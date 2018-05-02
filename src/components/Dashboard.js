@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
+import DrawerWindow from './Drawer';
 export class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,8 +28,9 @@ export class Dashboard extends React.Component {
 		// }
 		return (
 			<div>
-				<Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-					<Tab label="Tab One" value={0} />
+				<DrawerWindow/>
+				<Tabs onChange={this.handleChange} value={this.state.slideIndex} >
+					<Tab label="Tab One" value={0} style={{position: 'relative'}} />
 					<Tab label="Tab Two" value={1} />
 					<Tab label="Tab Three" value={2} />
 				</Tabs>
