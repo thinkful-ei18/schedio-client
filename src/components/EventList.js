@@ -2,16 +2,37 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import EventListEvent from './EventListEvent';
-
+import './styles/EventList.css'
 //================================== Event List Component ====================>
 /**
  * Responsible for Containing a list of Events belonging to the user, conditionally displaying upcoming events or past events.
  * The Events listed will be individual Event components themselves. 
  */
 export class EventList extends React.Component {
+  constructor(props) {
+
+    super(props)
+
+    //some Mock data. This can be deleted. Also, the styles I provided are totally temporary and should be deleted.
+    this.events = [
+      {
+        title:'Beach Volleyball',
+        starttime: "Tomorrow at 5 PM",
+        location:'Melbourne Florida'
+      },
+      {
+        title:'NodeSchool Meetup',
+        starttime: "Tomorrow at 8PM",
+        location: 'Miami, Florida'
+      }
+    ]
+
+  }
+  
   render() {
 
-  const events = this.props.events ? this.props.events.map(event => <EventListEvent event={event} /> ) : '';
+  // This code should be changed to loop over this.PROPS.events, not this.events. 
+  const events = this.events ? this.events.map((event,index) => <EventListEvent event={event} key={index} /> ) : '';
 
   /*
   Regarding the question of how to display upcoming events vs past events. I would first argue that an event should be `upcoming` until it is `past`. For an MVP we

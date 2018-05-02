@@ -9,9 +9,14 @@ import React from 'react';
 export default (props) => {
   return (
     <div className='event-list-event'>
-      {this.props.event.title}
-      {this.props.event.startdate}
-      {this.props.event.location}
+      <b>{props.event.title}</b>
+      <br/>
+      {props.event.starttime}
+      <br/>
+      {props.event.location}
+      <button className='event-list-open-button'>
+        View
+      </button>
     </div>
   )
 }
