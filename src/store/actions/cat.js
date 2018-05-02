@@ -2,7 +2,7 @@ import {FETCH_CATS_REQUEST, FETCH_CATS_SUCCESS, FETCH_CATS_FAILURE, DELETE_CAT_R
 
 export const getCats = () => dispatch => {
   dispatch({ type: FETCH_CATS_REQUEST });
-  fetch('https://www.mocky.io/v2/5185415ba171ea3a00704eed')
+  fetch('https://www.eventbriteapi.com/v3/users/me/owned_events/?token=DLXGZSTOOQBEPH53YJPU')
     .then(results => {
       return results.json();
     })

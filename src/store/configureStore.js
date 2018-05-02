@@ -2,10 +2,12 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import catReducer from './reducers/cat'
 import dogReducer from './reducers/cat'
+import authReducer from './reducers/auth'
 
 const rootReducer = combineReducers({
 cat:catReducer,
-dog:dogReducer
+dog:dogReducer,
+auth: authReducer
 });
 
 const middlewares = [thunk];

@@ -1,0 +1,17 @@
+.landing-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.landing-container form {
+  margin: 0 auto;
+  
+}
+
+.prm-btn {
+  margin: 12
+}
+
+form .name-input {
+  display: inline-block;
+}
