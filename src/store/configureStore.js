@@ -1,11 +1,13 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import catReducer from './reducers/cat'
-import dogReducer from './reducers/cat'
+import catReducer from './reducers/cat';
+import dogReducer from './reducers/cat';
+import coordinateReducer from './reducers/reducer_coordinates';
 
 const rootReducer = combineReducers({
 cat:catReducer,
-dog:dogReducer
+dog:dogReducer,
+coordinates:coordinateReducer,
 });
 
 const middlewares = [thunk];
