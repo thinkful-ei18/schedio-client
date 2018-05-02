@@ -1,1 +1,23 @@
-{"extends":"react-app"}
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"mocha": true,
+		"mongo": true
+	},
+	"extends": "react-app",
+	"parserOptions": {
+		"sourceType": "script"
+	},
+	"rules": {
+		"strict": ["error", "safe"],
+		"eqeqeq": "error",
+		"no-console": "warn",
+		"no-unused-vars": "warn",
+		"no-eval": "error",
+		"indent": ["error", 2],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"]
+	}
+}
