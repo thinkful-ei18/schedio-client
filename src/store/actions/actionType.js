@@ -15,6 +15,9 @@ export const DELETE_DOG_REQUEST = 'DELETE_DOG_REQUEST';
 export const DELETE_DOG_SUCCESS = 'DELETE_DOG_SUCCESS';
 export const DELETE_DOG_FAILURE = 'DELETE_DOG_FAILURE';
 
+
+export const FETCH_COORDINATES = 'FETCH_COORDINATES';
+
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
     type: SET_AUTH_TOKEN,
