@@ -12,6 +12,8 @@ class App extends Component {
 				<Header />
 				<Route exact path="/" component={LandingPage} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/signup" component={SignUpPage} />
+				<Route exact path="/login" component={Login} />
 			</div>
 		);
 	}
