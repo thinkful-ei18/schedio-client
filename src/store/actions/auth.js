@@ -3,6 +3,7 @@ import {API_BASE_URL} from '../../config';
 import {normalizeResponseErrors} from './utils';
 import {setAuthToken, authSuccess, authRequest, authError, clearAuth} from './actionType'
 import {saveAuthToken, clearAuthToken} from '../../local-storage';
+import axios from 'axios';
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
@@ -13,19 +14,15 @@ const storeAuthInfo = (authToken, dispatch) => {
 
 export const login = (loginInfo) => dispatch => {
   dispatch(authRequest());
-  return (
-      fetch(`${API_BASE_URL}/login/local/`, {
+         axios({
+           'url':`${API_BASE_URL}/login/local/`,
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+              'content-Type': 'application/json'
           },
-          body: JSON.stringify(loginInfo)
+          data: JSON.stringify(loginInfo)
       })
-          // Reject any requests which don't return a 200 status, creating
-          // errors which follow a consistent format
-          .then(res => normalizeResponseErrors(res))
-          .then(res => res.json())
-          .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+          .then(response =>  storeAuthInfo(response.data, dispatch))
           .catch(err => {
               const {code} = err;
               const message =
@@ -37,7 +34,6 @@ export const login = (loginInfo) => dispatch => {
               // Form
               return Promise.reject(new Error(message));
           })
-  );
 };
 
 export const refreshAuthToken = () => (dispatch, getState) => {
