@@ -1,0 +1,15 @@
+.event-list-container {
+  height:40em;
+  background-color:#F0F0F0;
+  padding:10px;
+}
+
+
+.event-list-event {
+  background-color:orange;
+  padding:15px;
+  width:20em;
+  border-radius:1em;
+  margin:0 auto;
+  margin:1em;
+}
