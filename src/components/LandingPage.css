@@ -1,0 +1,43 @@
+.info-container{
+  margin: 0 auto;
+  text-align: center;  
+  background-color: #5A7A6E;
+  padding: 20px;
+  
+  }
+
+  .container h1 {
+    color: black;
+    font-size: 75px;
+  }
+  
+  .info-container h1 {
+    font-size: 40px;
+    color: white;
+  }
+  
+  p{
+    color: white;
+    font-size: 28px;
+  }
+  
+  .f-pg p {
+    font-size: 28px;
+    color: white;
+  }
+  
+  .f-pg {
+   display: inline-block;
+   width: 33%;
+  }
+  
+  .info-progression {
+
+  margin-top: 100px;  
+  background-color: #19BAD1;
+  padding-top: 40px;
+  padding-bottom: 25px;
+  color: white;
+  }
+  
+  

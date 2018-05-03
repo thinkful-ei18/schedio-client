@@ -11,18 +11,15 @@ const storeAuthInfo = (authToken, dispatch) => {
   saveAuthToken(authToken);
 };
 
-export const login = (email, password) => dispatch => {
+export const login = (loginInfo) => dispatch => {
   dispatch(authRequest());
   return (
-      fetch(`${API_BASE_URL}/login/local`, {
+      fetch(`${API_BASE_URL}/login/local/`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-              email,
-              password
-          })
+          body: JSON.stringify(loginInfo)
       })
           // Reject any requests which don't return a 200 status, creating
           // errors which follow a consistent format

@@ -23,7 +23,6 @@ class Login extends Component {
   loginHandler = (e) => {
     e.preventDefault();
     this.props.login({
-      firstName: this.state.firstName,
       username: this.state.username,
       password: this.state.pass
     })
@@ -47,8 +46,6 @@ handlePassInput = (e) => {
       <div className="landing-container">
     <MuiThemeProvider>
       <form onSubmit={this.loginHandler}>
-        <TextField className="name-input" type="text" name="firstName"  floatingLabelText="First name" onChange={this.handleFirstNameInput}/>
-        <br/>
         <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUsernameInput}/>
         <br/>
         <TextField type="password"  hintText="Password Field"
