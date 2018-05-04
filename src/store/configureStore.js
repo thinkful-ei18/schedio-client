@@ -1,21 +1,21 @@
+//================================== Import Dependencies ====================>
+
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-
 import coordinateReducer from './reducers/reducer_coordinates';
-import catReducer from './reducers/cat';
-import dogReducer from './reducers/cat';
 import authReducer from './reducers/auth';
-import eventReducer from './reducers/events';
+import eventReducer from './reducers/events.reducers';
+
+
+//================================== Establish Root Reducer ====================>
 
 const rootReducer = combineReducers({
-	cat: catReducer,
-	dog: dogReducer,
 	coordinates: coordinateReducer,
 	auth: authReducer,
-	events: eventReducer
+	events: eventReducer,
 });
 
-const middlewares = [thunk];
+const middleware = [thunk];
 
 let composeEnhancers;
 
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const configureStore = () => {
-	return createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
+	return createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
 };
 
 export default configureStore;

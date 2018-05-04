@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
-
+import EventView from './EventView';
 import EventList from './EventList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -56,10 +56,10 @@ export class Dashboard extends React.Component {
 				<main style={styles.contents}>
 					<SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
 						<div>
-							Event view component<br />
+							<EventView/><br />
 						</div>
-						<div style={styles.slide}>Event List for exist events</div>
-						<div style={styles.slide}>Event List for all past events</div>
+						<div style={styles.slide}><EventList/></div>
+						<div style={styles.slide}><EventList/></div>
 					</SwipeableViews>
 					<section
 						style={

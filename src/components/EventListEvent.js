@@ -13,7 +13,8 @@ export default (props) => {
       <br/>
       {props.event.starttime}
       <br/>
-      {props.event.location}
+      {props.event.location.lat}
+      {props.event.location.long}
       <button className='event-list-open-button'>
         View
       </button>
