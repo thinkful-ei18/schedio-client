@@ -1,72 +1,79 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {TextField, RaisedButton} from 'material-ui';
+import { TextField, RaisedButton } from 'material-ui';
 
 import * as actions from '../store/actions';
-import './signup.css'
+import './signup.css';
 
 class Login extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			firstName: '',
+			username: '',
+			pass: ''
+		};
+	}
+	componentDidMount() {
+		this.props.getCats();
+	}
 
-  constructor(props){
-  super(props)
-  this.state = {
-    firstName: '',
-    username: '',
-    pass: ''
-  }
-  }
-  componentDidMount(){
-    this.props.getCats();
-  }
+	loginHandler = e => {
+		e.preventDefault();
+		this.props.login({
+			username: this.state.username,
+			password: this.state.pass
+		});
+	};
 
-  loginHandler = (e) => {
-    e.preventDefault();
-    this.props.login({
-      username: this.state.username,
-      password: this.state.pass
-    })
-  }
+	handleFirstNameInput = e => {
+		this.setState({ firstName: e.target.value });
+	};
 
- handleFirstNameInput = (e) => {
-   this.setState({firstName: e.target.value})
- }
+	handleUserNameInput = e => {
+		this.setState({ username: e.target.value });
+	};
 
- handleUserNameInput = (e) => {
-  this.setState({username: e.target.value})
+	handlePassInput = e => {
+		this.setState({ pass: e.target.value });
+	};
+
+	render() {
+		console.log(this.props.catsInfo);
+		return (
+			<div className="landing-container">
+				<MuiThemeProvider>
+					<form onSubmit={this.loginHandler}>
+						<TextField
+							type="text"
+							className="name-input"
+							name="username"
+							floatingLabelText="Username"
+							onChange={this.handleUserNameInput}
+						/>
+						<br />
+						<TextField
+							type="password"
+							hintText="Password Field"
+							floatingLabelText="Password"
+							className="name-input"
+							name="password"
+							onChange={this.handlePassInput}
+						/>
+						<br />
+						<button type="submit">Login</button>
+					</form>
+				</MuiThemeProvider>
+			</div>
+		);
+	}
 }
 
-handlePassInput = (e) => {
-  this.setState({pass: e.target.value})
-}
+const mapStateToProps = state => {
+	return {
+		userData: state.auth.currentUser
+	};
+};
 
-  render(){
-    console.log(this.props.catsInfo)
-    return(
-      <div className="landing-container">
-    <MuiThemeProvider>
-      <form onSubmit={this.loginHandler}>
-        <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUserNameInput}/>
-        <br/>
-        <TextField type="password"  hintText="Password Field"
-      floatingLabelText="Password" className="name-input" name="password"    onChange={this.handlePassInput}/>
-        <br/>
-        <button type="submit">Login</button>
-        </form>
-      </MuiThemeProvider>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    catsInfo: state.cat.data,
-    dogsInfo: state.dog.data,
-    userData: state.auth.currentUser
-  }
-}
-
-export default connect(mapStateToProps, actions)(Login)
-
-
+export default connect(mapStateToProps, actions)(Login);
