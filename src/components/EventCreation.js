@@ -10,31 +10,31 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { asyncCreateEvent, createEvent } from '../store/actions/eventcreation';
 export class EventCreation extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			stepIndex: 0,
-			date: new Date(),
-			address: null,
-			coordinate: null
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      stepIndex: 0,
+      date: new Date(),
+      address: null,
+      coordinate: null
+    };
+  }
 	/*============ handle stepper control ===========
 	handleNext go to next step
 	handlePrev go to prev step
 	*/
 	handleNext = () => {
-		const { stepIndex } = this.state;
-		if (stepIndex < 2) {
-			this.setState({ stepIndex: stepIndex + 1 });
-		}
+	  const { stepIndex } = this.state;
+	  if (stepIndex < 2) {
+	    this.setState({ stepIndex: stepIndex + 1 });
+	  }
 	};
 
 	handlePrev = () => {
-		const { stepIndex } = this.state;
-		if (stepIndex > 0) {
-			this.setState({ stepIndex: stepIndex - 1 });
-		}
+	  const { stepIndex } = this.state;
+	  if (stepIndex > 0) {
+	    this.setState({ stepIndex: stepIndex - 1 });
+	  }
 	};
 
 	/*============== handle picking event date ===========
@@ -48,130 +48,129 @@ export class EventCreation extends React.Component {
 	handle error if there is any
 	*/
 	handleLocation = address => {
-		this.setState({
-			address
-		});
+	  this.setState({
+	    address
+	  });
 	};
 	handleCoordinate = coordinate => {
-		this.setState({ coordinate });
+	  this.setState({ coordinate });
 	};
 	handleError = error => {
-		alert('no location is returned');
+	  alert('no location is returned');
 	};
 	handleAsyncError = error => {
-		console.log(error);
-		alert('error in selecting template');
+	  console.log(error);
+	  alert('error in selecting template');
 	};
 	/*===========handle submit and redirect ===========
 	
 	*/
 	onSubmit = template => {
-		if (!templateWidgets[template]) {
-			return alert(`${template} is not defined tempalte`);
-		}
-		const { address, coordinate, date } = this.state;
-		const newEvent = {
-			title: `new event created on ${new Date()}`,
-			location: {
-				address: address,
-				lat: coordinate.lat,
-				long: coordinate.long
-			},
-			/*============ require user info from auth token ============
+	  if (!templateWidgets[template]) {
+	    return alert(`${template} is not defined tempalte`);
+	  }
+	  const { address, coordinate, date } = this.state;
+	  const newEvent = {
+	    title: `new event created on ${new Date()}`,
+	    location: {
+	      address: address,
+	      lat: coordinate.lat,
+	      long: coordinate.long
+	    },
+	    /*============ require user info from auth token ============
 				waiting on user auth feature to complete
 				for now I am using static known userId
 			*/
-			userId: '5aebeabfc7a8f23320d38d72',
-			starttime: date.getTime(),
-			initWidgets: templateWidgets[template]
-		};
-		const { dispatch, history } = this.props;
-		return dispatch(asyncCreateEvent(newEvent))
-			.then(_event => {
-				return dispatch(createEvent(_event));
-			})
-			.then(() => history.push('/dashboard'))
-			.catch(err => this.handleAsyncError(err));
+	    userId: '5aebeabfc7a8f23320d38d72',
+	    starttime: date.getTime(),
+	    initWidgets: templateWidgets[template]
+	  };
+	  const { dispatch, history } = this.props;
+	  return dispatch(asyncCreateEvent(newEvent))
+	    .then(_event => {
+	      return dispatch(createEvent(_event));
+	    })
+	    .then(() => history.push('/dashboard'))
+	    .catch(err => this.handleAsyncError(err));
 	};
 	render() {
-		console.log(this.state);
-		const renderStepActions = step => {
-			return (
-				<div style={{ margin: '12px 0' }}>
-					<RaisedButton
-						label="Next"
-						primary={true}
-						onClick={this.handleNext}
-						style={{ marginRight: 12 }}
-					/>
-					{step > 0 && <FlatButton label="Back" onClick={this.handlePrev} />}
-				</div>
-			);
-		};
-		const { stepIndex } = this.state;
-		return (
-			<div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
-				<Stepper activeStep={stepIndex} linear={false} orientation="vertical">
-					<Step>
-						<StepButton onClick={() => this.setState({ stepIndex: 0 })}>
+	  const renderStepActions = step => {
+	    return (
+	      <div style={{ margin: '12px 0' }}>
+	        <RaisedButton
+	          label="Next"
+	          primary={true}
+	          onClick={this.handleNext}
+	          style={{ marginRight: 12 }}
+	        />
+	        {step > 0 && <FlatButton label="Back" onClick={this.handlePrev} />}
+	      </div>
+	    );
+	  };
+	  const { stepIndex } = this.state;
+	  return (
+	    <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
+	      <Stepper activeStep={stepIndex} linear={false} orientation="vertical">
+	        <Step>
+	          <StepButton onClick={() => this.setState({ stepIndex: 0 })}>
 							Select a date for the event
-						</StepButton>
-						<StepContent>
-							<div style={styles.stepContent}>
-								<Calendar
-									onChange={this.onChange}
-									value={this.state.date}
-									className="react-calendar"
-								/>
-							</div>
-							{renderStepActions(0)}
-						</StepContent>
-					</Step>
-					<Step>
-						<StepButton onClick={() => this.setState({ stepIndex: 1 })}>
+	          </StepButton>
+	          <StepContent>
+	            <div style={styles.stepContent}>
+	              <Calendar
+	                onChange={this.onChange}
+	                value={this.state.date}
+	                className="react-calendar"
+	              />
+	            </div>
+	            {renderStepActions(0)}
+	          </StepContent>
+	        </Step>
+	        <Step>
+	          <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
 							Enter location for the event
-						</StepButton>
-						<StepContent>
-							<p>Enter the address where event is held.</p>
-							<p>Enter city location if you don't know the detail yet.</p>
-							<div style={styles.stepContent}>
-								<LocationSearch
-									address={this.handleLocation}
-									coordinate={this.handleCoordinate}
-									error={this.handleError}
-								/>
-							</div>
-							{renderStepActions(1)}
-						</StepContent>
-					</Step>
-					<Step>
-						<StepButton onClick={() => this.setState({ stepIndex: 2 })}>
+	          </StepButton>
+	          <StepContent>
+	            <p>Enter the address where event is held.</p>
+	            <p>Enter city location if you don't know the detail yet.</p>
+	            <div style={styles.stepContent}>
+	              <LocationSearch
+	                address={this.handleLocation}
+	                coordinate={this.handleCoordinate}
+	                error={this.handleError}
+	              />
+	            </div>
+	            {renderStepActions(1)}
+	          </StepContent>
+	        </Step>
+	        <Step>
+	          <StepButton onClick={() => this.setState({ stepIndex: 2 })}>
 							Select a template that best suit for your event
-						</StepButton>
-						<StepContent>
-							<div style={styles.stepContent}>
-								<EventTemplate onClick={this.onSubmit} />
-							</div>
-						</StepContent>
-					</Step>
-				</Stepper>
-			</div>
-		);
+	          </StepButton>
+	          <StepContent>
+	            <div style={styles.stepContent}>
+	              <EventTemplate onClick={this.onSubmit} />
+	            </div>
+	          </StepContent>
+	        </Step>
+	      </Stepper>
+	    </div>
+	  );
 	}
 }
 
 const templateWidgets = {
-	Basic: ['weather', 'schedule'],
-	Shopping: ['weather', 'schedule', 'todo']
+  Basic: ['weather', 'schedule'],
+  Shopping: ['weather', 'schedule', 'todo']
 };
 const styles = {
-	stepContent: {
-		padding: 15,
-		width: '100%'
-	}
+  stepContent: {
+    padding: 15,
+    width: '100%'
+  }
 };
 
 const mapStateToProps = state => {
-	return {};
+  return {};
 };
 export default connect(mapStateToProps)(withRouter(EventCreation));

@@ -45,14 +45,14 @@ import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
-    Button: {
-      // marginLeft: 500
-    },
-    Drawer: {
-      // position: 'absolute',
-      // height: 300
-    }
+  Button: {
+    // marginLeft: 500
+  },
+  Drawer: {
+    // position: 'absolute',
+    // height: 300
   }
+};
 
 export default class DrawerWindow extends React.Component {
 

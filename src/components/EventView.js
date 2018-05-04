@@ -20,12 +20,12 @@ export class EventView extends React.Component {
         </div>
       </section>
 
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({
   currentEvent: state.currentEvent ? state.currentEvent : ''
-})
+});
 
 export default connect(mapStateToProps)(EventView);
