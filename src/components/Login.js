@@ -46,7 +46,7 @@ handlePassInput = (e) => {
       <div className="landing-container">
     <MuiThemeProvider>
       <form onSubmit={this.loginHandler}>
-        <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUsernameInput}/>
+        <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUserNameInput}/>
         <br/>
         <TextField type="password"  hintText="Password Field"
       floatingLabelText="Password" className="name-input" name="password"    onChange={this.handlePassInput}/>

@@ -22,8 +22,9 @@ class SignUp extends Component {
 
   signUpHandler = (e) => {
     e.preventDefault();
+    console.log(this.state.username);
     this.props.registerUser({
-      firstName: this.state.firstName,
+      firstname: this.state.firstName,
       username: this.state.username,
       password: this.state.pass
     })
@@ -49,7 +50,7 @@ handlePassInput = (e) => {
       <form onSubmit={this.signUpHandler}>
         <TextField className="name-input" type="text" name="firstName"  floatingLabelText="First name" onChange={this.handleFirstNameInput}/>
         <br/>
-        <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUsernameInput}/>
+        <TextField type="text" className="name-input" name="username" floatingLabelText="Username"  onChange={this.handleUserNameInput}/>
         <br/>
         <TextField type="password"  hintText="Password Field"
       floatingLabelText="Password" className="name-input" name="password"  onChange={this.handlePassInput}/>
