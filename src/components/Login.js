@@ -15,9 +15,7 @@ class Login extends Component {
 			pass: ''
 		};
 	}
-	componentDidMount() {
-		this.props.getCats();
-	}
+
 
 	loginHandler = e => {
 		e.preventDefault();

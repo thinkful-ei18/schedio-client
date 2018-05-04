@@ -16,9 +16,6 @@ class SignUp extends Component {
     pass: ''
   }
   }
-  componentDidMount(){
-    this.props.getCats();
-  }
 
   signUpHandler = (e) => {
     e.preventDefault();
@@ -43,7 +40,6 @@ handlePassInput = (e) => {
 }
 
   render(){
-    console.log(this.props.catsInfo)
     return(
       <div className="landing-container">
     <MuiThemeProvider>
@@ -63,13 +59,7 @@ handlePassInput = (e) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    catsInfo: state.cat.data,
-    dogsInfo: state.dog.data
-  }
-}
 
-export default connect(mapStateToProps, actions)(SignUp)
+export default connect(actions)(SignUp)
 
 
