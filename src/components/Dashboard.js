@@ -8,7 +8,6 @@ import EventList from './EventList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-
 export class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -56,10 +55,15 @@ export class Dashboard extends React.Component {
 				<main style={styles.contents}>
 					<SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
 						<div>
-							<EventView/><br />
+							<EventView />
+							<br />
 						</div>
-						<div style={styles.slide}><EventList/></div>
-						<div style={styles.slide}><EventList/></div>
+						<div style={styles.slide}>
+							<EventList />
+						</div>
+						<div style={styles.slide}>
+							<EventList />
+						</div>
 					</SwipeableViews>
 					<section
 						style={
