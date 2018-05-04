@@ -21,7 +21,6 @@ export default class Header extends React.Component {
           width={200} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
           <MenuItem>Homepage</MenuItem>
           <MenuItem>Registaration</MenuItem>
-          
           <MenuItem>Login</MenuItem>
           <MenuItem>Dashboard</MenuItem>
         </Drawer>

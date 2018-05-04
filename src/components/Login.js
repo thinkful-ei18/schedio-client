@@ -40,7 +40,6 @@ class Login extends Component {
 	};
 
 	render() {
-		console.log(this.props.catsInfo);
 		return (
 			<div className="landing-container">
 				<MuiThemeProvider>
