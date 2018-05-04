@@ -6,6 +6,13 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import EventCreation from './components/EventCreation';
+import RequireAuth from './components/Utilities/RequireAuth';
+
+/*======== RequireAuth is HOC that protects route from unauthorized visit ==========
+	example: RequireAuth()(< Your Component that render the route >)
+*/
+const SecureDashboard = RequireAuth()(Dashboard);
+const SecureEventCreation = RequireAuth()(EventCreation);
 class App extends Component {
 	render() {
 		return (
@@ -13,8 +20,8 @@ class App extends Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={LandingPage} />
-					<Route exact path="/dashboard" component={Dashboard} />
-					<Route exact path="/dashboard/eventcreate" component={EventCreation} />
+					<Route exact path="/dashboard" component={SecureDashboard} />
+					<Route exact path="/dashboard/eventcreate" component={SecureEventCreation} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={SignUpPage} />
 				</Switch>
