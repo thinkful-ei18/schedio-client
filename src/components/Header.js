@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppBar, Drawer, MenuItem } from 'material-ui';
+import {Link} from 'react-router-dom';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -19,7 +20,9 @@ export default class Header extends React.Component {
       />
 			<Drawer  docked={false}
           width={200} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
+          <Link to="/">
           <MenuItem>Homepage</MenuItem>
+          </Link>
           <MenuItem>Registaration</MenuItem>
           <MenuItem>Login</MenuItem>
           <MenuItem>Dashboard</MenuItem>
