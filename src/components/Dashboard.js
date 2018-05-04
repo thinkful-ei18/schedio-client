@@ -40,50 +40,7 @@ export class Dashboard extends React.Component {
 	  /*
 			*** to do
 		*/
-<<<<<<< HEAD
-		// authentication on dashboard component
-		// if (!authToken) {
-		// 	return this.props.history.push('/')
-		// }
-		return (
-			<div style={styles.container}>
-				<section style={styles.tabs}>
-					<Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-						<Tab label="Active " value={0} />
-						<Tab label="Events" value={1} />
-						<Tab label="History" value={2} />
-					</Tabs>
-				</section>
-				<main style={styles.contents}>
-					<SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
-						<div>
-							<EventView />
-							<br />
-						</div>
-						<div style={styles.slide}>
-							<EventList />
-						</div>
-						<div style={styles.slide}>
-							<EventList />
-						</div>
-					</SwipeableViews>
-					<section
-						style={
-							this.state.addEventBtnHover
-								? styles.addEventBtnContainerHover
-								: styles.addEventBtnContainer
-						}
-						onMouseEnter={this.toggleHover}
-						onMouseLeave={this.toggleHover}
-					>
-						<FloatingActionButton secondary={true} onClick={this.handleEventCreationRedirect}>
-							<ContentAdd />
-						</FloatingActionButton>
-					</section>
-				</main>
-			</div>
-		);
-=======
+
 	  // authentication on dashboard component
 	  // if (!authToken) {
 	  // 	return this.props.history.push('/')
@@ -121,7 +78,6 @@ export class Dashboard extends React.Component {
 	      </main>
 	    </div>
 	  );
->>>>>>> Fix eventlists
 	}
 }
 
