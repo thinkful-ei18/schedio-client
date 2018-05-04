@@ -13,13 +13,15 @@ export const storeEventList = events => ({
 
 
 //================================== Asynchronous Actions ====================>
-export const fetchUserEvents = () => dispatch => {
+export const fetchUserEvents = () => (dispatch,getState) => {
   console.log('async request');
+  console.log(getState());
   axios({
     'url':`${API_BASE_URL}/api/events`,
     'method':'GET',
     headers: {
-      'content-type':'application/json'
+      'content-type':'application/json',
+      'Authorization': `Bearer ${getState().auth.authToken}`
     }
   })
   .then(response => {

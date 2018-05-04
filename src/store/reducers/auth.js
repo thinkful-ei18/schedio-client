@@ -1,3 +1,6 @@
+
+//================================== Import Dependencies ====================>
+
 import {
   SET_AUTH_TOKEN,
   CLEAR_AUTH,
@@ -5,10 +8,15 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR
 } from '../actions/actionType';
+import {loadAuthToken} from '../../local-storage';
+import jwtDecode from 'jwt-decode'; 
+
+
+//================================== Construct Initial State ====================>
 
 const initialState = {
-  authToken: null, // authToken !== null does not mean it has been validated
-  currentUser: null,
+  authToken: localStorage.getItem('authToken') || null, // authToken !== null does not mean it has been validated
+  currentUser: localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null,
   loading: false,
   error: null
 };
