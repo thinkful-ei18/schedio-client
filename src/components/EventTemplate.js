@@ -6,6 +6,9 @@ import Home from 'material-ui/svg-icons/action/home';
 import Sport from 'material-ui/svg-icons/maps/directions-bike';
 import { RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
+
+let selectedTemplate = null;
+
 export default class EventTemplate extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,12 +16,21 @@ export default class EventTemplate extends React.Component {
 			activeLabel: 0
 		};
 	}
+	/*======= select categories ======
+	*/
 	handleChange = value => this.setState({ activeLabel: value });
 	handleOnActive = activeLabel => {
 		clearTimeout(this.timerId);
 		this.timerId = setTimeout(() => {
 			this.setState({ activeLabel });
 		}, 50);
+	};
+
+	/*======= select a template ======
+		it will return template name as callback
+	*/
+	handleOnClick = () => {
+		this.props.onClick(selectedTemplate);
 	};
 	render() {
 		console.log(this.state);
@@ -50,16 +62,16 @@ export default class EventTemplate extends React.Component {
 				<section>
 					<SwipeableViews index={this.state.activeLabel} onChangeIndex={this.handleChange}>
 						<ul style={{ paddingLeft: '0' }}>
-							<ChoiceWithNav title="Basic" />
+							<Choice title="Basic" onClick={this.handleOnClick} />
 						</ul>
 						<ul style={{ paddingLeft: '0' }}>
-							<ChoiceWithNav title="Shopping" />
-							<ChoiceWithNav title="Party" />
-							<ChoiceWithNav title="In door sports" />
+							<Choice title="Shopping" onClick={this.handleOnClick} />
+							<Choice title="Party" onClick={this.handleOnClick} />
+							<Choice title="In door sports" onClick={this.handleOnClick} />
 						</ul>
 						<ul style={{ paddingLeft: '0' }}>
-							<ChoiceWithNav title="Hiking" />
-							<ChoiceWithNav title="Fishing" />
+							<Choice title="Hiking" onClick={this.handleOnClick} />
+							<Choice title="Fishing" onClick={this.handleOnClick} />
 						</ul>
 						<div />
 					</SwipeableViews>
@@ -68,18 +80,19 @@ export default class EventTemplate extends React.Component {
 		);
 	}
 }
-const ChoiceWithNav = withRouter(Choice);
 
 function Choice(props) {
-	const handleChoice = () => {
-		/*============== to do ================
-      dispatch target choice and initialize widgets
-    */
-		props.history.push('/dashboard');
+	const handleChoice = template => {
+		selectedTemplate = template;
+		props.onClick();
 	};
 	return (
 		<li style={{ listStyle: 'none', display: 'inline-block', margin: 5 }}>
-			<RaisedButton label={props.title} labelStyle={{ fontSize: '12px' }} onClick={handleChoice} />
+			<RaisedButton
+				label={props.title}
+				labelStyle={{ fontSize: '12px' }}
+				onClick={() => handleChoice(props.title)}
+			/>
 		</li>
 	);
 }
