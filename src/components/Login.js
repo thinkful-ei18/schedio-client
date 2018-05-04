@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { TextField, RaisedButton } from 'material-ui';
+import {withRouter} from 'react-router-dom';
 
 import * as actions from '../store/actions';
 import './signup.css';
@@ -23,6 +24,7 @@ class Login extends Component {
 			username: this.state.username,
 			password: this.state.pass
 		});
+		this.props.history.push('/dashboard')
 	};
 
 	handleFirstNameInput = e => {
@@ -74,4 +76,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, actions)(Login);
+export default connect(mapStateToProps, actions)(withRouter(Login));

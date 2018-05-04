@@ -19,8 +19,11 @@ export default class Header extends React.Component {
       />
 			<Drawer  docked={false}
           width={200} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
-          <MenuItem>Events</MenuItem>
-          <MenuItem>Schedule</MenuItem>
+          <MenuItem>Homepage</MenuItem>
+          <MenuItem>Registaration</MenuItem>
+          
+          <MenuItem>Login</MenuItem>
+          <MenuItem>Dashboard</MenuItem>
         </Drawer>
 				</div>
     );
