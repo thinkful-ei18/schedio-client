@@ -8,6 +8,7 @@ import PastEventsList from './PastEventsList';
 import UpcomingEventsList from './UpcomingEventsList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import SortableComponent from './Sortable';
 
 export class Dashboard extends React.Component {
   constructor(props) {
@@ -36,15 +37,7 @@ export class Dashboard extends React.Component {
 	  }, 100);
 	};
 	render() {
-	  const { authToken } = this.props;
-	  /*
-			*** to do
-		*/
 
-	  // authentication on dashboard component
-	  // if (!authToken) {
-	  // 	return this.props.history.push('/')
-	  // }
 	  return (
 	    <div style={styles.container}>
 	      <section style={styles.tabs}>
@@ -78,6 +71,7 @@ export class Dashboard extends React.Component {
 	      </main>
 	    </div>
 	  );
+
 	}
 }
 
