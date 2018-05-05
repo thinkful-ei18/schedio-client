@@ -7,6 +7,7 @@ import EventView from './EventView';
 import EventList from './EventList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import SortableComponent from './Sortable';
 
 export class Dashboard extends React.Component {
 	constructor(props) {
@@ -56,6 +57,7 @@ export class Dashboard extends React.Component {
 					<SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
 						<div>
 							<EventView />
+							<SortableComponent/>
 							<br />
 						</div>
 						<div style={styles.slide}>
