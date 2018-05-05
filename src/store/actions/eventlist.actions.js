@@ -7,15 +7,19 @@ export const STORE_EVENTLIST = 'STORE_EVENTLIST';
 export const storeEventList = events => ({
   type:STORE_EVENTLIST,
   events
-})
+});
 
+
+export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
+export const setCurrentEvent = event => ({
+  type:SET_CURRENT_EVENT,
+  event
+});
 
 
 
 //================================== Asynchronous Actions ====================>
 export const fetchUserEvents = () => (dispatch,getState) => {
-  console.log('async request');
-  console.log(getState());
   axios({
     'url':`${API_BASE_URL}/api/events`,
     'method':'GET',
@@ -24,10 +28,10 @@ export const fetchUserEvents = () => (dispatch,getState) => {
       'Authorization': `Bearer ${getState().auth.authToken}`
     }
   })
-  .then(response => {
-    dispatch(storeEventList(response.data));
-  })
-  .catch(err => {
-    console.log(err);
-  })
+    .then(response => {
+      dispatch(storeEventList(response.data));
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };

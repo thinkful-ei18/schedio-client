@@ -18,8 +18,9 @@ export class PastEventsList extends React.Component {
   render() {
 
   // This code should be changed to loop over this.PROPS.events, not this.events. 
-  const events = this.props.events ? this.props.events.filter(event => Number(event.starttime) < Number(Date.now)).map((event,index) => <EventListEvent event={event} key={index} /> ) : '';
-
+    const events = this.props.events ? this.props.events
+      .filter(event => Number(new Date(event.starttime).getTime()) <= Number(Date.now()))
+      .map((event,index) => <EventListEvent event={event} key={index} /> ) : '';
 
     /*
   Regarding the question of how to display upcoming events vs past events. I would first argue that an event should be `upcoming` until it is `past`. For an MVP we
@@ -32,7 +33,7 @@ export class PastEventsList extends React.Component {
     return(
       <div className='event-list-container'>
         <div className='event-list-header'>
-          Hello from the Event List Component
+          Past Events
         </div>
         <section className='events-list'>
           {events}

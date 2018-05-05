@@ -14,19 +14,19 @@ import RequireAuth from './components/Utilities/RequireAuth';
 const SecureDashboard = RequireAuth()(Dashboard);
 const SecureEventCreation = RequireAuth()(EventCreation);
 class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<Header />
-				<Switch>
-					<Route exact path="/" component={LandingPage} />
-					<Route exact path="/dashboard" component={SecureDashboard} />
-					<Route exact path="/dashboard/eventcreate" component={SecureEventCreation} />
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/register" component={SignUpPage} />
-				</Switch>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/dashboard" component={SecureDashboard} />
+          <Route exact path="/dashboard/eventcreate" component={SecureEventCreation} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={SignUpPage} />
+        </Switch>
+      </div>
+    );
+  }
 }
 export default App;

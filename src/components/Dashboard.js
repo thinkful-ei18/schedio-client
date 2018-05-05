@@ -51,7 +51,7 @@ export class Dashboard extends React.Component {
 	        <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
 	          <Tab label="View Event" value={0} />
 	          <Tab label="Upcoming Events" value={1} />
-	          <Tab label="History" value={2} />
+	          <Tab label="Past Events" value={2} />
 	        </Tabs>
 	      </section>
 	      <main style={styles.contents}>

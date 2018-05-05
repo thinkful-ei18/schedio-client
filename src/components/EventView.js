@@ -1,31 +1,37 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Moment} from 'react-moment';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import moment from 'moment';
 
 export class EventView extends React.Component {
 
   render() {
 
     return (
-      <section className='event-view-container'>
-        <div className='event-view-header'>
-          {this.props.currentEvent.title ? this.props.currentEvent.title : '' }
-        </div>
-        <div className='event-view-location'>
-        </div>
-        <div className='event-view-time'>
-          {/* We probably want to use Moment.JS here, or something like that. */}
-          {this.props.currentEvent.starttime ? this.props.currentEvent.starttime : ''} to {this.props.currentEvent.endtime ? this.props.currentEvent.endttime : ''}
-        </div>
-        <div className='event-view-widget-container'>
-        </div>
-      </section>
-
+      <Card>
+        {this.props.currentEvent ? 
+          <div>
+            <CardHeader
+              title={this.props.currentEvent.title}
+              subtitle={new Date(this.props.currentEvent.starttime).toDateString()}
+              showExpandableButton={false}
+            />
+            <CardText expandable={false}>
+              {this.props.currentEvent.address ? this.props.currentEvent.address : ''} 
+              {this.props.currentEvent? moment(this.props.currentEvent.starttime).fromNow() : ''}
+            </CardText> 
+          </div>: 'No Event Selected'
+        }
+       
+      </Card>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  currentEvent: state.currentEvent ? state.currentEvent : ''
+  currentEvent: state.events.activeEvent ? state.events.activeEvent : ''
 });
 
 export default connect(mapStateToProps)(EventView);
