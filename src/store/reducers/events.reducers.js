@@ -1,44 +1,61 @@
 import { CREATE_EVENT } from '../actions/eventcreation';
-import { STORE_EVENTLIST } from '../actions/eventlist.actions';
+import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
 
 const initialState = {
-	activeEvent: {
-		id: null,
-		location: null,
-		starttime: null,
-		title: null,
-		widgets: null
-	},
-	// Eventlist: a list of events that belong to the user. Retrieved from the DB in order to list upcoming and past events.
-	eventList: null
-	/*======= other props waiting to fill up
-    state related to events goes below
-  */
+  activeEvent: {
+    id: null,
+    location: {
+      lat: null,
+      long: null,
+      address: null
+    },
+    starttime: null,
+    title: null,
+    widgets: null
+  },
+  eventList:null
 };
 
 export default function eventReducer(state = initialState, action) {
-	switch (action.type) {
-		//---------------
-		case CREATE_EVENT:
-			return {
-				...state,
-				activeEvent: action.event
-			};
+  switch(action.type) {
+		
+  //---------------
+  case CREATE_EVENT:
+    return {
+      ...state, activeEvent:action.event
+    };
+		
+    //----------------
+  case STORE_EVENTLIST:
+    return {
+      ...state,
+      eventList:action.events
+    };
 
-		//----------------
-		case STORE_EVENTLIST:
-			console.log('store eventlist reducer was hit');
-			return {
-				...state,
-				eventList: action.events
-			};
+    //-----------------
+  case SET_CURRENT_EVENT:
+    return {
+      ...state,
+      activeEvent: {
+        id: action.event.id,
+        location: {
+          lat: action.event.location.lat,
+          long:action.event.location.long,
+          address: null
+        },
+        starttime: action.event.starttime,
+        title: action.event.title,
+        widgets: action.event.widgets,
+      }
+    };
 
-		//----------------
-		default:
-			return {
-				state
-			};
+
+    //----------------
+  default:
+    return {
+      state
+    };
 
 		//--------------
-	}
+  }
 }
