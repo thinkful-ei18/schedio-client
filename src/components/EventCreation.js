@@ -161,8 +161,8 @@ export class EventCreation extends React.Component {
 }
 
 const templateWidgets = {
-  Basic: ['weather', 'schedule'],
-  Shopping: ['weather', 'schedule', 'todo']
+  Basic: ['weather', 'todo'],
+  Shopping: ['weather', 'todo']
 };
 const styles = {
   stepContent: {
