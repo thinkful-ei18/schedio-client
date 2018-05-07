@@ -1,5 +1,6 @@
 import { CREATE_EVENT } from '../actions/eventcreation';
 import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
+import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
 
 const initialState = {
   activeEvent: {
@@ -11,7 +12,17 @@ const initialState = {
     },
     starttime: null,
     title: null,
-    widgets: null
+    widgets: {
+      map: {
+        displayed: true
+      },
+      todo: {
+        displayed: false
+      },
+      weather: {
+        displayed: true
+      }
+    }
   },
   eventList: null
 };
@@ -50,6 +61,14 @@ export default function eventReducer(state = initialState, action) {
     };
 
     //----------------
+
+    /*========= reserved spots for widget management actions ==========
+  */
+  case TOGGLE_WIDGET_DISPLAY:
+    const targetWidget = action.widget;
+    console.log(targetWidget);
+    return;
+
   default:
     return state;
 
