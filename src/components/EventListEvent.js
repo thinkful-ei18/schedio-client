@@ -16,7 +16,7 @@ export class  EventListEvent extends React.Component {
       <div className='event-list-event'>
         <b>{this.props.event.title}</b>
         <br/>
-        <Moment fromNow date={this.props.event.starttime}>  </Moment> on <Moment format={'dddd, MMMM Do, h:mm a'}date={this.props.event.starttime}> </Moment>
+        <Moment fromNow date={Number(this.props.event.starttime)}>  </Moment> on <Moment format={'dddd, MMMM Do, h:mm a'}date={Number(this.props.event.starttime)}> </Moment>
         <br/>
         {this.props.event.location.lat}
         {this.props.event.location.long}

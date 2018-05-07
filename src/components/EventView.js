@@ -8,26 +8,23 @@ import moment from 'moment';
 export class EventView extends React.Component {
   render() {
     return (
-      <div>
-        <Card>
-          {this.props.currentEvent ? (
-            <div>
-              <CardHeader
-                title={this.props.currentEvent.title}
-                subtitle={new Date(this.props.currentEvent.starttime).toDateString()}
-                showExpandableButton={false}
-              />
-              <CardText expandable={false}>
-                {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
-                {this.props.currentEvent ? moment(this.props.currentEvent.starttime).fromNow() : ''}
-              </CardText>
-              <section />
-            </div>
-          ) : (
-            'No Event Selected'
-          )}
-        </Card>
-      </div>
+      <Card>
+        {this.props.currentEvent ? (
+          <div>
+            <CardHeader
+              title={this.props.currentEvent.title}
+              subtitle={new Date(this.props.currentEvent.starttime).toDateString()}
+              showExpandableButton={false}
+            />
+            <CardText expandable={false}>
+              {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
+              {this.props.currentEvent ? moment(this.props.currentEvent.starttime).fromNow() : ''}
+            </CardText>
+          </div>
+        ) : (
+          'No Event Selected'
+        )}
+      </Card>
     );
   }
 }

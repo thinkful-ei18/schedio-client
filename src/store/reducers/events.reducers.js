@@ -52,9 +52,7 @@ export default function eventReducer(state = initialState, action) {
 
     //----------------
   default:
-    return {
-      state
-    };
+    return state;
 
 		//--------------
   }
