@@ -75,6 +75,7 @@ export default function eventReducer(state = initialState, action) {
       }
     }
     newState.activeEvent.widgets = widgets;
+    // console.log(newState);
     return newState;
 
   default:
