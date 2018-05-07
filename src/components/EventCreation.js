@@ -19,6 +19,7 @@ export class EventCreation extends React.Component {
       coordinate: null
     };
   }
+
 	/*============ handle stepper control ===========
 	handleNext go to next step
 	handlePrev go to prev step

@@ -37,7 +37,6 @@ export class Dashboard extends React.Component {
 	  }, 100);
 	};
 	render() {
-
 	  return (
 	    <div style={styles.container}>
 	      <section style={styles.tabs}>
@@ -49,11 +48,15 @@ export class Dashboard extends React.Component {
 	      </section>
 	      <main style={styles.contents}>
 	        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
-	          <div>
-	            <EventView/><br />
+	          <div style={styles.slide}>
+	            <EventView />
 	          </div>
-	          <div style={styles.slide}><UpcomingEventsList/></div>
-	          <div style={styles.slide}><PastEventsList/></div>
+	          <div style={styles.slide}>
+	            <UpcomingEventsList />
+	          </div>
+	          <div style={styles.slide}>
+	            <PastEventsList />
+	          </div>
 	        </SwipeableViews>
 	        <section
 	          style={
@@ -71,7 +74,6 @@ export class Dashboard extends React.Component {
 	      </main>
 	    </div>
 	  );
-
 	}
 }
 
@@ -87,9 +89,9 @@ const styles = {
   contents: {
     display: 'block',
     border: 'solid #E0E0E0 0.5px',
-    minHeight: '80vh',
-    maxHeight: '80vh',
-    overflow: 'scroll',
+    minHeight: '75vh',
+    maxHeight: '75vh',
+    overflow: 'hidden',
     textAlign: 'center',
     position: 'relative',
     transition: 'inherit'
@@ -113,7 +115,9 @@ const styles = {
     fontWeight: 400
   },
   slide: {
-    padding: 10
+    padding: 10,
+    height: '75vh',
+    overflow: 'scroll'
   }
 };
 const mapStateToProps = () => {

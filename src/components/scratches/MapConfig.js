@@ -70,7 +70,7 @@ export default class Map extends React.Component {
 	  return (
 	    <div>
 	      {showMap ? (
-	        <section>
+	        <section style={styles.mapContainer}>
 	          <div>
 	            <button onClick={() => this.setState({ showMap: false })}>go back</button>
 	            <button>confirm</button>
@@ -87,7 +87,7 @@ export default class Map extends React.Component {
 	          />
 	        </section>
 	      ) : (
-	        <form onSubmit={this.handleSubmit}>
+	        <form onSubmit={this.handleSubmit} style={styles.container}>
 	          <div>
 	            <label style={{ display: 'block' }}>widget title</label>
 	            <input
@@ -111,20 +111,17 @@ export default class Map extends React.Component {
 
 const styles = {
   container: {
-    //   display: 'block',
-    position: 'relative'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 10
     //   margin: 10
   },
-  searchBar: {
-    margin: 'auto',
-    backgroundColor: 'white',
-    height: '50px',
-    width: '500px',
-    position: 'absolute',
-    left: 100,
-    right: 0,
-    top: -100,
-    zIndex: 999
+  mapContainer: {
+    padding: 10,
+    marginTop: 10
   },
   infoBox: {
     margin: '0 auto',
