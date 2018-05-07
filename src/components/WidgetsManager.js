@@ -5,19 +5,11 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
-import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay } from '../store/actions/widgetManage';
 class WidgetManager extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      widgets: {
-        weather: true,
-        todo: true,
-        map: true
-      }
-    };
   }
 	/*======== handle toggle on list item
     @params: String
@@ -33,9 +25,9 @@ class WidgetManager extends React.Component {
 	handleConfirm = widget => {
 	  console.log(this.state);
 	};
+
 	render() {
-	  const { displayWidgets } = this.props;
-	  console.log(displayWidgets);
+	  console.log('display: ', this.propsdisplayWidgets);
 	  return (
 	    <div style={styles.root}>
 	      <List>
@@ -53,7 +45,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Weather"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidgets.weather.displayed}
+	              toggled={this.props.displayWidgets.weather.displayed}
 	              onToggle={() => this.handleToggle('weather')}
 	            />
 	          }
@@ -62,7 +54,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Checklist"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidgets.todo.displayed}
+	              toggled={this.props.displayWidgets.todo.displayed}
 	              onToggle={() => this.handleToggle('todo')}
 	            />
 	          }
@@ -71,7 +63,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Map"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidgets.map.displayed}
+	              toggled={this.props.displayWidgets.map.displayed}
 	              onToggle={() => this.handleToggle('map')}
 	            />
 	          }
@@ -87,10 +79,10 @@ class WidgetManager extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-  const currentEvent = state.events.activeEvent;
+const mapStateToProps = (state, props) => {
+  // props.widgets = state.events.activeEvent ? state.events.activeEvent.widgets : null;
   return {
-    displayWidgets: currentEvent ? currentEvent.widgets : null
+    displayWidgets: state.events.activeEvent ? state.events.activeEvent.widgets : null
   };
 };
 
@@ -101,4 +93,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps)(withRouter(WidgetManager));
+export default connect(mapStateToProps)(WidgetManager);
