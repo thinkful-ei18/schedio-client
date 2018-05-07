@@ -17,9 +17,7 @@ class WidgetManager extends React.Component {
     @return: send async dispatch event to update event
   */
 	handleToggle = widget => {
-	  const { displayWidgets } = this.props;
-	  const isShown = displayWidgets[widget].displayed;
-	  this.props.dispatch(toggleWidgetDisplay(widget, !isShown));
+	  this.props.dispatch(toggleWidgetDisplay(widget));
 	};
 
 	handleConfirm = widget => {
@@ -27,7 +25,7 @@ class WidgetManager extends React.Component {
 	};
 
 	render() {
-	  console.log('display: ', this.propsdisplayWidgets);
+	  console.log('display: ', this.props.displayWidgets);
 	  return (
 	    <div style={styles.root}>
 	      <List>
@@ -80,7 +78,6 @@ class WidgetManager extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  // props.widgets = state.events.activeEvent ? state.events.activeEvent.widgets : null;
   return {
     displayWidgets: state.events.activeEvent ? state.events.activeEvent.widgets : null
   };
