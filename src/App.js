@@ -9,7 +9,7 @@ import EventCreation from './components/EventCreation';
 import RequireAuth from './components/Utilities/RequireAuth';
 import Experiment from './components/scratches/scratch';
 import MapConfig from './components/scratches/MapConfig';
-import WidgetsManage from './components/WidgetsManage';
+import WidgetsManager from './components/WidgetsManager';
 /*======== RequireAuth is HOC that protects route from unauthorized visit ==========
 	example: RequireAuth()(< Your Component that render the route >)
 */
@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path="/register" component={SignUpPage} />
           <Route exact path="/experiment" component={Experiment} />
           <Route exact path="/mapconfig" component={MapConfig} />
-          <Route exact path="/widget-manage" component={WidgetsManage} />
+          <Route exact path="/widget-manager" component={WidgetsManager} />
         </Switch>
       </div>
     );
