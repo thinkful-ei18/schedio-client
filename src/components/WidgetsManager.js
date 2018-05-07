@@ -25,14 +25,17 @@ class WidgetManager extends React.Component {
     @return: send async dispatch event to update event
   */
 	handleToggle = widget => {
-	  this.props.dispatch(toggleWidgetDisplay(widget));
+	  const { displayWidgets } = this.props;
+	  const isShown = displayWidgets[widget].displayed;
+	  this.props.dispatch(toggleWidgetDisplay(widget, !isShown));
 	};
 
 	handleConfirm = widget => {
 	  console.log(this.state);
 	};
 	render() {
-	  const { displayWidget } = this.props;
+	  const { displayWidgets } = this.props;
+	  console.log(displayWidgets);
 	  return (
 	    <div style={styles.root}>
 	      <List>
@@ -50,7 +53,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Weather"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidget.weather.displayed}
+	              toggled={displayWidgets.weather.displayed}
 	              onToggle={() => this.handleToggle('weather')}
 	            />
 	          }
@@ -59,7 +62,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Checklist"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidget.todo.displayed}
+	              toggled={displayWidgets.todo.displayed}
 	              onToggle={() => this.handleToggle('todo')}
 	            />
 	          }
@@ -68,7 +71,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Map"
 	          rightToggle={
 	            <Toggle
-	              toggled={displayWidget.map.displayed}
+	              toggled={displayWidgets.map.displayed}
 	              onToggle={() => this.handleToggle('map')}
 	            />
 	          }
@@ -85,29 +88,9 @@ class WidgetManager extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const currentEvent = {
-    id: '1234456',
-    location: {
-      address: 'somewhere',
-      lat: 12,
-      lng: 13
-    },
-    starttime: '1234124',
-    title: '123',
-    widgets: {
-      map: {
-        displayed: true
-      },
-      weather: {
-        displayed: true
-      },
-      todo: {
-        displayed: false
-      }
-    }
-  };
+  const currentEvent = state.events.activeEvent;
   return {
-    displayWidget: currentEvent ? currentEvent.widgets : null
+    displayWidgets: currentEvent ? currentEvent.widgets : null
   };
 };
 

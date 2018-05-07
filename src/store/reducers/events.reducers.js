@@ -66,8 +66,16 @@ export default function eventReducer(state = initialState, action) {
   */
   case TOGGLE_WIDGET_DISPLAY:
     const targetWidget = action.widget;
-    console.log(targetWidget);
-    return;
+    const isShown = action.isShown;
+    const newState = { ...state };
+    const widgets = newState.activeEvent.widgets;
+    for (let widget in widgets) {
+      if (widget === targetWidget) {
+        widgets[widget].displayed = isShown;
+      }
+    }
+    newState.activeEvent.widgets = widgets;
+    return newState;
 
   default:
     return state;
