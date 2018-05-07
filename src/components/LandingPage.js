@@ -23,7 +23,7 @@ export default function LandingPage(props) {
           <p>Commit</p>
         </div>
       </div>
-      <WeatherWidget/>
+      <WeatherWidget event= {{'location': {lat: '52.5200', long: '13.4050'}, starttime: Date.now()}}/>
     </div>
   );
 }

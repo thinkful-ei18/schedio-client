@@ -1,8 +1,10 @@
 .weather-widget-container {
   background-color:#EEEEEE;
-  height:7em;
-  width:15em;
+  height:10em;
+  width:25em;
   border-radius:10px;
+  position:relative;
+  overflow:hidden;
 }
 
 .weather-widget-header {
@@ -15,8 +17,21 @@
 
 .weather-spinner {
   position:absolute;
+  width:100%;
+  height:100%;
+  background-color:rgb(255,255,255, .4);
 }
 
 .weather-spinner img {
   width:2em;
+  margin:0 auto;
+  display:block;
+  margin-top:3em;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+0% {}
+50% {margin-left:3em;}
+100% {margin-right:3em;}
 }

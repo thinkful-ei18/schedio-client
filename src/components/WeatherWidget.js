@@ -2,6 +2,8 @@
 import React from 'react';
 import {WEATHER_APIKEY} from '../config';
 import './styles/WeatherWidget.css';
+import axios from 'axios';
+import moment from 'moment';
 
 //================================== Weather Widget Component ====================>
 export default class WeatherWidget extends React.Component {
@@ -10,11 +12,48 @@ export default class WeatherWidget extends React.Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
+      temperature: null,
+      locationName: null,
+      conditionImg: 'http://cdn.apixu.com/weather/64x64/day/116.png',
+      conditions: null
     };
   }
 
+
+  componentDidMount() {
+    this.getWeather();
+  }
+  
+  getWeather = () => {
+
+    const daysAhead = moment(Date.now()).diff(this.props.event.starttime, 'days') + 1;
+    console.log(daysAhead);
+    if (daysAhead <=7) {
+      axios({
+        'url':`https://api.apixu.com/v1/forecast.json?key=${WEATHER_APIKEY}&q=${this.props.event.location.lat},${this.props.event.location.long}&days=${daysAhead}`,
+        'method':'GET',
+      })
+        .then(response => {
+
+          this.setState({
+            locationName: `${response.data.location.name}, ${response.data.location.country}`,
+            temperature: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.avgtemp_f,
+            conditionImg: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.condition.icon,
+            conditions: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.condition.text,
+            high: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.maxtemp_f,
+            low: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.mintemp_f,
+            sunrise:  response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].astro.sunrise,
+            sunset: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].astro.sunset,
+            date: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].date,
+          });
+        });
+    }
+  };
+  
   render() {
+    //Props passed in: Event object.
+
     const weatherSpinner = () => {
       return (
         <div className='weather-spinner'>
@@ -23,15 +62,20 @@ export default class WeatherWidget extends React.Component {
       );
     };
 
+
+
     return(
       <section className='weather-widget-container'>
+        {this.state.loading ? weatherSpinner() : ''}
         <div className='weather-widget-header'>
-          Weather in the area:
+          Weather in {this.state.locationName ? this.state.locationName: ''}
         </div>
         <div className='weather-widget-temperature'>
-          {weatherSpinner()}
+          Temperature: {this.state.temperature ? this.state.temperature : ''}
         </div>
         <div className='weather-widget-precipitation'>
+          <img src={this.state.conditionImg} alt='weather condition icon' />
+          {this.state.conditions}
         </div>
       </section>
     );
