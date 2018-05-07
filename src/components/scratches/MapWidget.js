@@ -1,6 +1,7 @@
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import LocationSearch from '../Utilities/LocationSearch';
+
 class MapWidget extends React.Component {
   render() {
     let renderInfoBox = '';
