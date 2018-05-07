@@ -1,14 +1,11 @@
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-const { SearchBox } = require('react-google-maps/lib/components/places/SearchBox');
+import LocationSearch from '../Utilities/LocationSearch';
 class MapWidget extends React.Component {
-  componentDidMount() {
-    console.log(google);
-  }
   render() {
     let renderInfoBox = '';
     if (this.props.info) {
-      renderInfoBox = <section style={styles.infoBox}>{this.props.info.location.address}</section>;
+      renderInfoBox = <section style={styles.infoBox}>{this.props.info.address}</section>;
     }
     return (
       <div style={styles.container}>
@@ -17,34 +14,15 @@ class MapWidget extends React.Component {
           defaultZoom={14}
           center={
             this.props.info
-              ? { lat: this.props.info.location.lat, lng: this.props.info.location.lng }
+              ? { lat: this.props.info.lat, lng: this.props.info.lng }
               : { lat: -34.397, lng: 150.644 }
           }
         >
-          <SearchBox>
-            <input
-              type="text"
-              placeholder="Customized your placeholder"
-              style={{
-                boxSizing: 'border-box',
-                border: '1px solid transparent',
-                width: '240px',
-                height: '32px',
-                marginTop: '27px',
-                padding: '0 12px',
-                borderRadius: '3px',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-                fontSize: '14px',
-                outline: 'none',
-                textOverflow: 'ellipses'
-              }}
-            />
-          </SearchBox>
           {this.props.isMarkerShown && (
             <Marker
               position={
                 this.props.info
-                  ? { lat: this.props.info.location.lat, lng: this.props.info.location.lng }
+                  ? { lat: this.props.info.lat, lng: this.props.info.lng }
                   : { lat: -34.397, lng: 150.644 }
               }
             />
@@ -58,20 +36,76 @@ class MapWidget extends React.Component {
 const MapWrapper = withScriptjs(withGoogleMap(MapWidget));
 
 export default class Map extends React.Component {
-  render() {
-    return (
-      <MapWrapper
-        isMarkerShown={true}
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDre2JV9TmMIIXbaIlxwHwDjopIsSvs3ow&libraries=places"
-        loadingElement={<div style={{ height: '100%' }} />}
-        containerElement={<div style={{ maxHeight: '400px', height: '400px' }} />}
-        mapElement={
-          <div style={{ height: '100%', boxShadow: '0 5px 10px 0 rgba(16, 36, 94, 0.2)' }} />
-        }
-        info={this.props.info}
-      />
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      address: '',
+      lat: null,
+      lng: null,
+      showMap: false
+    };
   }
+	handleAddress = address => {
+	  this.setState({ address });
+	};
+	handleCoordinate = coordinate => {
+	  const { lat, lng } = coordinate;
+	  this.setState({ lat, lng });
+	};
+	handleSubmit = e => {
+	  e.preventDefault();
+	  this.setState({ showMap: true });
+	};
+	handleTitleChange = e => {
+	  e.preventDefault();
+	  const title = e.target.value;
+	  this.setState({ title });
+	};
+	render() {
+	  console.log(this.state);
+	  const { showMap, ...info } = this.state;
+
+	  return (
+	    <div>
+	      {showMap ? (
+	        <section>
+	          <div>
+	            <button onClick={() => this.setState({ showMap: false })}>go back</button>
+	            <button>confirm</button>
+	          </div>
+	          <MapWrapper
+	            isMarkerShown={true}
+	            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDre2JV9TmMIIXbaIlxwHwDjopIsSvs3ow&libraries=places"
+	            loadingElement={<div style={{ height: '100%' }} />}
+	            containerElement={<div style={{ maxHeight: '350px', height: '300px' }} />}
+	            mapElement={
+	              <div style={{ height: '100%', boxShadow: '0 5px 10px 0 rgba(16, 36, 94, 0.2)' }} />
+	            }
+	            info={info}
+	          />
+	        </section>
+	      ) : (
+	        <form onSubmit={this.handleSubmit}>
+	          <div>
+	            <label style={{ display: 'block' }}>widget title</label>
+	            <input
+	              id="title"
+	              name="title"
+	              value={this.state.title}
+	              onChange={this.handleTitleChange}
+	            />
+	          </div>
+	          <div>
+	            <label>Search for location</label>
+	            <LocationSearch address={this.handleAddress} coordinate={this.handleCoordinate} />
+	            <button type="submit">submit</button>
+	          </div>
+	        </form>
+	      )}
+	    </div>
+	  );
+	}
 }
 
 const styles = {
@@ -96,7 +130,7 @@ const styles = {
     padding: 10,
     width: '280px',
     position: 'absolute',
-    top: -160,
+    top: -140,
     left: 0,
     right: 0,
     zIndex: 999,

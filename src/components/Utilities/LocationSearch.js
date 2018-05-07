@@ -17,8 +17,8 @@ export default class LocationSearchInput extends React.Component {
 	    .then(latLng => {
 	      this.props.address(address);
 	      this.props.coordinate(latLng);
-	    });
-	  // .catch(error => this.props.error(error));
+	    })
+	    .catch(error => this.props.error(error));
 	};
 
 	render() {
@@ -38,7 +38,6 @@ export default class LocationSearchInput extends React.Component {
 	          />
 	          <div className="autocomplete-dropdown-container">
 	            {suggestions.map(suggestion => {
-	              console.log(suggestion);
 	              const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
 	              // inline style for demonstration purpose
 	              const style = suggestion.active
