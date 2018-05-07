@@ -1,0 +1,22 @@
+.weather-widget-container {
+  background-color:#EEEEEE;
+  height:7em;
+  width:15em;
+  border-radius:10px;
+}
+
+.weather-widget-header {
+  text-align:center;
+  font-size:.8em;
+  padding:.8em;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+.weather-spinner {
+  position:absolute;
+}
+
+.weather-spinner img {
+  width:2em;
+}
