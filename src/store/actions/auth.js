@@ -5,6 +5,7 @@ import { setAuthToken, authSuccess, authRequest, authError, clearAuth } from './
 import { saveAuthToken, clearAuthToken } from '../../local-storage';
 import axios from 'axios';
 
+
 const storeAuthInfo = (authToken, dispatch) => {
 	const decodedToken = jwtDecode(authToken);
 	dispatch(setAuthToken(authToken));
