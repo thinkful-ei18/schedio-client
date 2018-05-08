@@ -96,8 +96,9 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    userData: state.auth.currentUser
+    userData: state.auth.currentUser,
+    authError: state.auth.error
   };
 };
 
-export default connect(mapStateToProps, actions)(withRouter(Login));
+export default connect(mapStateToProps)(withRouter(Login));

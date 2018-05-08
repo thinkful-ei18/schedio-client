@@ -76,7 +76,7 @@ export class EventCreation extends React.Component {
 	    location: {
 	      address: address,
 	      lat: coordinate.lat,
-	      long: coordinate.long
+	      long: coordinate.lng
 	    },
 	    /*============ require user info from auth token ============
 				waiting on user auth feature to complete
