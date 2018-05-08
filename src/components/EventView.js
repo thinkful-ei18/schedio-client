@@ -12,13 +12,13 @@ export class EventView extends React.Component {
         {this.props.currentEvent ? (
           <div>
             <CardHeader
-              title={this.props.currentEvent.title}
-              subtitle={new Date(this.props.currentEvent.starttime).toDateString()}
+              title={this.props.currentEvent.title ? this.props.currentEvent.title : 'No Event Selected'}
+              subtitle={ this.props.currentEvent.starttime ? new Date(this.props.currentEvent.starttime).toDateString() : ''}
               showExpandableButton={false}
             />
             <CardText expandable={false}>
               {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
-              {this.props.currentEvent ? moment(this.props.currentEvent.starttime).fromNow() : ''}
+              {this.props.currentEvent.starttime ? moment(this.props.currentEvent.starttime).fromNow() : ''}
             </CardText>
           </div>
         ) : (
