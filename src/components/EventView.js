@@ -9,21 +9,19 @@ export class EventView extends React.Component {
   render() {
     return (
       <Card>
-        {this.props.currentEvent ? (
-          <div>
-            <CardHeader
-              title={this.props.currentEvent.title}
-              subtitle={new Date(this.props.currentEvent.starttime).toDateString()}
-              showExpandableButton={false}
-            />
-            <CardText expandable={false}>
-              {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
-              {this.props.currentEvent ? moment(this.props.currentEvent.starttime).fromNow() : ''}
-            </CardText>
-          </div>
-        ) : (
-          'No Event Selected'
-        )}
+    
+        <div>
+          <CardHeader
+            title={ this.props.currentEvent.title ? this.props.currentEvent.title : 'No Event Selected'}
+            subtitle={ this.props.currentEvent.title ? new Date(Number(this.props.currentEvent.starttime)).toDateString() : '' }
+            showExpandableButton={false}
+          />
+          <CardText expandable={false}>
+            {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
+            {this.props.currentEvent.starttime ? moment(Number(this.props.currentEvent.starttime)).fromNow() : ''}
+          </CardText>
+        </div>
+  }
       </Card>
     );
   }
