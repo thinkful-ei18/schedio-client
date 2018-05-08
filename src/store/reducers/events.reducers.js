@@ -24,23 +24,23 @@ const initialState = {
       }
     }
   },
-  eventList: null
+  eventList:null
 };
 
 export default function eventReducer(state = initialState, action) {
-  switch (action.type) {
+  switch(action.type) {
+		
   //---------------
   case CREATE_EVENT:
     return {
-      ...state,
-      activeEvent: action.event
+      ...state, activeEvent:action.event
     };
-
+		
     //----------------
   case STORE_EVENTLIST:
     return {
       ...state,
-      eventList: action.events
+      eventList:action.events
     };
 
     //-----------------
@@ -51,14 +51,15 @@ export default function eventReducer(state = initialState, action) {
         id: action.event.id,
         location: {
           lat: action.event.location.lat,
-          long: action.event.location.long,
+          long:action.event.location.long,
           address: null
         },
         starttime: action.event.starttime,
         title: action.event.title,
-        widgets: action.event.widgets
+        widgets: action.event.widgets,
       }
     };
+
 
     //----------------
 
