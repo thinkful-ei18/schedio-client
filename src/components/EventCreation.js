@@ -172,6 +172,8 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    userId: state.auth.currentUser.id
+  };
 };
 export default connect(mapStateToProps)(withRouter(EventCreation));
