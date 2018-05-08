@@ -8,14 +8,6 @@ import Toggle from 'material-ui/Toggle';
 import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay } from '../store/actions/widgetManage';
 class WidgetManager extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-	/*======== handle toggle on list item
-    @params: String
-    example: 'weather'
-    @return: send async dispatch event to update event
-  */
 	handleToggle = widget => {
 	  this.props.dispatch(toggleWidgetDisplay(widget));
 	};
