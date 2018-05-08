@@ -4,12 +4,11 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import store from './store/configureStore';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const store = configureStore();
-
+// leave store as simple as possible
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>

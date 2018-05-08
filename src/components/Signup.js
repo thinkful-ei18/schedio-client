@@ -60,6 +60,6 @@ handlePassInput = (e) => {
 }
 
 
-export default connect(actions)(SignUp)
+export default connect(null, actions)(SignUp)
 
 
