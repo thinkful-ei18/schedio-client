@@ -30,6 +30,9 @@ class Login extends Component {
 	      this.props.history.push('/dashboard');
 	    })
 	    .catch(err => {
+	      if (!err.response) {
+	        return dispatch(authError({ message: 'server is down atm', location: 'server' }));
+	      }
 	      dispatch(authError(err.response.data));
 	    });
 	};
@@ -49,10 +52,12 @@ class Login extends Component {
 	render() {
 	  let renderUserError = '';
 	  let renderPasswordError = '';
+	  let renderServerError = '';
 	  const { authError } = this.props;
 	  if (authError) {
 	    if (authError.location === 'username') renderUserError = <div>{authError.message}</div>;
 	    if (authError.location === 'password') renderPasswordError = <div>{authError.message}</div>;
+	    if (authError.location === 'server') renderServerError = <div>{authError.message}</div>;
 	  }
 	  return (
 	    <div className="landing-container">
@@ -78,6 +83,7 @@ class Login extends Component {
 	          {renderPasswordError}
 	          <br />
 	          <button type="submit">Login</button>
+	          {renderServerError}
 	        </form>
 	      </MuiThemeProvider>
 	    </div>
