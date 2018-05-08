@@ -1,6 +1,6 @@
 import { normalizeResponseErrors } from './utils';
 import { API_BASE_URL } from '../../config';
-
+import {} from '../actions/';
 
 export const registerUser = user => dispatch => {
   console.log(user);
@@ -14,6 +14,5 @@ export const registerUser = user => dispatch => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .catch(err => {
-      return Promise.reject(new Error(err));
     });
 };
