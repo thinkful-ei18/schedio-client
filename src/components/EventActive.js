@@ -3,38 +3,37 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import { fetchUserEvents } from '../store/actions/eventlist.actions';
 
-const SortableItem = SortableElement(({ value }) => <li className="style-item">{value}</li>);
-
-export class EarlyEvent extends Component {
+export class EventActive extends Component {
   componentDidMount() {
     this.props.dispatch(fetchUserEvents());
   }
 
-	state = {
-	  items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
-	};
-
-	onSortEnd = ({ oldIndex, newIndex }) => {
-	  this.setState({
-	    items: arrayMove(this.state.items, oldIndex, newIndex)
-	  });
-	};
-
 	earlyEvent = events => {
-	  let earlyEventTime = new Date('3000-01-01T08:00:00.000Z');
-	  let earlyEvent;
+	  let earlyEventTime = 3250368000000;
+		let earlyEvent;
+		
 	  for (let i = 0; i < events.length; i++) {
-	    const currentEvent = new Date(events[i].starttime);
+			const currentEvent = parseInt(events[i].starttime);
+			// console.log(events[i].starttime);
+			console.log(earlyEventTime);
+			console.log(currentEvent);
+			
+			
 	    if (currentEvent < earlyEventTime) {
 	      earlyEventTime = currentEvent;
 	      earlyEvent = events[i];
 	    }
-	  }
+		}
+		
+		console.log(earlyEvent);
+		
 
 	  let data = {};
 	  for (let k in earlyEvent) {
+			// console.log(k);
 	    if (earlyEvent.hasOwnProperty(k) && k === 'location') {
-	      data = earlyEvent[k];
+        data = earlyEvent[k];
+        console.log(data);
 	    }
 	  }
 	  return data;
@@ -43,7 +42,7 @@ export class EarlyEvent extends Component {
 	render() {
 	  let events = this.props.events ? this.props.events : '';
 	  let currentEvent = this.earlyEvent(events);
-	  console.log(currentEvent);
+	  // console.log(currentEvent);
 
 	  return (
 	    <div>
@@ -52,7 +51,6 @@ export class EarlyEvent extends Component {
 	        <h5>
 						Latitude: {currentEvent.lat} Longitude: {currentEvent.lng}
 	        </h5>
-	        <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
 	      </div>
 	    </div>
 	  );
@@ -60,10 +58,9 @@ export class EarlyEvent extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     events: state.events.eventList
   };
 };
 
-export default connect(mapStateToProps)(EarlyEvent);
+export default connect(mapStateToProps)(EventActive);
