@@ -6,18 +6,19 @@ import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
 import MenuItem from 'material-ui/MenuItem';
-import { toggleWidgetDisplay } from '../store/actions/widgetManage';
+import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
 class WidgetManager extends React.Component {
 	handleToggle = widget => {
 	  this.props.dispatch(toggleWidgetDisplay(widget));
 	};
 
-	handleConfirm = widget => {
-	  console.log(this.state);
+	handleConfirm = () => {
+	  const { currentEvent, dispatch } = this.props;
+	  dispatch(submitWidgetDisplay(currentEvent));
 	};
 
 	render() {
-	  console.log('display: ', this.props.displayWidgets);
+	  const { currentEvent } = this.props;
 	  return (
 	    <div style={styles.root}>
 	      <List>
@@ -35,7 +36,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Weather"
 	          rightToggle={
 	            <Toggle
-	              toggled={this.props.displayWidgets.weather.displayed}
+	              toggled={currentEvent.widgets.weather.displayed}
 	              onToggle={() => this.handleToggle('weather')}
 	            />
 	          }
@@ -44,7 +45,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Checklist"
 	          rightToggle={
 	            <Toggle
-	              toggled={this.props.displayWidgets.todo.displayed}
+	              toggled={currentEvent.widgets.todo.displayed}
 	              onToggle={() => this.handleToggle('todo')}
 	            />
 	          }
@@ -53,7 +54,7 @@ class WidgetManager extends React.Component {
 	          primaryText="Map"
 	          rightToggle={
 	            <Toggle
-	              toggled={this.props.displayWidgets.map.displayed}
+	              toggled={currentEvent.widgets.map.displayed}
 	              onToggle={() => this.handleToggle('map')}
 	            />
 	          }
@@ -71,7 +72,7 @@ class WidgetManager extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    displayWidgets: state.events.activeEvent ? state.events.activeEvent.widgets : null
+    currentEvent: state.events.activeEvent.id ? state.events.activeEvent : null
   };
 };
 
