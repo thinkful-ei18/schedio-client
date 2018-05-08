@@ -14,4 +14,4 @@ class RequiresLogin extends Component {
   }
 }
 
-export default RequiresLogin
+export default RequiresLogin;
