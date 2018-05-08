@@ -15,16 +15,7 @@ const rootReducer = combineReducers({
 	events: eventReducer,
 });
 
-const middleware = [thunk];
+// use thunk middleware instead
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk))
 
-let composeEnhancers;
-
-if (process.env.NODE_ENV === 'development') {
-	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-}
-
-const configureStore = () => {
-	return createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
-};
-
-export default configureStore;
+export default store;
