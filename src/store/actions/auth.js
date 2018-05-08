@@ -23,7 +23,6 @@ export const login = loginInfo => dispatch => {
     },
     data: JSON.stringify(loginInfo)
   }).then(response => {
-    console.log(response);
     storeAuthInfo(response.data.authToken, dispatch);
   });
 };
