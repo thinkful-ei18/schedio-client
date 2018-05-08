@@ -38,17 +38,21 @@ class Login extends Component {
 	    });
 	};
 
-	handleFirstNameInput = e => {
-	  this.setState({ firstName: e.target.value });
-	};
 
-	handleUserNameInput = e => {
-	  this.setState({ username: e.target.value });
-	};
+  handleFirstNameInput = e => {
+    this.setState({ firstName: e.target.value });
+  };
 
 	handlePassInput = e => {
 	  this.setState({ pass: e.target.value });
 	};
+  handleUserNameInput = e => {
+    this.setState({ username: e.target.value });
+  };
+
+  handlePassInput = e => {
+    this.setState({ pass: e.target.value });
+  };
 	render() {
 	  let renderUserError = '';
 	  let renderPasswordError = '';
@@ -89,13 +93,13 @@ class Login extends Component {
 	    </div>
 	  );
 	}
+
 }
 
 const mapStateToProps = state => {
   return {
-    userData: state.auth.currentUser,
-    authError: state.auth.error
+    userData: state.auth.currentUser
   };
 };
 
-export default connect(mapStateToProps)(withRouter(Login));
+export default connect(mapStateToProps, actions)(withRouter(Login));
