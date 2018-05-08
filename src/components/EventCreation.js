@@ -54,8 +54,6 @@ export class EventCreation extends React.Component {
 	  });
 	};
 	handleCoordinate = coordinate => {
-		console.log(coordinate, 'COORDINATE HERE');
-		
 	  this.setState({ coordinate });
 	};
 	handleError = error => {
@@ -69,8 +67,6 @@ export class EventCreation extends React.Component {
 	
 	*/
 	onSubmit = template => {
-		// console.log(this.state, 'STATE');
-		
 	  if (!templateWidgets[template]) {
 	    return alert(`${template} is not defined tempalte`);
 	  }
@@ -80,7 +76,7 @@ export class EventCreation extends React.Component {
 	    location: {
 	      address: address,
 	      lat: coordinate.lat,
-	      long: coordinate.lng
+	      long: coordinate.long
 	    },
 	    /*============ require user info from auth token ============
 				waiting on user auth feature to complete
@@ -89,9 +85,7 @@ export class EventCreation extends React.Component {
 	    userId: '5aebeabfc7a8f23320d38d72',
 	    starttime: date.getTime(),
 	    initWidgets: templateWidgets[template]
-		};
-		console.log(newEvent);
-		
+	  };
 	  const { dispatch, history } = this.props;
 	  return dispatch(asyncCreateEvent(newEvent))
 	    .then(_event => {
