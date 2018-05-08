@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { TextField, RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
-import { login } from '../store/actions';
-import { authError } from '../store/actions/actionType';
 import './signup.css';
+import { login } from '../store/actions/auth';
+import { authError } from '../store/actions/actionType';
 
 class Login extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class Login extends Component {
       pass: ''
     };
   }
-
 	loginHandler = e => {
 	  e.preventDefault();
 	  const { dispatch } = this.props;
@@ -48,7 +47,6 @@ class Login extends Component {
 	handlePassInput = e => {
 	  this.setState({ pass: e.target.value });
 	};
-
 	render() {
 	  let renderUserError = '';
 	  let renderPasswordError = '';
