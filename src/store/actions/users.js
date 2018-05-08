@@ -1,6 +1,5 @@
 import { normalizeResponseErrors } from './utils';
 import { API_BASE_URL } from '../../config';
-import {} from '../actions/';
 
 export const registerUser = user => dispatch => {
   console.log(user);
