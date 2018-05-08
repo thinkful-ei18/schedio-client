@@ -4,6 +4,7 @@ import { Moment } from 'react-moment';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import moment from 'moment';
+import EventActive from './EventActive';
 
 export class EventView extends React.Component {
   render() {
@@ -18,12 +19,13 @@ export class EventView extends React.Component {
             />
             <CardText expandable={false}>
               {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
-              {this.props.currentEvent.starttime ? moment(this.props.currentEvent.starttime).fromNow() : ''}
+              {this.props.currentEvent.starttime ? moment(Number(this.props.currentEvent.starttime)).fromNow() : ''}
             </CardText>
           </div>
         ) : (
           'No Event Selected'
         )}
+        {/* <EventActive/> */}
       </Card>
     );
   }
