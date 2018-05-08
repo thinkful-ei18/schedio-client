@@ -4,7 +4,7 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import {connect} from 'react-redux';
 import {fetchUserEvents} from '../store/actions/eventlist.actions';
 // import EventList from './EventList';
-// import './Sortable.css';
+import './Sortable.css';
 
 
 const SortableItem = SortableElement(({value}) =>
