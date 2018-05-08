@@ -11,7 +11,5 @@ export const registerUser = user => dispatch => {
     body: JSON.stringify(user)
   })
     .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .catch(err => {
-    });
+    .then(res => res.json());
 };
