@@ -9,6 +9,7 @@
   .container h1 {
     color: black;
     font-size: 75px;
+    text-align: center;
   }
   
   .info-container h1 {
@@ -28,16 +29,20 @@
   
   .f-pg {
    display: inline-block;
-   width: 33%;
+   width: 30%;
+   background-color: #19BAD1;
+   margin: 5px;
+   padding: 25px;
   }
+
   
   .info-progression {
 
   margin-top: 100px;  
-  background-color: #19BAD1;
   padding-top: 40px;
   padding-bottom: 25px;
   color: white;
+  background-color: black;
   }
   
   
