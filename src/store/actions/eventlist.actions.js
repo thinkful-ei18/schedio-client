@@ -54,19 +54,23 @@ export const fetchUserEvents = () => (dispatch, getState) => {
       let lastViewedId = localStorage.getItem('lastViewedEvent');
       let lastViewedTimestamp = Number(localStorage.getItem('lastViewedTimestamp'));
 
-      if (lastViewedId && lastViewedTimestamp) {
-        if (moment(lastViewedTimestamp).diff(Number(Date.now()), 'days') < 5 ) {
-          let lastViewedEvent = response.data.filter(event => event.id === lastViewedId );
-          if (lastViewedEvent.length && lastViewedEvent[0].user === getState().auth.currentUser.id) {
-            dispatch(setCurrentEvent(lastViewedEvent[0]));
+
+      if (lastViewedId && lastViewedTimestamp && moment(lastViewedTimestamp).diff(Number(Date.now()), 'days') < 5 ) {
+        let lastViewedEvent = response.data.filter(event => event.id === lastViewedId );
+        console.log('HERE', lastViewedEvent[0].user, getState().auth.currentUser.id);
+        if (lastViewedEvent.length && lastViewedEvent[0].user === getState().auth.currentUser.user.id) {
+          dispatch(setCurrentEvent(lastViewedEvent[0]));
+        } else {
+          
+          let eventDefault = earlyEvent(response.data);
+          if (eventDefault) {
+            dispatch(setCurrentEvent(eventDefault));
           }
         }
 
       } else {
 
-      // loop over response.data to find what is earliest
         let eventDefault = earlyEvent(response.data);
-        // If eventDefault function produces an Event, (it will NOT if there are no upcoming events);
         if (eventDefault) {
           dispatch(setCurrentEvent(eventDefault));
         }
