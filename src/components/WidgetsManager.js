@@ -8,7 +8,8 @@ import Toggle from 'material-ui/Toggle';
 import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
 import { fetchUserEvents } from '../store/actions/eventlist.actions';
-
+import IconButton from 'material-ui/IconButton';
+import ActionSettings from 'material-ui/svg-icons/action/settings';
 class WidgetManager extends React.Component {
 	handleToggle = widget => {
 	  this.props.dispatch(toggleWidgetDisplay(widget));
@@ -42,64 +43,113 @@ class WidgetManager extends React.Component {
 	        <ListItem
 	          primaryText="Weather"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.weather.displayed}
-	              onToggle={() => this.handleToggle('weather')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.weather.displayed}
+	                onToggle={() => this.handleToggle('weather')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Checklist"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.todo.displayed}
-	              onToggle={() => this.handleToggle('todo')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.todo.displayed}
+	                onToggle={() => this.handleToggle('todo')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Map"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.map.displayed}
-	              onToggle={() => this.handleToggle('map')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.map.displayed}
+	                onToggle={() => this.handleToggle('map')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Outdoor activity"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.outdooractivities.displayed}
-	              onToggle={() => this.handleToggle('outdooractivities')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.outdooractivities.displayed}
+	                onToggle={() => this.handleToggle('outdooractivities')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Public event"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.publicevents.displayed}
-	              onToggle={() => this.handleToggle('publicevents')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.publicevents.displayed}
+	                onToggle={() => this.handleToggle('publicevents')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Food and dinning"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.foodanddining.displayed}
-	              onToggle={() => this.handleToggle('foodanddining')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.foodanddining.displayed}
+	                onToggle={() => this.handleToggle('foodanddining')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <ListItem
 	          primaryText="Sports"
 	          rightToggle={
-	            <Toggle
-	              toggled={currentEvent.widgets.sports.displayed}
-	              onToggle={() => this.handleToggle('sports')}
-	            />
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.sports.displayed}
+	                onToggle={() => this.handleToggle('sports')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
 	          }
 	        />
 	        <MenuItem

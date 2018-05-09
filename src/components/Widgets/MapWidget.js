@@ -66,7 +66,6 @@ export default class Map extends React.Component {
 	render() {
 	  console.log(this.state);
 	  const { showMap, ...info } = this.state;
-
 	  return (
 	    <div>
 	      {showMap ? (
