@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './MapWidget';
+import Map from '../Widgets/MapWidget';
 import { connect } from 'react-redux';
 import { Moment } from 'react-moment';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
