@@ -34,7 +34,7 @@ export class EventView extends React.Component {
       <main>
         <Card>
           <Header
-            title={currentEvent.title ? currentEvent.title : 'No Event Selected'}
+            title={currentEvent.title ? currentEvent.title : 'No Upcoming Events.  Why not create one?'}
             date={currentEvent.title ? new Date(Number(currentEvent.starttime)).toDateString() : ''}
             location={currentEvent.location.address ? currentEvent.location.address : ''}
             countdown={
