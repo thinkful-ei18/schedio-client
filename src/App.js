@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path="/register" component={SignUpPage} />
           <Route exact path="/experiment" component={Experiment} />
           <Route exact path="/mapconfig" component={MapConfig} />
-          <Route exact path="/dashboard/widget-manager" component={WidgetsManager} />
+          <Route exact path="/dashboard/eventsetting" component={WidgetsManager} />
         </Switch>
       </div>
     );

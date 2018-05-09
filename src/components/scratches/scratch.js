@@ -13,7 +13,7 @@ export class EventView extends React.Component {
     for (let widget in widgets) {
       if (widgets[widget].displayed === true) {
         if (widget === 'map') {
-          widgetsForShow.push(<Map widget={widgets[widget]} />);
+          widgetsForShow.push(<Map info={widgets[widget]} />);
         }
       }
     }

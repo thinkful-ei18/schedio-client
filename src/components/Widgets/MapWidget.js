@@ -62,11 +62,11 @@ export default class Map extends React.Component {
 	  e.preventDefault();
 	  const title = e.target.value;
 	  this.setState({ title });
-	};
+  };
 	render() {
 	  console.log(this.state);
-	  const { showMap, ...info } = this.state;
-
+	  // const { showMap, ...info } = this.state;
+    const {info} = this.props;
 	  return (
 	    <div>
 	      {showMap ? (
