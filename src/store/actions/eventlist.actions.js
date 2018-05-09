@@ -38,10 +38,7 @@ function earlyEvent(events) {
   return resultingEvent;
 }
   
-  
 
-  return earlyEvent;
-}
 
 //================================== Asynchronous Actions ====================>
 export const fetchUserEvents = () => (dispatch, getState) => {
@@ -68,17 +65,12 @@ export const fetchUserEvents = () => (dispatch, getState) => {
       } else {
 
       // loop over response.data to find what is earliest
-<<<<<<< HEAD
-      let eventDefault = earlyEvent(response.data);
-      dispatch(setCurrentEvent(eventDefault));
-=======
         let eventDefault = earlyEvent(response.data);
         // If eventDefault function produces an Event, (it will NOT if there are no upcoming events);
         if (eventDefault) {
           dispatch(setCurrentEvent(eventDefault));
         }
       }
->>>>>>> Set up default event logic for event view
       dispatch(storeEventList(response.data));
     })
     .catch(err => {
