@@ -71,6 +71,7 @@ export class EventCreation extends React.Component {
 	    return alert(`${template} is not defined tempalte`);
 	  }
 	  const { address, coordinate, date } = this.state;
+	  const { userId } = this.props;
 	  const newEvent = {
 	    title: `new event created on ${new Date()}`,
 	    location: {
@@ -82,10 +83,11 @@ export class EventCreation extends React.Component {
 				waiting on user auth feature to complete
 				for now I am using static known userId
 			*/
-	    userId: '5aebeabfc7a8f23320d38d72',
+	    userId,
 	    starttime: date.getTime(),
 	    initWidgets: templateWidgets[template]
 	  };
+	  console.log(newEvent);
 	  const { dispatch, history } = this.props;
 	  return dispatch(asyncCreateEvent(newEvent))
 	    .then(_event => {
@@ -173,7 +175,7 @@ const styles = {
 
 const mapStateToProps = state => {
   return {
-    userId: state.auth.currentUser.id
+    userId: state.auth.currentUser.user.id
   };
 };
 export default connect(mapStateToProps)(withRouter(EventCreation));

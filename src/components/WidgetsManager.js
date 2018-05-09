@@ -19,6 +19,8 @@ class WidgetManager extends React.Component {
 
 	render() {
 	  const { currentEvent } = this.props;
+	  console.log(currentEvent);
+	  if (!currentEvent) return <div>No content is loaded</div>;
 	  return (
 	    <div style={styles.root}>
 	      <List>
@@ -56,6 +58,42 @@ class WidgetManager extends React.Component {
 	            <Toggle
 	              toggled={currentEvent.widgets.map.displayed}
 	              onToggle={() => this.handleToggle('map')}
+	            />
+	          }
+	        />
+	        <ListItem
+	          primaryText="Outdoor activity"
+	          rightToggle={
+	            <Toggle
+	              toggled={currentEvent.widgets.outdooractivities.displayed}
+	              onToggle={() => this.handleToggle('outdooractivities')}
+	            />
+	          }
+	        />
+	        <ListItem
+	          primaryText="Public event"
+	          rightToggle={
+	            <Toggle
+	              toggled={currentEvent.widgets.publicevents.displayed}
+	              onToggle={() => this.handleToggle('publicevents')}
+	            />
+	          }
+	        />
+	        <ListItem
+	          primaryText="Food and dinning"
+	          rightToggle={
+	            <Toggle
+	              toggled={currentEvent.widgets.foodanddining.displayed}
+	              onToggle={() => this.handleToggle('foodanddining')}
+	            />
+	          }
+	        />
+	        <ListItem
+	          primaryText="Sports"
+	          rightToggle={
+	            <Toggle
+	              toggled={currentEvent.widgets.sports.displayed}
+	              onToggle={() => this.handleToggle('sports')}
 	            />
 	          }
 	        />

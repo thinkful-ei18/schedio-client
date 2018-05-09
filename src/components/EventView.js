@@ -4,24 +4,40 @@ import { Moment } from 'react-moment';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import moment from 'moment';
+import { withRouter } from 'react-router-dom';
 
 export class EventView extends React.Component {
   render() {
     return (
       <Card>
-    
         <div>
           <CardHeader
-            title={ this.props.currentEvent.title ? this.props.currentEvent.title : 'No Event Selected'}
-            subtitle={ this.props.currentEvent.title ? new Date(Number(this.props.currentEvent.starttime)).toDateString() : '' }
+            title={
+              this.props.currentEvent.title ? this.props.currentEvent.title : 'No Event Selected'
+            }
+            subtitle={
+              this.props.currentEvent.title
+                ? new Date(Number(this.props.currentEvent.starttime)).toDateString()
+                : ''
+            }
             showExpandableButton={false}
           />
           <CardText expandable={false}>
             {this.props.currentEvent.address ? this.props.currentEvent.address : ''}
-            {this.props.currentEvent.starttime ? moment(Number(this.props.currentEvent.starttime)).fromNow() : ''}
+            {this.props.currentEvent.starttime
+              ? moment(Number(this.props.currentEvent.starttime)).fromNow()
+              : ''}
           </CardText>
         </div>
-  }
+        <button
+          onClick={() => {
+            console.log('click');
+            this.props.history.push('/dashboard/widget-manager');
+          }}
+        >
+					Click me
+        </button>
+				}
       </Card>
     );
   }
@@ -31,4 +47,4 @@ const mapStateToProps = state => ({
   currentEvent: state.events.activeEvent ? state.events.activeEvent : ''
 });
 
-export default connect(mapStateToProps)(EventView);
+export default withRouter(connect(mapStateToProps)(EventView));

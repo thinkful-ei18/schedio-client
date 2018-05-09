@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { TextField, RaisedButton } from 'material-ui';
-
-import * as actions from '../store/actions';
+import { registerUser } from '../store/actions/users';
+import { authError } from '../store/actions/actionType';
 import './signup.css';
 
 class SignUp extends Component {
@@ -19,11 +19,25 @@ class SignUp extends Component {
 	signUpHandler = e => {
 	  e.preventDefault();
 	  console.log(this.state.username);
-	  this.props.registerUser({
-	    firstname: this.state.firstName,
-	    username: this.state.username,
-	    password: this.state.pass
-	  });
+	  const { dispatch, history } = this.props;
+	  return dispatch(
+	    registerUser({
+	      firstname: this.state.firstName,
+	      username: this.state.username,
+	      password: this.state.pass
+	    })
+	  )
+	    .then(() => {
+	      history.push('/login');
+	    })
+	    .catch(err => {
+	      if (!err.response) {
+	        return dispatch(
+	          authError({ message: 'server is down at the moment', location: 'server' })
+	        );
+	      }
+	      dispatch(authError(err));
+	    });
 	};
 
 	handleFirstNameInput = e => {
@@ -39,6 +53,11 @@ class SignUp extends Component {
 	};
 
 	render() {
+	  let renderError = '';
+	  const { error } = this.props;
+	  if (error) {
+	    renderError = <div>{error.message}</div>;
+	  }
 	  return (
 	    <div className="landing-container">
 	      <MuiThemeProvider>
@@ -69,11 +88,17 @@ class SignUp extends Component {
 	          />
 	          <br />
 	          <button type="submit">Sign Up</button>
+	          <br />
+	          {renderError}
 	        </form>
 	      </MuiThemeProvider>
 	    </div>
 	  );
 	}
 }
-
-export default connect(null, actions)(SignUp);
+const mapStateToProps = state => {
+  return {
+    error: state.auth.error
+  };
+};
+export default connect(mapStateToProps)(SignUp);
