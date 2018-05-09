@@ -1,5 +1,4 @@
 import React from 'react';
-import WeatherWidget from '../components/WeatherWidget';
 import './LandingPage.css';
 export default function LandingPage(props) {
   return (
@@ -23,7 +22,6 @@ export default function LandingPage(props) {
           <p>Commit</p>
         </div>
       </div>
-      <WeatherWidget event= {{'location': {lat: '52.5200', long: '13.4050'}, starttime: Date.now()}}/>
     </div>
   );
 }

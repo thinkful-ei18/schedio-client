@@ -20,22 +20,30 @@ export default class WeatherWidget extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps) {
+      if (prevProps.event.starttime === this.props.event.starttime) {
+        return null;
+      } else {
+        this.getWeather();
+      }
+    }
+  }
 
-  componentDidMount() {
+  componentDidMount(){
     this.getWeather();
   }
-  
-  getWeather = () => {
 
-    const daysAhead = moment(Date.now()).diff(this.props.event.starttime, 'days') + 1;
-    console.log(daysAhead);
+
+  getWeather = () => {
+    this.setState({loading:true});
+    const daysAhead = moment(Date.now()).diff(Number(this.props.event.starttime), 'days') + 1;
     if (daysAhead <=7) {
       axios({
         'url':`https://api.apixu.com/v1/forecast.json?key=${WEATHER_APIKEY}&q=${this.props.event.location.lat},${this.props.event.location.long}&days=${daysAhead}`,
         'method':'GET',
       })
         .then(response => {
-
           this.setState({
             locationName: `${response.data.location.name}, ${response.data.location.country}`,
             temperature: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.avgtemp_f,
@@ -46,14 +54,17 @@ export default class WeatherWidget extends React.Component {
             sunrise:  response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].astro.sunrise,
             sunset: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].astro.sunset,
             date: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].date,
+            loading:false
           });
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   };
   
   render() {
-    //Props passed in: Event object.
-
+    console.log(this.props, 'PROPS');
     const weatherSpinner = () => {
       return (
         <div className='weather-spinner'>
@@ -61,8 +72,6 @@ export default class WeatherWidget extends React.Component {
         </div>
       );
     };
-
-
 
     return(
       <section className='weather-widget-container'>

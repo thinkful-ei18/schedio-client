@@ -11,7 +11,6 @@ import {connect} from 'react-redux';
 export class  EventListEvent extends React.Component {
 
   render() {
-    console.log(JSON.stringify(this.props.event));
     
     return (
       <div className='event-list-event'>
