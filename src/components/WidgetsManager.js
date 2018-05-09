@@ -7,19 +7,24 @@ import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
 import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
+import { fetchUserEvents } from '../store/actions/eventlist.actions';
+
 class WidgetManager extends React.Component {
 	handleToggle = widget => {
 	  this.props.dispatch(toggleWidgetDisplay(widget));
 	};
 
 	handleConfirm = () => {
-	  const { currentEvent, dispatch } = this.props;
-	  dispatch(submitWidgetDisplay(currentEvent));
+	  const { currentEvent, dispatch, history } = this.props;
+	  return dispatch(submitWidgetDisplay(currentEvent))
+	    .then(history.push('/dashboard'))
+	    .catch(err => {
+	      console.log('error from wg-manager', err);
+	    });
 	};
 
 	render() {
 	  const { currentEvent } = this.props;
-	  console.log(currentEvent);
 	  if (!currentEvent) return <div>No content is loaded</div>;
 	  return (
 	    <div style={styles.root}>
@@ -121,4 +126,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps)(WidgetManager);
+export default withRouter(connect(mapStateToProps)(WidgetManager));

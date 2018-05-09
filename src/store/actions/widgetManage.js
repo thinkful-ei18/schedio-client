@@ -9,7 +9,7 @@ export const toggleWidgetDisplay = widget => ({
 
 export const submitWidgetDisplay = event => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/${event.id}/display`, {
+  return fetch(`${API_BASE_URL}/api/events/${event.id}/display`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -18,6 +18,5 @@ export const submitWidgetDisplay = event => (dispatch, getState) => {
     body: JSON.stringify(event)
   })
     .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .then(res => console.log(res));
+    .then(res => res.json());
 };
