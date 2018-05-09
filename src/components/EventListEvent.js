@@ -10,8 +10,9 @@ import {connect} from 'react-redux';
  */
 export class  EventListEvent extends React.Component {
 
-
   render() {
+    console.log(JSON.stringify(this.props.event));
+    
     return (
       <div className='event-list-event'>
         <b>{this.props.event.title}</b>
@@ -29,4 +30,3 @@ export class  EventListEvent extends React.Component {
 };
 
 export default connect()(EventListEvent);
-

@@ -8,6 +8,8 @@ import { withRouter } from 'react-router-dom';
 
 export class EventView extends React.Component {
   render() {
+    let events = this.props.events ? this.props.events : '';
+      
     return (
       <Card>
         <div>
@@ -44,7 +46,8 @@ export class EventView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentEvent: state.events.activeEvent ? state.events.activeEvent : ''
+  currentEvent: state.events.activeEvent ? state.events.activeEvent : '',
+  events: state.events.eventList  
 });
 
 export default withRouter(connect(mapStateToProps)(EventView));
