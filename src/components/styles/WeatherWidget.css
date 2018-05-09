@@ -31,6 +31,10 @@
   animation: spin 2s linear infinite;
 }
 
+.weather-flex-container {
+  
+}
+
 @keyframes spin {
 0% {}
 50% {margin-left:3em;}

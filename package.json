@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "create-react-app": "^1.5.2",
     "jwt-decode": "^2.2.0",
     "material-ui": "^0.20.0",
     "moment": "^2.22.1",
