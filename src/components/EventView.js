@@ -31,6 +31,7 @@ export class EventView extends React.Component {
     }
 
     return (
+<<<<<<< HEAD
       <main>
         <Card>
           <Header
@@ -39,6 +40,18 @@ export class EventView extends React.Component {
             location={currentEvent.location.address ? currentEvent.location.address : ''}
             countdown={
               currentEvent.starttime ? moment(Number(currentEvent.starttime)).fromNow() : ''
+=======
+      <Card>
+        <div>
+          <CardHeader
+            title={
+              this.props.currentEvent.title ? this.props.currentEvent.title : 'No Upcoming Events.  Why not create some?'
+            }
+            subtitle={
+              this.props.currentEvent.title
+                ? new Date(Number(this.props.currentEvent.starttime)).toDateString()
+                : ''
+>>>>>>> Set up default event logic for event view
             }
             history={history}
           />

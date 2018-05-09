@@ -9,6 +9,12 @@ import {connect} from 'react-redux';
  * be looping through the list of events in the state and displaying multiple EventListEvent components.
  */
 export class  EventListEvent extends React.Component {
+  
+  handleViewEvent() {
+    this.props.dispatch(setCurrentEvent(this.props.event));
+    localStorage.setItem('lastViewedEvent', this.props.event.id);
+    localStorage.setItem('lastViewedTimestamp', Number(Date.now()));
+  }
 
   render() {
     
@@ -20,7 +26,7 @@ export class  EventListEvent extends React.Component {
         <br/>
         {this.props.event.location.lat}
         {this.props.event.location.long}
-        <button onClick={() => this.props.dispatch(setCurrentEvent(this.props.event))} className='event-list-open-button'>
+        <button onClick={() => this.handleViewEvent()} className='event-list-open-button'>
         View
         </button>
       </div>
