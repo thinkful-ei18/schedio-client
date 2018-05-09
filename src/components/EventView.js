@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Moment } from 'react-moment';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import WeatherWidget from './WeatherWidget';
+// import FlatButton from 'material-ui/FlatButton';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 
@@ -29,6 +29,7 @@ export class EventView extends React.Component {
             {this.props.currentEvent.starttime
               ? moment(Number(this.props.currentEvent.starttime)).fromNow()
               : ''}
+            <WeatherWidget event= {this.props.currentEvent}/>
           </CardText>
         </div>
         <button
