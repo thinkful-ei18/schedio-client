@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import { fetchUserEvents } from '../store/actions/eventlist.actions';
+import { setCurrentEvent } from '../store/actions/eventlist.actions';
 
 const SortableItem = SortableElement(({ value }) => <li className="style-item">{value}</li>);
 
@@ -42,8 +43,9 @@ export class EarlyEvent extends Component {
 
 	render() {
 	  let events = this.props.events ? this.props.events : '';
-	  let currentEvent = this.earlyEvent(events);
-	  console.log(currentEvent);
+		let currentEvent = this.earlyEvent(events);
+		// this.props.dispatch(setCurrentEvent(currentEvent));
+	  // console.log(currentEvent);
 
 	  return (
 	    <div>
