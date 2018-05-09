@@ -19,13 +19,6 @@ export class EventView extends React.Component {
       const widgets = currentEvent.widgets;
       for (let widget in widgets) {
         if (widgets[widget].displayed === true) {
-          if (widget === 'map') {
-            widgetsForShow.push(
-              <Card>
-                <Map event={currentEvent} key={'map'} />
-              </Card>
-            );
-          }
           if (widget === 'weather') {
             widgetsForShow.push(
               <Card>
@@ -33,12 +26,6 @@ export class EventView extends React.Component {
               </Card>
             );
           }
-          // if (widget === 'todo') {
-          //   widgetsForShow.push(<Todo event={currentEvent} key={'todo'} />);
-          // }
-          // if (widget === 'trail') {
-          //   widgetsForShow.push(<Trail event={currentEvent} key={'trail'} />);
-          // }
         }
       }
     }
@@ -69,6 +56,9 @@ const mapStateToProps = state => ({
 
 export default withRouter(connect(mapStateToProps)(EventView));
 
+/*=============== Header Component for EventView==================
+ @props { title, location, date, countdown, history }
+*/
 function Header(props) {
   const { title, location, date, countdown, history } = props;
   return (
