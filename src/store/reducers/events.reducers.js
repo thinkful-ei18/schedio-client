@@ -50,9 +50,7 @@ export default function eventReducer(state = initialState, action) {
       activeEvent: {
         id: action.event.id,
         location: {
-          lat: action.event.location.lat,
-          long: action.event.location.long,
-          address: action.event.location.address
+          ...action.event
         },
         starttime: action.event.starttime,
         title: action.event.title,
