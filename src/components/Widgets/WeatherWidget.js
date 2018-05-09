@@ -35,42 +35,75 @@ export default class WeatherWidget extends React.Component {
 
 	getWeather = () => {
 	  this.setState({ loading: true });
-	  const daysAhead = moment(Date.now()).diff(Number(this.props.event.starttime), 'days') + 1;
-	  if (daysAhead <= 7) {
-	    axios({
-	      url: `https://api.apixu.com/v1/forecast.json?key=${WEATHER_APIKEY}&q=${
-	        this.props.event.location.lat
-	      },${this.props.event.location.long}&days=${daysAhead}`,
-	      method: 'GET'
-	    })
+	  const daysAhead = moment(Number(this.props.event.starttime)).diff(Date.now(), 'days') + 1;
+	  console.log(daysAhead, 'DAYS AHEAD');
+	  axios({
+	    url: `https://api.apixu.com/v1/forecast.json?key=${WEATHER_APIKEY}&q=${
+	      this.props.event.location.lat
+	    },${this.props.event.location.long}&days=${daysAhead}`,
+	    method: 'GET'
+	  })
 	      .then(response => {
+					
+	      let country = response.data.location.country;
+	        if (country === 'United States of America') {
+	        country = `${response.data.location.region}, USA`;
+	        }
+					
+	      if (daysAhead < 7 && daysAhead >= 0) {
 	        this.setState({
-	          locationName: `${response.data.location.name}, ${response.data.location.country}`,
+	          locationName: `${response.data.location.name}, ${country}`,
 	          temperature:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].day.avgtemp_f,
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].day.avgtemp_f,
 	          conditionImg:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].day.condition
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].day.condition
 							  .icon,
 	          conditions:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].day.condition
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].day.condition
 							  .text,
 	          high:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].day.maxtemp_f,
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].day.maxtemp_f,
 	          low:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].day.mintemp_f,
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].day.mintemp_f,
 	          sunrise:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].astro.sunrise,
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].astro.sunrise,
 	          sunset:
-							response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].astro.sunset,
-	          date: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead - 1].date,
+							response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].astro.sunset,
+	          date: response.data.forecast.forecastday[daysAhead <= 0 ? 0 : daysAhead - 1].date,
 	          loading: false
 	        });
+					
+	      } else {
+	        console.log('THIS RAN');
+	        this.setState({
+	          locationName: `${response.data.location.name}, ${country}`,
+	          temperature:
+								response.data.forecast.forecastday[0].day.avgtemp_f,
+	          conditionImg:
+								response.data.forecast.forecastday[0].day.condition
+								  .icon,
+	          conditions:
+								response.data.forecast.forecastday[0].day.condition
+								  .text,
+	          high:
+								response.data.forecast.forecastday[0].day.maxtemp_f,
+	          low:
+								response.data.forecast.forecastday[0].day.mintemp_f,
+	          sunrise:
+								response.data.forecast.forecastday[0].astro.sunrise,
+	          sunset:
+								response.data.forecast.forecastday[0].astro.sunset,
+	          date: response.data.forecast.forecastday[0].date,
+	          loading: false
+	        });
+
+
+	      }
 	      })
 	      .catch(err => {
 	        console.log(err);
 	      });
 	  }
-	};
 
 	render() {
 	  console.log(this.props, 'PROPS');
@@ -84,16 +117,29 @@ export default class WeatherWidget extends React.Component {
 
 	  return (
 	    <section className="weather-widget-container">
-	      {this.state.loading ? weatherSpinner() : ''}
-	      <div className="weather-widget-header">
-					Weather in {this.state.locationName ? this.state.locationName : ''}
-	      </div>
-	      <div className="weather-widget-temperature">
-					Temperature: {this.state.temperature ? this.state.temperature : ''}
-	      </div>
-	      <div className="weather-widget-precipitation">
-	        <img src={this.state.conditionImg} alt="weather condition icon" />
-	        {this.state.conditions}
+	        {this.state.loading ? weatherSpinner() : ''}
+	        <div className="weather-widget-header">
+						Weather in {this.state.locationName ? this.state.locationName : ''}
+	        <br/>
+						On { this.state.date}
+	        </div>
+	      <div className='weather-flex-container'>
+	        <div className="weather-widget-temperature weatherunit">
+						Temperature: {this.state.temperature ? this.state.temperature : ''}
+	          <br/>
+						High: {this.state.high}
+	          <br/>
+						Low: {this.state.low}
+	        </div>
+	        <div className="weather-widget-precipitation weatherunit">
+	          <img src={this.state.conditionImg} alt="weather condition icon" />
+	          {this.state.conditions}
+	        </div>
+	        <div className='astro weatherunit'>
+						Sunrise: {this.state.sunrise}
+	          <br/>
+						Sunset: {this.state.sunset}
+	        </div>
 	      </div>
 	    </section>
 	  );

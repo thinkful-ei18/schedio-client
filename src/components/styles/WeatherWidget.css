@@ -32,8 +32,32 @@
 }
 
 .weather-flex-container {
-  
+  display:flex;
+  justify-content:center;
+  margin:-1em;
 }
+
+.weather-widget-precipitation {
+  display:flex;
+  flex-direction:column-reverse;
+}
+
+.weather-widget-temperature {
+  text-align:left;
+}
+
+.weather-widget-precipitation img {
+  width:3em;
+  margin:0 auto;
+}
+
+
+.weatherunit {
+  margin-top:2em;
+  margin-left:1em;
+  margin-right:1em;
+}
+
 
 @keyframes spin {
 0% {}
