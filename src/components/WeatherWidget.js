@@ -44,8 +44,13 @@ export default class WeatherWidget extends React.Component {
         'method':'GET',
       })
         .then(response => {
+          let country = response.data.location.country;
+          if (country === 'United States of America') {
+            country = 'USA';
+          }
+
           this.setState({
-            locationName: `${response.data.location.name}, ${response.data.location.country}`,
+            locationName: `${response.data.location.name}, ${country}`,
             temperature: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.avgtemp_f,
             conditionImg: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.condition.icon,
             conditions: response.data.forecast.forecastday[daysAhead < 0 ? 0 : daysAhead-1].day.condition.text,
@@ -64,7 +69,6 @@ export default class WeatherWidget extends React.Component {
   };
   
   render() {
-    console.log(this.props, 'PROPS');
     const weatherSpinner = () => {
       return (
         <div className='weather-spinner'>
@@ -76,15 +80,17 @@ export default class WeatherWidget extends React.Component {
     return(
       <section className='weather-widget-container'>
         {this.state.loading ? weatherSpinner() : ''}
-        <div className='weather-widget-header'>
-          Weather in {this.state.locationName ? this.state.locationName: ''}
-        </div>
-        <div className='weather-widget-temperature'>
-          Temperature: {this.state.temperature ? this.state.temperature : ''}
-        </div>
-        <div className='weather-widget-precipitation'>
-          <img src={this.state.conditionImg} alt='weather condition icon' />
-          {this.state.conditions}
+        <div className='weather-flex-container'>
+          <div className='weather-widget-header'>
+            Weather in {this.state.locationName ? this.state.locationName: ''}
+          </div>
+          <div className='weather-widget-temperature'>
+            Temperature: {this.state.temperature ? this.state.temperature : ''}
+          </div>
+          <div className='weather-widget-precipitation'>
+            <img src={this.state.conditionImg} alt='weather condition icon' />
+            {this.state.conditions}
+          </div>
         </div>
       </section>
     );
