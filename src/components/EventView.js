@@ -59,7 +59,7 @@ function getWidgetRender(event) {
           <CardItem>
             <Card key={'weather'}>
               <header style={styles.widgetTitle}>
-                {widgets[widget].title ? widgets[widget].title : 'weather title'}
+                {widgets[widget].title ? widgets[widget].title : 'weather widget'}
               </header>
               <Weather event={event} />
             </Card>
@@ -71,7 +71,7 @@ function getWidgetRender(event) {
           <CardItem>
             <Card key={'map'}>
               <header style={styles.widgetTitle}>
-                {widgets[widget].title ? widgets[widget].title : 'map title'}
+                {widgets[widget].title ? widgets[widget].title : 'map widget'}
               </header>
               <Map event={event} />
             </Card>
