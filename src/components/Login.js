@@ -5,6 +5,7 @@ import { TextField, RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
 import './signup.css';
 import { login } from '../store/actions/auth';
+import GoogleLog from './GoogleLog';
 import { authError } from '../store/actions/actionType';
 
 class Login extends Component {
@@ -65,7 +66,7 @@ class Login extends Component {
 	  return (
 	    <div className="landing-container">
 	      <MuiThemeProvider>
-	        <form onSubmit={this.loginHandler}>
+	        <form className="login-form" onSubmit={this.loginHandler}>
 	          <TextField
 	            type="text"
 	            className="name-input"
@@ -88,6 +89,7 @@ class Login extends Component {
 	          <button type="submit">Login</button>
 	          {renderServerError}
 	        </form>
+					<GoogleLog/>
 	      </MuiThemeProvider>
 	    </div>
 	  );

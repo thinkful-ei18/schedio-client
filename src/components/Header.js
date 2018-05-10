@@ -37,11 +37,12 @@ class Header extends React.Component {
   render() {
     
     return (
-      <div>
+      <div className="header">
         <AppBar
           title="Schedio"
           iconElementRight={this.props.authStatus ?  <Logged />: <RequiresLogin />}
           onLeftIconButtonClick={this.handleToggle}
+          style={{position: 'fixed', top: 0}}
         />
         <Drawer
           docked={false}
