@@ -1,6 +1,6 @@
 .weather-widget-container {
   background-color:white;
-  height:10em;
+  min-height:10em;
   width:100%;
   border-radius:10px;
   position:relative;
@@ -52,10 +52,61 @@
 }
 
 
+.weather-widget-header-alert-cont {
+  display:flex;
+  justify-content:flex-end;
+}
+
+.weather-alert-container {
+  font-size:.6em;
+  width:8em;
+  flex-basis:30%;
+  margin-top:2em;
+}
+
+.weather-alert-message {
+  background-color:rgb(163, 55, 55);
+  color:white;
+  width:60%;
+  margin:0 auto;
+  padding:6px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
 .weatherunit {
   margin-top:2em;
   margin-left:1em;
   margin-right:1em;
+}
+
+
+@media only screen and (max-width: 800px) {
+
+  .weather-flex-container {
+    flex-direction:column;
+  }
+
+  .weatherunit {
+    text-align:center;
+  }
+
+  .weather-widget-container {
+    height:20em;
+  }
+
+  .weather-widget-header-alert-cont {
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .weather-alert-container {
+    margin:0 auto;
+  }
+
+  .weather-alert-message {
+    width:10em;
+  }
 }
 
 
