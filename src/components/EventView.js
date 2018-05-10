@@ -18,26 +18,6 @@ export class EventView extends React.Component {
     let widgetsForShow = [];
     if (currentEvent.id) {
       widgetsForShow = getWidgetRender(currentEvent);
-      const widgets = currentEvent.widgets;
-      for (let widget in widgets) {
-        if (widgets[widget].displayed === true) {
-          if (widget === 'weather') {
-            widgetsForShow.push(
-              <Card>
-                <Weather event={currentEvent} key={'weather'} />
-              </Card>
-            );
-          }
-          if (widget==='todo') {
-            widgetsForShow.push(
-              <Card>
-                <Todo event={currentEvent} key={'todo'}/>
-              </Card>
-            );
-          }
-        }
-      }
-
     }
 
     return (
