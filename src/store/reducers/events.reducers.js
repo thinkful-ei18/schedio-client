@@ -12,17 +12,7 @@ const initialState = {
     },
     starttime: null,
     title: null,
-    widgets: {
-      map: {
-        displayed: true
-      },
-      todo: {
-        displayed: false
-      },
-      weather: {
-        displayed: true
-      }
-    }
+    widgets: {}
   },
   eventList: null
 };

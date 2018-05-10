@@ -2,29 +2,55 @@ import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import LocationSearch from '../Utilities/LocationSearch';
 
+export default class Map extends React.Component {
+  render() {
+    const { info } = this.props.event.widgets.map;
+    const { location } = this.props.event;
+    console.log(info, 'info');
+    return (
+      <div>
+        <section>
+          <MapWrapper
+            isMarkerShown={true}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDre2JV9TmMIIXbaIlxwHwDjopIsSvs3ow&libraries=places"
+            loadingElement={<div style={{ height: '100%' }} />}
+            containerElement={<div style={{ maxHeight: '350px', height: '300px' }} />}
+            mapElement={
+              <div style={{ height: '100%', boxShadow: '0 5px 10px 0 rgba(16, 36, 94, 0.2)' }} />
+            }
+            info={info}
+            fallback={location}
+          />
+        </section>
+      </div>
+    );
+  }
+}
+
+/*========== sub component for map =========
+@ props = {info, fallback}
+*/
 class MapWidget extends React.Component {
   render() {
+    const { info, fallback, isMarkerShown } = this.props;
+    console.log(fallback, 'hello');
     let renderInfoBox = '';
-    if (this.props.info) {
-      renderInfoBox = <section style={styles.infoBox}>{this.props.info.address}</section>;
-    }
+    renderInfoBox = (
+      <section style={styles.infoBox}>{info ? info.address : fallback.address}</section>
+    );
     return (
       <div style={styles.container}>
         {renderInfoBox}
         <GoogleMap
           defaultZoom={14}
           center={
-            this.props.info
-              ? { lat: this.props.info.lat, lng: this.props.info.lng }
-              : { lat: -34.397, lng: 150.644 }
+            info ? { lat: info.lat, lng: info.long } : { lat: fallback.lat, lng: fallback.long }
           }
         >
-          {this.props.isMarkerShown && (
+          {isMarkerShown && (
             <Marker
               position={
-                this.props.info
-                  ? { lat: this.props.info.lat, lng: this.props.info.lng }
-                  : { lat: -34.397, lng: 150.644 }
+                info ? { lat: info.lat, lng: info.long } : { lat: fallback.lat, lng: fallback.long }
               }
             />
           )}
@@ -35,78 +61,6 @@ class MapWidget extends React.Component {
 }
 
 const MapWrapper = withScriptjs(withGoogleMap(MapWidget));
-
-export default class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      address: '',
-      lat: null,
-      lng: null,
-      showMap: false
-    };
-  }
-	handleAddress = address => {
-	  this.setState({ address });
-	};
-	handleCoordinate = coordinate => {
-	  const { lat, lng } = coordinate;
-	  this.setState({ lat, lng });
-	};
-	handleSubmit = e => {
-	  e.preventDefault();
-	  this.setState({ showMap: true });
-	};
-	handleTitleChange = e => {
-	  e.preventDefault();
-	  const title = e.target.value;
-	  this.setState({ title });
-	};
-	render() {
-	  console.log(this.state);
-	  const { showMap, ...info } = this.state;
-	  return (
-	    <div>
-	      {showMap ? (
-	        <section>
-	          <div>
-	            <button onClick={() => this.setState({ showMap: false })}>go back</button>
-	            <button>confirm</button>
-	          </div>
-	          <MapWrapper
-	            isMarkerShown={true}
-	            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDre2JV9TmMIIXbaIlxwHwDjopIsSvs3ow&libraries=places"
-	            loadingElement={<div style={{ height: '100%' }} />}
-	            containerElement={<div style={{ maxHeight: '350px', height: '300px' }} />}
-	            mapElement={
-	              <div style={{ height: '100%', boxShadow: '0 5px 10px 0 rgba(16, 36, 94, 0.2)' }} />
-	            }
-	            info={info}
-	          />
-	        </section>
-	      ) : (
-	        <form onSubmit={this.handleSubmit}>
-	          <div>
-	            <label style={{ display: 'block' }}>widget title</label>
-	            <input
-	              id="title"
-	              name="title"
-	              value={this.state.title}
-	              onChange={this.handleTitleChange}
-	            />
-	          </div>
-	          <div>
-	            <label>Search for location</label>
-	            <LocationSearch address={this.handleAddress} coordinate={this.handleCoordinate} />
-	            <button type="submit">submit</button>
-	          </div>
-	        </form>
-	      )}
-	    </div>
-	  );
-	}
-}
 
 const styles = {
   container: {
@@ -136,7 +90,6 @@ const styles = {
     zIndex: 999,
     textAlign: 'center',
     backgroundColor: 'white',
-    borderRadius: '5px',
-    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
+    borderRadius: '5px'
   }
 };
