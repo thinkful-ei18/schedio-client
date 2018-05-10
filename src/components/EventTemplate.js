@@ -1,11 +1,11 @@
 import React from 'react';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+// import ContentAdd from 'material-ui/svg-icons/content/add';
 import SwipeableViews from 'react-swipeable-views';
 import Basic from 'material-ui/svg-icons/action/bookmark-border';
 import Home from 'material-ui/svg-icons/action/home';
 import Sport from 'material-ui/svg-icons/maps/directions-bike';
 import { RaisedButton } from 'material-ui';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 let selectedTemplate = null;
 
@@ -33,7 +33,6 @@ export default class EventTemplate extends React.Component {
 	  this.props.onClick(selectedTemplate);
 	};
 	render() {
-	  console.log(this.state);
 	  return (
 	    <main style={templateStyles.container}>
 	      <section>

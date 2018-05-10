@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
 import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
-import { fetchUserEvents } from '../store/actions/eventlist.actions';
+// import { fetchUserEvents } from '../store/actions/eventlist.actions';
 import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 class WidgetManager extends React.Component {
@@ -20,7 +20,6 @@ class WidgetManager extends React.Component {
 	  return dispatch(submitWidgetDisplay(currentEvent))
 	    .then(history.push('/dashboard'))
 	    .catch(err => {
-	      console.log('error from wg-manager', err);
 	    });
 	};
 

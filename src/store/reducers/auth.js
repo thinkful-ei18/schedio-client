@@ -8,7 +8,7 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR
 } from '../actions/actionType';
-import {loadAuthToken} from '../../local-storage';
+// import {loadAuthToken} from '../../local-storage';
 import jwtDecode from 'jwt-decode'; 
 
 

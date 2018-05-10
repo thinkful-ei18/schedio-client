@@ -64,7 +64,6 @@ export default class Map extends React.Component {
 	  this.setState({ title });
 	};
 	render() {
-	  console.log(this.state);
 	  const { showMap, ...info } = this.state;
 
 	  return (

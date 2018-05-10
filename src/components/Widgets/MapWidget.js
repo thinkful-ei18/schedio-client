@@ -1,14 +1,13 @@
-/* global google */
+/* global */
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import LocationSearch from '../Utilities/LocationSearch';
+// import LocationSearch from '../Utilities/LocationSearch';
 import { InfoWindow } from 'react-google-maps';
 
 export default class Map extends React.Component {
   render() {
     const { info } = this.props.event.widgets.map;
     const { location } = this.props.event;
-    console.log(info, 'info');
     return (
       <div>
         <section>
@@ -41,7 +40,6 @@ class MapWidget extends React.Component {
   }
   render() {
     const { info, fallback, isMarkerShown } = this.props;
-    console.log(fallback, 'hello');
     let renderInfoBox = '';
     renderInfoBox = (
       <section style={styles.infoBox}>{info ? info.address : fallback.address}</section>

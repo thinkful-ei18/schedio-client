@@ -4,7 +4,7 @@ import { Card } from 'material-ui/Card';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import Weather from './Widgets/WeatherWidget';
-import Todo from './Widgets/TodoWidget';
+// import Todo from './Widgets/TodoWidget';
 import Map from './Widgets/MapWidget';
 // import Todo from './Widgets/Todo';
 // import Trail from './Widgets/trail';
