@@ -66,6 +66,22 @@ export default function eventReducer(state = initialState, action) {
       }
     };
 
+    //----------------
+
+    // case SET_TODO_CHECKED:
+    // return {
+    //   ...state,
+    //   activeEvent: {
+    //     ...state.activeEvent,
+    //     widgets: {
+    //       ...state.activeEvent.widgets,
+    //       'todo': {
+    //         ''
+    //       }
+    //     }
+    //   }
+    // }
+
   default:
     return state;
 

@@ -57,7 +57,6 @@ export const fetchUserEvents = () => (dispatch, getState) => {
 
       if (lastViewedId && lastViewedTimestamp && moment(lastViewedTimestamp).diff(Number(Date.now()), 'days') < 5 ) {
         let lastViewedEvent = response.data.filter(event => event.id === lastViewedId );
-        console.log('HERE', lastViewedEvent[0].user, getState().auth.currentUser.id);
         if (lastViewedEvent.length && lastViewedEvent[0].user === getState().auth.currentUser.user.id) {
           dispatch(setCurrentEvent(lastViewedEvent[0]));
         } else {

@@ -4,6 +4,7 @@ import { Card } from 'material-ui/Card';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import Weather from './Widgets/WeatherWidget';
+import Todo from './Widgets/TodoWidget';
 import Map from './Widgets/MapWidget';
 // import Todo from './Widgets/Todo';
 // import Trail from './Widgets/trail';
@@ -17,6 +18,26 @@ export class EventView extends React.Component {
     let widgetsForShow = [];
     if (currentEvent.id) {
       widgetsForShow = getWidgetRender(currentEvent);
+      const widgets = currentEvent.widgets;
+      for (let widget in widgets) {
+        if (widgets[widget].displayed === true) {
+          if (widget === 'weather') {
+            widgetsForShow.push(
+              <Card>
+                <Weather event={currentEvent} key={'weather'} />
+              </Card>
+            );
+          }
+          if (widget==='todo') {
+            widgetsForShow.push(
+              <Card>
+                <Todo event={currentEvent} key={'todo'}/>
+              </Card>
+            );
+          }
+        }
+      }
+
     }
 
     return (
