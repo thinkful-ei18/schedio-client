@@ -72,6 +72,9 @@ export default class TodoList extends React.Component {
 
     return(
       <div className='todo-widget-container'>
+        <div className='todo-widget-title'>
+          Things to Remember:
+        </div>
         {todoItems}
       </div>
     );

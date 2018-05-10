@@ -5,5 +5,24 @@
 
 .todo-item-container {
   display:flex;
+  padding:10px;
+  margin-bottom:2px;
+  margin-top:1px;
   box-shadow:rgba(0, 0, 0, 0.12) 0px -1px 3px, rgba(0, 0, 0, 0.12) 0px 1px 2px;
+}
+
+
+.todo-title-section {
+  flex-basis: 95%;
+  word-break: break-all;
+}
+
+.todo-completed-delete-section {
+  display:flex;
+}
+
+.todo-widget-title {
+  font-size:1.1em;
+  padding:10px;
+  font-weight:bold;
 }
