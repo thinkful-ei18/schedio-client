@@ -76,7 +76,11 @@ export default function eventReducer(state = initialState, action) {
     //     widgets: {
     //       ...state.activeEvent.widgets,
     //       'todo': {
-    //         ''
+    //         ...state.activeEvent.widgets.todo,
+    //         list: {
+    //           ...state.activeEvent.widgets.todo.list,
+    //           state.activeEvent.widgets.find()
+    //         }
     //       }
     //     }
     //   }

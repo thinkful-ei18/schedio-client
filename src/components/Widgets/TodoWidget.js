@@ -12,6 +12,12 @@ import {fetchUserEvents} from '../../store/actions/eventlist.actions';
 
 export default class TodoList extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.timer = null;
+  }
+
   // API Methods
 
   // Add Item
@@ -19,29 +25,39 @@ export default class TodoList extends React.Component {
   // Delete Item
 
 
-  //Check Item
-  checkItem = (id) => {
-    axios({
-      'url':`${API_BASE_URL}/api/events/${this.props.event.id}/todo`,
-      'method':'PUT',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${store.getState().auth.authToken}`
-      },
-      data: {
-        'requestType':'setComplete',
-        'todoItemId':id
-      }
-    })
-      .then(response => {
-        fetchUserEvents();
+  // Toggle Check Item (receives todo item ID and status of checked nature)
+  toggleChecked = (id,completed) => {
+
+    let requestType = completed ? 'setIncomplete' : 'setComplete';
+
+    const apiCall = () => {
+      axios({
+        'url':`${API_BASE_URL}/api/events/${this.props.event.id}/todo`,
+        'method':'PUT',
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `Bearer ${store.getState().auth.authToken}`
+        },
+        data: {
+          'requestType':requestType,
+          'todoItemId':id
+        }
       })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(response => {
+          fetchUserEvents();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+    
+    clearTimeout(this.timer);
+    this.timer = setTimeout(apiCall(), 3000);
+    
   }
 
-  //Uncheck Item
+
+
 
 
 
@@ -52,7 +68,7 @@ export default class TodoList extends React.Component {
 
     const todolist = this.props.event.widgets.todo.list;
 
-    const todoItems = todolist ? todolist.map(todo => <TodoItem checkItem={this.checkItem} todo={todo}/>) : '';
+    const todoItems = todolist ? todolist.map(todo => <TodoItem toggleChecked={this.toggleChecked} todo={todo}/>) : '';
 
     return(
       <div className='todo-widget-container'>
