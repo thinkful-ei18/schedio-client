@@ -3,6 +3,7 @@ import LandingPage from './components/LandingPage';
 import { Route, Switch } from 'react-router-dom';
 import SignUpPage from './components/Signup';
 import Login from './components/Login';
+import GoogleLog from './components/GoogleLog'
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import EventCreation from './components/EventCreation';
@@ -29,6 +30,8 @@ class App extends Component {
           <Route exact path="/experiment" component={Experiment} />
           <Route exact path="/mapconfig" component={MapConfig} />
           <Route exact path="/dashboard/eventsetting" component={WidgetsManager} />
+          <Route exact path="/dashboard/widget-manager" component={WidgetsManager} />
+          <Route exact path="/googlelogin" component={GoogleLog} />
         </Switch>
       </div>
     );

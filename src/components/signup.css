@@ -15,3 +15,7 @@
 form .name-input {
   display: inline-block;
 }
+
+.login-form button{
+  margin-bottom: 20px;
+}
