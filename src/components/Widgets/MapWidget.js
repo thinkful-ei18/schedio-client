@@ -1,6 +1,8 @@
+/* global google */
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import LocationSearch from '../Utilities/LocationSearch';
+import { InfoWindow } from 'react-google-maps';
 
 export default class Map extends React.Component {
   render() {
@@ -31,6 +33,12 @@ export default class Map extends React.Component {
 @ props = {info, fallback}
 */
 class MapWidget extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true
+    };
+  }
   render() {
     const { info, fallback, isMarkerShown } = this.props;
     console.log(fallback, 'hello');
@@ -40,9 +48,9 @@ class MapWidget extends React.Component {
     );
     return (
       <div style={styles.container}>
-        {renderInfoBox}
+        {/* {renderInfoBox} */}
         <GoogleMap
-          defaultZoom={14}
+          defaultZoom={info ? 14 : 8}
           center={
             info ? { lat: info.lat, lng: info.long } : { lat: fallback.lat, lng: fallback.long }
           }
@@ -52,7 +60,14 @@ class MapWidget extends React.Component {
               position={
                 info ? { lat: info.lat, lng: info.long } : { lat: fallback.lat, lng: fallback.long }
               }
-            />
+              onClick={() => this.setState({ isOpen: !this.state.isOpen })}
+            >
+              {this.state.isOpen && (
+                <InfoWindow onCloseClick={() => this.setState({ isOpen: false })}>
+                  <div>{info ? info.address : fallback.address}</div>
+                </InfoWindow>
+              )}
+            </Marker>
           )}
         </GoogleMap>
       </div>

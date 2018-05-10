@@ -56,12 +56,7 @@ function getWidgetRender(event) {
       if (widget === 'weather') {
         arr.push(
           <div>
-            <Card
-              key={'weather'}
-              style={{
-                boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
-              }}
-            >
+            <Card key={'weather'}>
               <Weather event={event} />
             </Card>
             <br />
@@ -125,7 +120,8 @@ function Header(props) {
     </MediaQuery>
   );
 }
-
+/*=============== Styles rules for components ==================
+*/
 const styles = {
   headerContainerDesk: {
     position: 'relative',
