@@ -16,25 +16,16 @@ export class EventView extends React.Component {
     const { currentEvent, history } = this.props;
     let widgetsForShow = [];
     if (currentEvent.id) {
-      const widgets = currentEvent.widgets;
-      for (let widget in widgets) {
-        if (widgets[widget].displayed === true) {
-          if (widget === 'weather') {
-            widgetsForShow.push(
-              <Card>
-                <Weather event={currentEvent} key={'weather'} />
-              </Card>
-            );
-          }
-        }
-      }
+      widgetsForShow = getWidgetRender(currentEvent);
     }
 
     return (
       <main>
         <Card>
           <Header
-            title={currentEvent.title ? currentEvent.title : 'No Upcoming Events.  Why not create one?'}
+            title={
+              currentEvent.title ? currentEvent.title : 'No Upcoming Events.  Why not create one?'
+            }
             date={currentEvent.title ? new Date(Number(currentEvent.starttime)).toDateString() : ''}
             location={currentEvent.location.address ? currentEvent.location.address : ''}
             countdown={
@@ -49,12 +40,43 @@ export class EventView extends React.Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   currentEvent: state.events.activeEvent ? state.events.activeEvent : ''
 });
 
 export default withRouter(connect(mapStateToProps)(EventView));
+
+/*=============== helper function for Rendering widgets======
+*/
+function getWidgetRender(event) {
+  const widgets = event.widgets;
+  const arr = [];
+  for (let widget in widgets) {
+    if (widgets[widget].displayed === true) {
+      if (widget === 'weather') {
+        arr.push(
+          <div>
+            <Card key={'weather'}>
+              <Weather event={event} />
+            </Card>
+            <br />
+          </div>
+        );
+      }
+      if (widget === 'map') {
+        arr.push(
+          <div>
+            <Card key={'map'}>
+              <Map event={event} />
+            </Card>
+            <br />
+          </div>
+        );
+      }
+    }
+  }
+  return arr;
+}
 
 /*=============== Header Component for EventView==================
  @props { title, location, date, countdown, history }
@@ -98,20 +120,23 @@ function Header(props) {
     </MediaQuery>
   );
 }
-
+/*=============== Styles rules for components ==================
+*/
 const styles = {
   headerContainerDesk: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: '10px 40px 10px 10px'
+    padding: '10px 40px 10px 10px',
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
   },
   headerContainer: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    padding: '10px 25px 10px 10px'
+    padding: '10px 25px 10px 10px',
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
   },
   headerTitle: {
     overflow: 'hidden'

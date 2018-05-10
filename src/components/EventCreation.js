@@ -87,7 +87,6 @@ export class EventCreation extends React.Component {
 	    starttime: date.getTime(),
 	    initWidgets: templateWidgets[template]
 	  };
-	  console.log(newEvent);
 	  const { dispatch, history } = this.props;
 	  return dispatch(asyncCreateEvent(newEvent))
 	    .then(_event => {
