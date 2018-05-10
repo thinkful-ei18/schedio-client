@@ -1,6 +1,8 @@
 import { normalizeResponseErrors } from './utils';
 import { API_BASE_URL } from '../../config';
+
 export const registerUser = user => dispatch => {
+  console.log(user);
   return fetch(`${API_BASE_URL}/signup`, {
     method: 'POST',
     headers: {

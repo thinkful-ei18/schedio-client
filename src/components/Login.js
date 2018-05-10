@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { TextField, RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
-import { login } from '../store/actions';
-import { authError } from '../store/actions/actionType';
 import './signup.css';
+import { login } from '../store/actions/auth';
+import GoogleLog from './GoogleLog';
+import { authError } from '../store/actions/actionType';
 
 class Login extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class Login extends Component {
       pass: ''
     };
   }
-
 	loginHandler = e => {
 	  e.preventDefault();
 	  const { dispatch } = this.props;
@@ -30,6 +30,11 @@ class Login extends Component {
 	      this.props.history.push('/dashboard');
 	    })
 	    .catch(err => {
+	      if (!err.response) {
+	        return dispatch(
+	          authError({ message: 'server is down at the moment', location: 'server' })
+	        );
+	      }
 	      dispatch(authError(err.response.data));
 	    });
 	};
@@ -38,6 +43,9 @@ class Login extends Component {
 	  this.setState({ firstName: e.target.value });
 	};
 
+	handlePassInput = e => {
+	  this.setState({ pass: e.target.value });
+	};
 	handleUserNameInput = e => {
 	  this.setState({ username: e.target.value });
 	};
@@ -45,19 +53,20 @@ class Login extends Component {
 	handlePassInput = e => {
 	  this.setState({ pass: e.target.value });
 	};
-
 	render() {
 	  let renderUserError = '';
 	  let renderPasswordError = '';
+	  let renderServerError = '';
 	  const { authError } = this.props;
 	  if (authError) {
 	    if (authError.location === 'username') renderUserError = <div>{authError.message}</div>;
 	    if (authError.location === 'password') renderPasswordError = <div>{authError.message}</div>;
+	    if (authError.location === 'server') renderServerError = <div>{authError.message}</div>;
 	  }
 	  return (
 	    <div className="landing-container">
 	      <MuiThemeProvider>
-	        <form onSubmit={this.loginHandler}>
+	        <form className="login-form" onSubmit={this.loginHandler}>
 	          <TextField
 	            type="text"
 	            className="name-input"
@@ -78,7 +87,9 @@ class Login extends Component {
 	          {renderPasswordError}
 	          <br />
 	          <button type="submit">Login</button>
+	          {renderServerError}
 	        </form>
+					<GoogleLog/>
 	      </MuiThemeProvider>
 	    </div>
 	  );

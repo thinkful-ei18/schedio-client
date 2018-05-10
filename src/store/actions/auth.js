@@ -1,14 +1,20 @@
 import jwtDecode from 'jwt-decode';
 import { API_BASE_URL } from '../../config';
 import { normalizeResponseErrors } from './utils';
-import { setAuthToken, authSuccess, authRequest, authError, clearAuth } from './actionType';
+import {
+  setAuthToken,
+  authSuccess,
+  authRequest,
+  authError,
+  clearAuth
+} from './actionType';
 import { saveAuthToken, clearAuthToken } from '../../local-storage';
 import axios from 'axios';
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
-  dispatch(authSuccess(decodedToken.user));
+  dispatch(authSuccess(decodedToken));
   saveAuthToken(authToken);
 };
 
@@ -23,9 +29,22 @@ export const login = loginInfo => dispatch => {
     },
     data: JSON.stringify(loginInfo)
   }).then(response => {
-    console.log(response);
     storeAuthInfo(response.data.authToken, dispatch);
   });
+};
+
+export const googleLogin = tokenId => dispatch => {
+  dispatch(authRequest());
+  return fetch(`${API_BASE_URL}/login/google/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ access_token: tokenId })
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(res => storeAuthInfo(res.authToken, dispatch));
 };
 
 export const refreshAuthToken = () => (dispatch, getState) => {

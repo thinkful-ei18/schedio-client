@@ -2,6 +2,11 @@ import React from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import './LocationSearch.css';
 export default class LocationSearchInput extends React.Component {
+  /*======
+
+	<LocationSearch address={cb} coordinate={cb} />
+	=========
+	*/
   constructor(props) {
     super(props);
     this.state = { address: '' };

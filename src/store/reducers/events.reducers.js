@@ -1,5 +1,6 @@
 import { CREATE_EVENT } from '../actions/eventcreation';
 import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
+import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
 
 const initialState = {
   activeEvent: {
@@ -11,7 +12,7 @@ const initialState = {
     },
     starttime: null,
     title: null,
-    widgets: null
+    widgets: {}
   },
   eventList: null
 };
@@ -39,9 +40,7 @@ export default function eventReducer(state = initialState, action) {
       activeEvent: {
         id: action.event.id,
         location: {
-          lat: action.event.location.lat,
-          long: action.event.location.long,
-          address: null
+          ...action.event.location
         },
         starttime: action.event.starttime,
         title: action.event.title,
@@ -50,6 +49,43 @@ export default function eventReducer(state = initialState, action) {
     };
 
     //----------------
+
+    /*========= reserved spots for widget management actions ==========
+  */
+  case TOGGLE_WIDGET_DISPLAY:
+    return {
+      ...state,
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          [action.widget]: {
+            displayed: !state.activeEvent.widgets[action.widget].displayed
+          }
+        }
+      }
+    };
+
+    //----------------
+
+    // case SET_TODO_CHECKED:
+    // return {
+    //   ...state,
+    //   activeEvent: {
+    //     ...state.activeEvent,
+    //     widgets: {
+    //       ...state.activeEvent.widgets,
+    //       'todo': {
+    //         ...state.activeEvent.widgets.todo,
+    //         list: {
+    //           ...state.activeEvent.widgets.todo.list,
+    //           state.activeEvent.widgets.find()
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
   default:
     return state;
 

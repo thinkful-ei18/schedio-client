@@ -5,58 +5,167 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
-const WidgetManager = props => {
-  const { currentEvent } = props;
+import MenuItem from 'material-ui/MenuItem';
+import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
+import { fetchUserEvents } from '../store/actions/eventlist.actions';
+import IconButton from 'material-ui/IconButton';
+import ActionSettings from 'material-ui/svg-icons/action/settings';
+class WidgetManager extends React.Component {
+	handleToggle = widget => {
+	  this.props.dispatch(toggleWidgetDisplay(widget));
+	};
 
-  return (
-    <div style={styles.root}>
-      <List>
-        <Subheader>General Setting</Subheader>
-        <ListItem
-          primaryText="Edit event"
-          secondaryText="Change title, date or location of the event"
-        />
-        <ListItem primaryText="Delete event" secondaryText="You want to remove my existence?" />
-      </List>
-      <Divider />
-      <List>
-        <Subheader>Widget Manager</Subheader>
-        <ListItem primaryText="Weather" rightToggle={<Toggle />} />
-        <ListItem primaryText="Checklist" rightToggle={<Toggle />} />
-        <ListItem primaryText="Messages" rightToggle={<Toggle />} />
-      </List>
-    </div>
-  );
-};
+	handleConfirm = () => {
+	  const { currentEvent, dispatch, history } = this.props;
+	  return dispatch(submitWidgetDisplay(currentEvent))
+	    .then(history.push('/dashboard'))
+	    .catch(err => {
+	      console.log('error from wg-manager', err);
+	    });
+	};
 
-const mapStateToProps = state => {
+	render() {
+	  const { currentEvent } = this.props;
+	  if (!currentEvent) return <div>No content is loaded</div>;
+	  return (
+	    <div style={styles.root}>
+	      <List>
+	        <Subheader>General Setting</Subheader>
+	        <ListItem
+	          primaryText="Edit event"
+	          secondaryText="Change title, date or location of the event"
+	        />
+	        <ListItem primaryText="Delete event" secondaryText="You want to remove my existence?" />
+	      </List>
+	      <Divider />
+	      <List>
+	        <Subheader>Widget Manager</Subheader>
+	        <ListItem
+	          primaryText="Weather"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.weather.displayed}
+	                onToggle={() => this.handleToggle('weather')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Checklist"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.todo.displayed}
+	                onToggle={() => this.handleToggle('todo')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Map"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.map.displayed}
+	                onToggle={() => this.handleToggle('map')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Outdoor activity"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.outdooractivities.displayed}
+	                onToggle={() => this.handleToggle('outdooractivities')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Public event"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.publicevents.displayed}
+	                onToggle={() => this.handleToggle('publicevents')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Food and dinning"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.foodanddining.displayed}
+	                onToggle={() => this.handleToggle('foodanddining')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <ListItem
+	          primaryText="Sports"
+	          rightToggle={
+	            <div style={{ marginRight: '35px' }}>
+	              <Toggle
+	                toggled={currentEvent.widgets.sports.displayed}
+	                onToggle={() => this.handleToggle('sports')}
+	              />
+	            </div>
+	          }
+	          rightIconButton={
+	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	              <ActionSettings />
+	            </IconButton>
+	          }
+	        />
+	        <MenuItem
+	          primaryText="Confirm"
+	          style={{ textAlign: 'center', backgroundColor: 'green', color: 'white' }}
+	          onClick={this.handleConfirm}
+	        />
+	      </List>
+	    </div>
+	  );
+	}
+}
+
+const mapStateToProps = (state, props) => {
   return {
-    currentEvent: {
-      id: '1234456',
-      location: {
-        address: 'somewhere',
-        lat: 12,
-        lng: 13
-      },
-      starttime: '1234124',
-      title: '123',
-      widgets: {
-        map: {
-          displayed: true,
-          location: {
-            address: 'somewhere2',
-            lat: 12,
-            lng: 13
-          }
-        },
-        weather: {
-          displayed: true
-        },
-        todo: {
-          displayed: false
-        }
-      }
-    }
+    currentEvent: state.events.activeEvent.id ? state.events.activeEvent : null
   };
 };
 
@@ -67,4 +176,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps)(withRouter(WidgetManager));
+export default withRouter(connect(mapStateToProps)(WidgetManager));

@@ -1,3 +1,4 @@
+
 //================================== Import Dependencies ====================>
 
 import {
@@ -7,16 +8,15 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR
 } from '../actions/actionType';
-import { loadAuthToken } from '../../local-storage';
-import jwtDecode from 'jwt-decode';
+import {loadAuthToken} from '../../local-storage';
+import jwtDecode from 'jwt-decode'; 
+
 
 //================================== Construct Initial State ====================>
 
 const initialState = {
   authToken: localStorage.getItem('authToken') || null, // authToken !== null does not mean it has been validated
-  currentUser: localStorage.getItem('authToken')
-    ? jwtDecode(localStorage.getItem('authToken'))
-    : null,
+  currentUser: localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null,
   loading: false,
   error: null
 };
@@ -39,7 +39,6 @@ export default function reducer(state = initialState, action) {
   } else if (action.type === AUTH_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
-      error: null,
       currentUser: action.currentUser
     });
   } else if (action.type === AUTH_ERROR) {
