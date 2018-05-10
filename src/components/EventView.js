@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
+import HikingTrail from './scratches/HikingTrail';
 
 export class EventView extends React.Component {
   render() {
@@ -41,6 +42,7 @@ export class EventView extends React.Component {
             }
             history={history}
           />
+          <HikingTrail/>
         </Card>
         <br />
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
