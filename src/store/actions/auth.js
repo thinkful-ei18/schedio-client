@@ -8,7 +8,7 @@ import axios from 'axios';
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
-  dispatch(authSuccess(decodedToken.user));
+  dispatch(authSuccess(decodedToken));
   saveAuthToken(authToken);
 };
 

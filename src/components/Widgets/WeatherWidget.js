@@ -51,7 +51,6 @@ export default class WeatherWidget extends React.Component {
 	        if (country === 'United States of America') {
 	        country = `${response.data.location.region}, USA`;
 	      }
-	      console.log(daysAhead);
 					
 	      if (daysAhead < 7 && daysAhead > 0) {
 
