@@ -56,22 +56,26 @@ function getWidgetRender(event) {
     if (widgets[widget].displayed === true) {
       if (widget === 'weather') {
         arr.push(
-          <div>
+          <CardItem>
             <Card key={'weather'}>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].title ? widgets[widget].title : 'weather title'}
+              </header>
               <Weather event={event} />
             </Card>
-            <br />
-          </div>
+          </CardItem>
         );
       }
       if (widget === 'map') {
         arr.push(
-          <div>
+          <CardItem>
             <Card key={'map'}>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].title ? widgets[widget].title : 'map title'}
+              </header>
               <Map event={event} />
             </Card>
-            <br />
-          </div>
+          </CardItem>
         );
       }
     }
@@ -121,6 +125,13 @@ function Header(props) {
     </MediaQuery>
   );
 }
+
+/*=============== CardItem Component for Widgets==================
+
+*/
+function CardItem(props) {
+  return <div style={styles.cardItem}>{props.children}</div>;
+}
 /*=============== Styles rules for components ==================
 */
 const styles = {
@@ -139,8 +150,17 @@ const styles = {
     padding: '10px 25px 10px 10px',
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
   },
-  headerTitle: {
-    overflow: 'hidden'
+  cardItem: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 10
+  },
+  widgetTitle: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 8,
+    padding: 10,
+    textAlign: 'left',
+    backgroundColor: '#0097A7',
+    color: 'white'
   },
   gearIcon: {
     position: 'absolute',

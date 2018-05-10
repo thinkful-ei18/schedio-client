@@ -8,7 +8,6 @@ export default class Map extends React.Component {
   render() {
     const { info } = this.props.event.widgets.map;
     const { location } = this.props.event;
-    console.log(info, 'info');
     return (
       <div>
         <section>
