@@ -97,7 +97,7 @@ function getWidgetRender(event, history) {
           </CardItem>
         );
       }
-      if (widget === 'todo') {
+      if (widget === 'todo') { //83-92 paste 93 with own component
         arr.push(
           <CardItem key={'todo'}>
             <Card>
