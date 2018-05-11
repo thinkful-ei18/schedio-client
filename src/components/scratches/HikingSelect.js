@@ -52,7 +52,8 @@ export default class HikingTrail extends React.Component {
 		if (!this.state.trails) {
 
 			const styleSearch = {
-				width: "100%",
+				// width: "100%",
+				height: "300px",
 				"background-size": "cover",
 				"background-position": "top",
 				backgroundImage: `url(https://www.banfftours.com/wp-content/uploads/2017/01/Hiking-Lake-Louise-5.jpg)`
