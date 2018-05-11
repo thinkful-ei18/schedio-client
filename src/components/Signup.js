@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { TextField, RaisedButton } from 'material-ui';
+import { TextField} from 'material-ui';
 import { registerUser } from '../store/actions/users';
 import { authError } from '../store/actions/actionType';
 import './signup.css';
@@ -18,7 +18,6 @@ class SignUp extends Component {
 
 	signUpHandler = e => {
 	  e.preventDefault();
-	  console.log(this.state.username);
 	  const { dispatch, history } = this.props;
 	  return dispatch(
 	    registerUser({

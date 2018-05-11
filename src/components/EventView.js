@@ -25,7 +25,7 @@ export class EventView extends React.Component {
         <Card>
           <Header
             title={
-              currentEvent.title ? currentEvent.title : 'No Upcoming Events.  Why not create one?'
+              currentEvent.title ? currentEvent.title : 'No Upcoming Events'
             }
             date={currentEvent.title ? new Date(Number(currentEvent.starttime)).toDateString() : ''}
             location={currentEvent.location.address ? currentEvent.location.address : ''}
@@ -74,6 +74,17 @@ function getWidgetRender(event) {
           </div>
         );
       }
+      if (widget === 'todo') {
+        arr.push(
+          <div>
+            <Card key={'todo'}>
+              <Todo event={event} />
+            </Card>
+            <br />
+          </div>
+        );
+      }
+      
     }
   }
   return arr;

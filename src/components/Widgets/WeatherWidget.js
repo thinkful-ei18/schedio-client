@@ -78,7 +78,6 @@ export default class WeatherWidget extends React.Component {
 	        });
 					
 	      } else {
-	        console.log('ZERO SHOWING');
 	        this.setState({
 	          showingCurrentWeather:true,
 	          locationName: `${response.data.location.name}, ${country}`,
