@@ -1,16 +1,18 @@
-/* global google */
+/* global */
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import LocationSearch from '../Utilities/LocationSearch';
+// import LocationSearch from '../Utilities/LocationSearch';
 import { InfoWindow } from 'react-google-maps';
 import MediaQuery from 'react-responsive';
 import './mapWidget.css';
 
 export default class Map extends React.Component {
   render() {
+
     const { configInfo, event } = this.props;
     const location = event.location;
     const widgetInfo = event.widgets['map'].info;
+
 
     return (
       <div>

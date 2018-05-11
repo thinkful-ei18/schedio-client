@@ -8,7 +8,7 @@ import PastEventsList from './PastEventsList';
 import UpcomingEventsList from './UpcomingEventsList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import SortableComponent from './Sortable';
+// import SortableComponent from './Sortable';
 
 export class Dashboard extends React.Component {
   constructor(props) {
