@@ -3,13 +3,13 @@ import LandingPage from './components/LandingPage';
 import { Route, Switch } from 'react-router-dom';
 import SignUpPage from './components/Signup';
 import Login from './components/Login';
-import GoogleLog from './components/GoogleLog'
+import GoogleLog from './components/GoogleLog';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import EventCreation from './components/EventCreation';
 import RequireAuth from './components/Utilities/RequireAuth';
 import Experiment from './components/scratches/scratch';
-import MapConfig from './components/scratches/MapConfig';
+import MapConfig from './components/Widgets/MapConfig';
 import WidgetsManager from './components/WidgetsManager';
 /*======== RequireAuth is HOC that protects route from unauthorized visit ==========
 	example: RequireAuth()(< Your Component that render the route >)
@@ -28,9 +28,8 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={SignUpPage} />
           <Route exact path="/experiment" component={Experiment} />
-          <Route exact path="/mapconfig" component={MapConfig} />
+          <Route exact path="/dashboard/mapconfig" component={MapConfig} />
           <Route exact path="/dashboard/eventsetting" component={WidgetsManager} />
-          <Route exact path="/dashboard/widget-manager" component={WidgetsManager} />
           <Route exact path="/googlelogin" component={GoogleLog} />
         </Switch>
       </div>

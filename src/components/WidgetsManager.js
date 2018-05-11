@@ -25,7 +25,7 @@ class WidgetManager extends React.Component {
 	};
 
 	render() {
-	  const { currentEvent } = this.props;
+	  const { currentEvent, history } = this.props;
 	  if (!currentEvent) return <div>No content is loaded</div>;
 	  return (
 	    <div style={styles.root}>
@@ -83,7 +83,7 @@ class WidgetManager extends React.Component {
 	            </div>
 	          }
 	          rightIconButton={
-	            <IconButton tooltip="setting" onClick={() => console.log('hello')}>
+	            <IconButton tooltip="setting" onClick={() => history.push('/dashboard/mapconfig')}>
 	              <ActionSettings />
 	            </IconButton>
 	          }

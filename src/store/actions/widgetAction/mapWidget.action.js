@@ -1,14 +1,14 @@
 import { API_BASE_URL } from '../../../config';
 import { normalizeResponseErrors } from '../utils';
-import {normalizeResponseErrors} from '../utils.js'
-export const displayMapWidget = id => (dispatch, getState) => {
-  return fetch(`${API_BASE_URL}/events/${id}/mapWidget`, {
+export const updateMapWidget = (id, info) => (dispatch, getState) => {
+  return fetch(`${API_BASE_URL}/api/events/${id}/map`, {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${getState().auth.authToken}`
-    }
+    },
+    body: JSON.stringify({ info })
   })
-  .then(res => normalizeResponseErrors(res))
-  .then(res => res.json())
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json());
 };

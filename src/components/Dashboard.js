@@ -14,8 +14,7 @@ export class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideIndex: 0,
-      addEventBtnHover: false
+      slideIndex: 0
     };
   }
 
@@ -26,15 +25,6 @@ export class Dashboard extends React.Component {
 	};
 	handleEventCreationRedirect = () => {
 	  this.props.history.push('/dashboard/eventcreate');
-	};
-	toggleHover = () => {
-	  this.timerId = null;
-	  clearTimeout(this.timerId);
-	  this.timerId = setTimeout(() => {
-	    this.setState({
-	      addEventBtnHover: !this.state.addEventBtnHover
-	    });
-	  }, 100);
 	};
 	render() {
 	  return (
@@ -58,15 +48,7 @@ export class Dashboard extends React.Component {
 	            <PastEventsList />
 	          </div>
 	        </SwipeableViews>
-	        <section
-	          style={
-	            this.state.addEventBtnHover
-	              ? styles.addEventBtnContainerHover
-	              : styles.addEventBtnContainer
-	          }
-	          onMouseEnter={this.toggleHover}
-	          onMouseLeave={this.toggleHover}
-	        >
+	        <section style={styles.addEventBtnContainer}>
 	          <FloatingActionButton secondary={true} onClick={this.handleEventCreationRedirect}>
 	            <ContentAdd />
 	          </FloatingActionButton>
@@ -79,7 +61,7 @@ export class Dashboard extends React.Component {
 
 const styles = {
   container: {
-    maxWidth: '800px',
+    maxWidth: '1080px',
     margin: '0 auto',
     transition: 'all 0.5s ease'
   },
@@ -89,23 +71,14 @@ const styles = {
   contents: {
     display: 'block',
     border: 'solid #E0E0E0 0.5px',
-    minHeight: '75vh',
-    maxHeight: '75vh',
-    overflow: 'hidden',
     textAlign: 'center',
     position: 'relative',
     transition: 'inherit'
   },
   addEventBtnContainer: {
     position: 'absolute',
-    bottom: 20,
-    left: -30,
-    transition: 'inherit'
-  },
-  addEventBtnContainerHover: {
-    position: 'absolute',
-    bottom: 20,
-    left: 5,
+    bottom: 40,
+    left: 10,
     transition: 'inherit'
   },
   headline: {
@@ -115,9 +88,7 @@ const styles = {
     fontWeight: 400
   },
   slide: {
-    padding: 10,
-    height: '75vh',
-    overflow: 'scroll'
+    padding: 10
   }
 };
 const mapStateToProps = () => {
