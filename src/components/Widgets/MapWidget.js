@@ -3,11 +3,15 @@ import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import LocationSearch from '../Utilities/LocationSearch';
 import { InfoWindow } from 'react-google-maps';
+import MediaQuery from 'react-responsive';
+import './mapWidget.css';
 
 export default class Map extends React.Component {
   render() {
-    const { info } = this.props.event.widgets.map;
-    const { location } = this.props.event;
+    const { configInfo, event } = this.props;
+    const location = event.location;
+    const widgetInfo = event.widgets['map'].info;
+
     return (
       <div>
         <section>
@@ -19,7 +23,7 @@ export default class Map extends React.Component {
             mapElement={
               <div style={{ height: '100%', boxShadow: '0 5px 10px 0 rgba(16, 36, 94, 0.2)' }} />
             }
-            info={info}
+            info={configInfo || widgetInfo}
             fallback={location}
           />
         </section>
@@ -40,7 +44,6 @@ class MapWidget extends React.Component {
   }
   render() {
     const { info, fallback, isMarkerShown } = this.props;
-    console.log(fallback, 'hello');
     let renderInfoBox = '';
     renderInfoBox = (
       <section style={styles.infoBox}>{info ? info.address : fallback.address}</section>
@@ -63,7 +66,7 @@ class MapWidget extends React.Component {
             >
               {this.state.isOpen && (
                 <InfoWindow onCloseClick={() => this.setState({ isOpen: false })}>
-                  <div>{info ? info.address : fallback.address}</div>
+                  <div className="map-infoWindow">{info ? info.address : fallback.address}</div>
                 </InfoWindow>
               )}
             </Marker>
