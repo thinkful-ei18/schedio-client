@@ -36,7 +36,7 @@ export class EventView extends React.Component {
           />
         </Card>
         <br />
-        <section>{widgetsForShow}</section>
+        <section style={styles.widgetContainer}>{widgetsForShow}</section>
       </main>
     );
   }
@@ -56,22 +56,26 @@ function getWidgetRender(event) {
     if (widgets[widget].displayed === true) {
       if (widget === 'weather') {
         arr.push(
-          <div>
-            <Card key={'weather'}>
+          <CardItem key={'weather'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].info ? widgets[widget].info.title : 'weather'}
+              </header>
               <Weather event={event} />
             </Card>
-            <br />
-          </div>
+          </CardItem>
         );
       }
       if (widget === 'map') {
         arr.push(
-          <div>
-            <Card key={'map'}>
+          <CardItem key={'map'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].info ? widgets[widget].info.title : 'map?'}
+              </header>
               <Map event={event} />
             </Card>
-            <br />
-          </div>
+          </CardItem>
         );
       }
       if (widget === 'todo') {
@@ -132,6 +136,19 @@ function Header(props) {
     </MediaQuery>
   );
 }
+
+/*=============== CardItem Component for Widgets==================
+
+*/
+function CardItem(props) {
+  return (
+    <MediaQuery maxWidth={700}>
+      {matches => {
+        return <div style={matches ? styles.cardItem : styles.cardItemDesk}>{props.children}</div>;
+      }}
+    </MediaQuery>
+  );
+}
 /*=============== Styles rules for components ==================
 */
 const styles = {
@@ -139,6 +156,7 @@ const styles = {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: '10px 40px 10px 10px',
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
@@ -150,8 +168,29 @@ const styles = {
     padding: '10px 25px 10px 10px',
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
   },
-  headerTitle: {
-    overflow: 'hidden'
+  cardItem: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 10,
+    width: '100%'
+  },
+  cardItemDesk: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 10,
+    width: '49%'
+  },
+  widgetContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  },
+  widgetTitle: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 8,
+    padding: 10,
+    textAlign: 'left',
+    backgroundColor: '#0097A7',
+    color: 'white'
   },
   gearIcon: {
     position: 'absolute',
