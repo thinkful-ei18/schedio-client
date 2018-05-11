@@ -70,6 +70,7 @@ export class MapConfig extends React.Component {
 	  console.log(this.state);
 	  const { showMap, configInfo } = this.state;
 	  const { activeEvent } = this.props;
+
 	  return (
 	    <div>
 	      {showMap ? (

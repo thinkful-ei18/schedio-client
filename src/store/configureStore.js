@@ -1,6 +1,6 @@
 //================================== Import Dependencies ====================>
 
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import coordinateReducer from './reducers/reducer_coordinates';
 import authReducer from './reducers/auth';

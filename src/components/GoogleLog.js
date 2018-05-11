@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { TextField, RaisedButton } from 'material-ui';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import { TextField, RaisedButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
 import { clientId } from '../config';
 import { GoogleLogin } from 'react-google-login';
 import './signup.css';
 import { googleLogin } from '../store/actions/auth';
-import { authError } from '../store/actions/actionType';
+// import { authError } from '../store/actions/actionType';
 
 class GoogleLog extends Component {
   loginHandler = e => {};

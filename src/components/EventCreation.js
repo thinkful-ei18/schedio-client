@@ -79,10 +79,7 @@ export class EventCreation extends React.Component {
 	      lat: coordinate.lat,
 	      long: coordinate.lng
 	    },
-	    /*============ require user info from auth token ============
-				waiting on user auth feature to complete
-				for now I am using static known userId
-			*/
+
 	    userId,
 	    starttime: date.getTime(),
 	    initWidgets: templateWidgets[template]
@@ -130,10 +127,10 @@ export class EventCreation extends React.Component {
 	        </Step>
 	        <Step>
 	          <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
-							Enter location for the event
+							Where would you like to go?
 	          </StepButton>
 	          <StepContent>
-	            <p>Enter the address where event is held.</p>
+	            <p>Enter the address for the event.</p>
 	            <p>Enter city location if you don't know the detail yet.</p>
 	            <div style={styles.stepContent}>
 	              <LocationSearch
@@ -147,7 +144,7 @@ export class EventCreation extends React.Component {
 	        </Step>
 	        <Step>
 	          <StepButton onClick={() => this.setState({ stepIndex: 2 })}>
-							Select a template that best suit for your event
+							Select the right template for your event:
 	          </StepButton>
 	          <StepContent>
 	            <div style={styles.stepContent}>
