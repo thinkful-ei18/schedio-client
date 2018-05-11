@@ -15,3 +15,10 @@ export const deleteTodo= (eventId, todoId) => ({
   eventId,
   todoId
 });
+
+
+export const ADD_TODO = 'ADD_TODO';
+export const addTodo = todoItem => ({
+  type:ADD_TODO,
+  todoItem
+});

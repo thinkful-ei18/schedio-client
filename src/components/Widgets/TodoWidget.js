@@ -6,8 +6,9 @@ import {API_BASE_URL} from '../../config';
 import store from '../../store/configureStore';
 import axios from 'axios';
 import {fetchUserEvents} from '../../store/actions/eventlist.actions';
-import {toggleTodoChecked,deleteTodo} from '../../store/actions/widgetAction/todolist.actions';
+import {toggleTodoChecked,deleteTodo,addTodo} from '../../store/actions/widgetAction/todolist.actions';
 import {connect} from 'react-redux';
+import TextField from 'material-ui/TextField';
 
 //================================== Component ====================>
 
@@ -22,6 +23,23 @@ export class TodoWidget extends React.Component {
   // API Methods
 
   // Add Item
+
+  addItem = title => {
+    // this.props.dispatch();
+    axios({
+      'url':`${API_BASE_URL}/api/events/${this.props.event.id}/todo`,
+      'method':'POST',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${store.getState().auth.authToken}`
+      },
+      data:JSON.stringify({title})
+    })
+      .then(response => {
+        this.props.dispatch(addTodo(response.data.widgets.todo.list[response.data.widgets.todo.list.length-1]));
+      });
+  }
+
 
   // Delete Item
   deleteItem = todoId => {
@@ -71,6 +89,13 @@ export class TodoWidget extends React.Component {
 
   }
 
+  onTextChange(e) {
+    if (e.key === 'Enter') {
+      this.addItem(e.target.value);
+      e.target.value = '';
+    }
+  }
+
 
 
 
@@ -91,6 +116,7 @@ export class TodoWidget extends React.Component {
           Things to Remember:
         </div>
         {todoItems}
+        <TextField onKeyDown={e => this.onTextChange(e)}hintText='add an Item...'/>
       </div>
     );
   }

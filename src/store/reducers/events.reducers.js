@@ -1,7 +1,7 @@
 import { CREATE_EVENT } from '../actions/eventcreation';
 import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
 import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
-import {TOGGLE_TODO_CHECKED, DELETE_TODO} from '../actions/widgetAction/todolist.actions';
+import {TOGGLE_TODO_CHECKED, DELETE_TODO, ADD_TODO} from '../actions/widgetAction/todolist.actions';
 
 const initialState = {
   activeEvent: {
@@ -105,6 +105,25 @@ export default function eventReducer(state = initialState, action) {
               ...state.activeEvent.widgets.todo.list.filter(item => {
                 return item.id !== action.todoId;
               })
+            ]
+          }
+        }
+      }
+    };
+
+
+  case ADD_TODO:
+    return {
+      ...state,
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          'todo': {
+            ...state.activeEvent.widgets.todo,
+            list: [
+              ...state.activeEvent.widgets.todo.list,
+              action.todoItem
             ]
           }
         }
