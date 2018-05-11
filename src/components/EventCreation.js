@@ -73,7 +73,7 @@ export class EventCreation extends React.Component {
 	  const { address, coordinate, date } = this.state;
 	  const { userId } = this.props;
 	  const newEvent = {
-	    title: `new event created on ${new Date()}`,
+	    title: `new event created on ${new Date().toDateString()}`,
 	    location: {
 	      address: address,
 	      lat: coordinate.lat,
