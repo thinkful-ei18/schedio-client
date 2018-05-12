@@ -65,7 +65,6 @@ class Login extends Component {
 	  }
 	  return (
 	    <div className="landing-container">
-	      <MuiThemeProvider>
 	        <form className="login-form" onSubmit={this.loginHandler}>
 	          <TextField
 	            type="text"
@@ -90,7 +89,6 @@ class Login extends Component {
 	          {renderServerError}
 	        </form>
 					<GoogleLog/>
-	      </MuiThemeProvider>
 	    </div>
 	  );
 	}
