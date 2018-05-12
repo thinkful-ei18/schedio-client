@@ -76,9 +76,7 @@ const styles = {
     transition: 'inherit'
   },
   addEventBtnContainer: {
-    position: 'absolute',
-    bottom: 40,
-    left: 10,
+		margin:'10px 10px',
     transition: 'inherit'
   },
   headline: {
