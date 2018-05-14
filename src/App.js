@@ -11,6 +11,8 @@ import RequireAuth from './components/Utilities/RequireAuth';
 import Experiment from './components/scratches/scratch';
 import MapConfig from './components/Widgets/MapConfig';
 import WidgetsManager from './components/WidgetsManager';
+import Account from './components/Account';
+import EventEdit from './components/EventEdit';
 /*======== RequireAuth is HOC that protects route from unauthorized visit ==========
 	example: RequireAuth()(< Your Component that render the route >)
 */
@@ -30,7 +32,11 @@ class App extends Component {
           <Route exact path="/experiment" component={Experiment} />
           <Route exact path="/dashboard/mapconfig" component={MapConfig} />
           <Route exact path="/dashboard/eventsetting" component={WidgetsManager} />
+          <Route exact path="/dashboard/eventsetting/edit" component={EventEdit} />
           <Route exact path="/googlelogin" component={GoogleLog} />
+          <Route exact path="/account" component={Account} />
+
+
         </Switch>
       </div>
     );

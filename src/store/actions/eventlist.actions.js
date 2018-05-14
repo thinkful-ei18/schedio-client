@@ -2,6 +2,7 @@
 import axios from 'axios'; // Needed for network requests on Async actions
 import { API_BASE_URL } from '../../config';
 import moment from 'moment';
+import { normalizeResponseErrors } from './utils';
 
 //================================== Store Actions ====================>
 export const STORE_EVENTLIST = 'STORE_EVENTLIST';
@@ -39,7 +40,7 @@ function earlyEvent(events) {
 
 //================================== Asynchronous Actions ====================>
 export const fetchUserEvents = () => (dispatch, getState) => {
-  axios({
+  return axios({
     url: `${API_BASE_URL}/api/events`,
     method: 'GET',
     headers: {
@@ -53,13 +54,13 @@ export const fetchUserEvents = () => (dispatch, getState) => {
 
       if (
         lastViewedId &&
-				lastViewedTimestamp &&
-				moment(lastViewedTimestamp).diff(Number(Date.now()), 'days') < 5
+        lastViewedTimestamp &&
+        moment(lastViewedTimestamp).diff(Number(Date.now()), 'days') < 5
       ) {
         let lastViewedEvent = response.data.filter(event => event.id === lastViewedId);
         if (
           lastViewedEvent.length &&
-					lastViewedEvent[0].user === getState().auth.currentUser.user.id
+          lastViewedEvent[0].user === getState().auth.currentUser.user.id
         ) {
           dispatch(setCurrentEvent(lastViewedEvent[0]));
         } else {
@@ -80,3 +81,28 @@ export const fetchUserEvents = () => (dispatch, getState) => {
       console.log(err);
     });
 };
+
+export const requestEventEdit = (id, content) => (dispatch, getState) => {
+  return fetch(`${API_BASE_URL}/api/events/${id}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${getState().auth.authToken}`
+    },
+    body: JSON.stringify(content)
+  })
+    .then(normalizeResponseErrors)
+    .then(res => res.json())
+}
+
+export const requestEventDelete = (id) => (dispatch, getState) => {
+  return fetch(`${API_BASE_URL}/api/events/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${getState().auth.authToken}`
+    }
+  })
+    .then(normalizeResponseErrors)
+    .then(res => res.json())
+}

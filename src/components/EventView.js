@@ -27,10 +27,18 @@ export class EventView extends React.Component {
             title={
               currentEvent.title ? currentEvent.title : 'No Upcoming Events'
             }
-            date={currentEvent.title ? new Date(Number(currentEvent.starttime)).toDateString() : ''}
-            location={currentEvent.location.address ? currentEvent.location.address : ''}
+            date={
+              currentEvent.title
+                ? moment(Number(currentEvent.starttime)).format("MMMM Do, h:mm a")
+                : ''
+            }
+            location={
+              currentEvent.location.address ? currentEvent.location.address : ''
+            }
             countdown={
-              currentEvent.starttime ? moment(Number(currentEvent.starttime)).fromNow() : ''
+              currentEvent.starttime
+                ? moment(Number(currentEvent.starttime)).fromNow()
+                : ''
             }
             history={history}
           />
@@ -71,7 +79,7 @@ function getWidgetRender(event) {
           <CardItem key={'map'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'map?'}
+                {widgets[widget].info ? widgets[widget].info.title : 'map'}
               </header>
               <Map event={event} />
             </Card>
@@ -80,15 +88,18 @@ function getWidgetRender(event) {
       }
       if (widget === 'todo') {
         arr.push(
-          <div>
-            <Card key={'todo'}>
+          <CardItem key={'todo'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'check list'}
+              </header>
               <Todo event={event} />
             </Card>
-            <br />
-          </div>
+          </CardItem>
         );
       }
-      
     }
   }
   return arr;
@@ -103,9 +114,16 @@ function Header(props) {
     <MediaQuery maxWidth={700}>
       {matches => {
         return (
-          <main style={matches ? styles.headerContainer : styles.headerContainerDesk}>
+          <main
+            style={
+              matches ? styles.headerContainer : styles.headerContainerDesk
+            }
+          >
             <div style={styles.gearIcon}>
-              <IconButton tooltip="setting" onClick={() => history.push('/dashboard/eventsetting')}>
+              <IconButton
+                tooltip="setting"
+                onClick={() => history.push('/dashboard/eventsetting')}
+              >
                 <ActionSettings />
               </IconButton>
             </div>
@@ -144,7 +162,11 @@ function CardItem(props) {
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
-        return <div style={matches ? styles.cardItem : styles.cardItemDesk}>{props.children}</div>;
+        return (
+          <div style={matches ? styles.cardItem : styles.cardItemDesk}>
+            {props.children}
+          </div>
+        );
       }}
     </MediaQuery>
   );

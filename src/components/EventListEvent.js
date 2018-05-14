@@ -24,8 +24,8 @@ export class  EventListEvent extends React.Component {
     return (
       
       <div className='event-list-event'>
-        <Card style={{'margin-top':'1em'}}>
-          <CardHeader style={{'padding-right':'0 !important'}} title={this.props.event.title} subtitle={<Moment fromNow date={Number(this.props.event.starttime)}></Moment>}/>
+        <Card style={{'marginTop':'1em'}}>
+          <CardHeader style={{'paddingRight':'0 !important'}} title={this.props.event.title} subtitle={<Moment fromNow date={Number(this.props.event.starttime)}></Moment>}/>
           <CardText>
           On <Moment format={'dddd, MMMM Do, h:mm a'}date={Number(this.props.event.starttime)}> </Moment>
           </CardText>
@@ -33,7 +33,7 @@ export class  EventListEvent extends React.Component {
             {this.props.event.location.lat}
             {this.props.event.location.long}
           </CardText>
-          <RaisedButton style={{'margin-bottom':'1em'}} secondary label='View Event' onClick={() => this.handleViewEvent()}/>
+          <RaisedButton style={{'marginBottom':'1em'}} secondary label='View Event' onClick={() => this.handleViewEvent()}/>
         </Card>
       </div>
     );
