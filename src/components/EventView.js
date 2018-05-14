@@ -29,7 +29,7 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? new Date(Number(currentEvent.starttime)).toDateString()
+                ? moment(Number(currentEvent.starttime)).format("MMMM Do, h:mm a")
                 : ''
             }
             location={

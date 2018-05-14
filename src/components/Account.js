@@ -23,7 +23,6 @@ export function Account(props) {
                 <Divider />
                 <ListItem primaryText='Password' secondaryText={'change password'} disabled={false} rightAvatar={renderEditIcon()} />
                 <Divider />
-
             </List>
         )
     }

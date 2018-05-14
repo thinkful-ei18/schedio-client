@@ -80,6 +80,7 @@ const styles = {
 	},
 	addEventBtnContainer: {
 		margin: '10px 10px',
+		marginBottom: '50px',
 		transition: 'inherit'
 	},
 	headline: {
