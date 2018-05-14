@@ -10,7 +10,7 @@ import { googleLogin } from '../store/actions/auth';
 // import { authError } from '../store/actions/actionType';
 
 class GoogleLog extends Component {
-  loginHandler = e => {};
+  loginHandler = e => { };
 
   render() {
     const responseGoogle = response => {

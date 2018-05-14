@@ -28,6 +28,10 @@ const Logged = props => {
       <AccountCircle />
     </IconButton>)
   }
+
+  if (!props.userData) {
+    return <div>Loading</div>
+  }
   return (
     <IconMenu
       {...props}
