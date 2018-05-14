@@ -116,7 +116,7 @@ export class TodoWidget extends React.Component {
           Things to Remember:
         </div>
         {todoItems}
-        <TextField onKeyDown={e => this.onTextChange(e)}hintText='add an Item...'/>
+        <TextField style={{'width':'90%'}}onKeyDown={e => this.onTextChange(e)}hintText='add an Item...'/>
       </div>
     );
   }
