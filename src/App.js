@@ -18,6 +18,7 @@ import EventEdit from './components/EventEdit';
 */
 const SecureDashboard = RequireAuth()(Dashboard);
 const SecureEventCreation = RequireAuth()(EventCreation);
+const SecureAccount = RequireAuth()(Account);
 class App extends Component {
   render() {
     return (
@@ -34,7 +35,7 @@ class App extends Component {
           <Route exact path="/dashboard/eventsetting" component={WidgetsManager} />
           <Route exact path="/dashboard/eventsetting/edit" component={EventEdit} />
           <Route exact path="/googlelogin" component={GoogleLog} />
-          <Route exact path="/account" component={Account} />
+          <Route exact path="/account" component={SecureAccount} />
 
 
         </Switch>
