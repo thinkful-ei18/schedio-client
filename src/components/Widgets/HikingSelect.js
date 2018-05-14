@@ -3,6 +3,8 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import axios from 'axios';
 import _ from 'lodash';
 import ReactStars from 'react-stars';
+import {connect} from 'react-redux';
+
 import './HikingSelect.css';
 
 // hiking trail api
@@ -10,7 +12,7 @@ const API_KEY = '&key=200228532-bc7667c06009a2e233ef5527dbb3a053';
 const API_ROOT_URL = 'https://www.hikingproject.com/data/get-trails?';
 let trails;
 
-export default class HikingTrail extends React.Component {
+export class HikingSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -45,7 +47,7 @@ export default class HikingTrail extends React.Component {
 					this.setState({trails: trails});
 				});
 	    })
-	    .catch(error => this.props.error(error));
+	    .catch(err => {console.log(err)});
 	};
 
 	renderTrails = () => {
@@ -175,3 +177,5 @@ export default class HikingTrail extends React.Component {
 	  );
 	}
 }
+
+export default connect()(HikingSelect);
