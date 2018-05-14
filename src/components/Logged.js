@@ -7,6 +7,7 @@ import * as actions from '../store/actions';
 import MenuItem from 'material-ui/MenuItem';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import './Account.css'
+import { withRouter } from 'react-router-dom'
 const Logged = props => {
   const handleLogOutSelect = () => {
     props.clearAuth();
@@ -53,4 +54,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Logged);
+export default withRouter(connect(mapStateToProps, actions)(Logged));
