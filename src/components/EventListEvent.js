@@ -30,8 +30,7 @@ export class  EventListEvent extends React.Component {
           On <Moment format={'dddd, MMMM Do, h:mm a'}date={Number(this.props.event.starttime)}> </Moment>
           </CardText>
           <CardText>
-            {this.props.event.location.lat}
-            {this.props.event.location.long}
+            {this.props.event.location.address ? this.props.event.location.address : ''}
           </CardText>
           <RaisedButton style={{'marginBottom':'1em'}} secondary label='View Event' onClick={() => this.handleViewEvent()}/>
         </Card>
