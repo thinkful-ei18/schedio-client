@@ -6,11 +6,10 @@ import { withRouter } from 'react-router-dom';
 import Weather from './Widgets/WeatherWidget';
 import Todo from './Widgets/TodoWidget';
 import Map from './Widgets/MapWidget';
-// import Todo from './Widgets/Todo';
-// import Trail from './Widgets/trail';
 import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
+import FoodWidget from './Widgets/FoodWidget';
 
 export class EventView extends React.Component {
   render() {
@@ -29,7 +28,7 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? moment(Number(currentEvent.starttime)).format("MMMM Do, h:mm a")
+                ? moment(Number(currentEvent.starttime)).format('MMMM Do, h:mm a')
                 : ''
             }
             location={
@@ -67,7 +66,7 @@ function getWidgetRender(event) {
           <CardItem key={'weather'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'weather'}
+                {widgets[widget].info ? widgets[widget].info.title : 'Weather Information'}
               </header>
               <Weather event={event} />
             </Card>
@@ -79,7 +78,7 @@ function getWidgetRender(event) {
           <CardItem key={'map'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'map'}
+                {widgets[widget].info ? widgets[widget].info.title : 'Map'}
               </header>
               <Map event={event} />
             </Card>
@@ -93,9 +92,23 @@ function getWidgetRender(event) {
               <header style={styles.widgetTitle}>
                 {widgets[widget].info
                   ? widgets[widget].info.title
-                  : 'check list'}
+                  : 'Things to Remember'}
               </header>
               <Todo event={event} />
+            </Card>
+          </CardItem>
+        );
+      }
+      if (widget === 'foodanddining') {
+        arr.push(
+          <CardItem key={'foodanddining'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Find Food Nearby'}
+              </header>
+              <FoodWidget event={event} />
             </Card>
           </CardItem>
         );

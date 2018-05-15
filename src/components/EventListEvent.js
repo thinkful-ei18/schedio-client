@@ -17,6 +17,7 @@ export class  EventListEvent extends React.Component {
     this.props.dispatch(setCurrentEvent(this.props.event));
     localStorage.setItem('lastViewedEvent', this.props.event.id);
     localStorage.setItem('lastViewedTimestamp', Number(Date.now()));
+    this.props.setSlideIndex();
   }
 
   render() {
@@ -32,7 +33,7 @@ export class  EventListEvent extends React.Component {
           <CardText>
             {this.props.event.location.address ? this.props.event.location.address : ''}
           </CardText>
-          <RaisedButton style={{'marginBottom':'1em'}} secondary label='View Event' onClick={() => this.handleViewEvent()}/>
+          <RaisedButton style={{'marginBottom':'1em'}}  secondary label='View Event' onClick={() => this.handleViewEvent()}/>
         </Card>
       </div>
     );
