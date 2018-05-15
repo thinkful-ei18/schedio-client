@@ -1,8 +1,36 @@
 .location-search-input {
+    border:0;
+    padding: 8px 3px 8px 3px;
+    width:270px;
+    font-size:16px;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color:rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    font-size:16px;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color:rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    font-size:16px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color:rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    font-size:16px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color:rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    font-size:16px;
+  }
 .autocomplete-dropdown-container {
+    padding:5px 5px 0 5px;
+    font-size:16px;
 }
 .suggestion-item--active {
+    padding:10px;
 }
 .suggestion-item {
+    padding:10px;
 }

@@ -140,11 +140,15 @@ export class EventCreation extends React.Component {
 	          </StepButton>
 						<StepContent>
 							<div style={styles.stepContent}>
-								<TimePicker
-									hintText="select a time"
-									autoOk={true}
-									minutesStep={5}
-									onChange={(err, time) => this.handleHours(time)} />
+								<div style={styles.input}>
+
+									<TimePicker
+										hintText="select a time"
+										autoOk={true}
+										minutesStep={5}
+										onChange={(err, time) => this.handleHours(time)}
+										underlineStyle={{ display: 'none' }} />
+								</div>
 							</div>
 							{renderStepActions(1)}
 						</StepContent>
@@ -154,14 +158,15 @@ export class EventCreation extends React.Component {
 							Where would you like to go?
 	          </StepButton>
 						<StepContent>
-							<p>Enter the address for the event.</p>
-							<p>Enter city location if you don't know the detail yet.</p>
+							<p style={{ color: 'grey', fontSize: '14px' }}>Enter the address for the event.</p>
 							<div style={styles.stepContent}>
-								<LocationSearch
-									address={this.handleLocation}
-									coordinate={this.handleCoordinate}
-									error={this.handleError}
-								/>
+								<div style={styles.input}>
+									<LocationSearch
+										address={this.handleLocation}
+										coordinate={this.handleCoordinate}
+										error={this.handleError}
+									/>
+								</div>
 							</div>
 							{renderStepActions(2)}
 						</StepContent>
@@ -189,7 +194,15 @@ const templateWidgets = {
 const styles = {
 	stepContent: {
 		padding: 15,
-		width: '100%'
+		width: '100%',
+		margin: 10,
+		marginLeft: 2,
+		paddingLeft: 0
+	},
+	input: {
+		boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+		display: 'flex',
+		justifyContent: 'center'
 	}
 };
 

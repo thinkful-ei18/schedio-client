@@ -3,42 +3,119 @@ import { connect } from 'react-redux';
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Edit from 'material-ui/svg-icons/image/edit'
-export function Account(props) {
+import { changeFirstName, changeUserName, validatePassword, resetPassword } from '../store/actions/users'
+import { fetchUserEvents } from '../store/actions/eventlist.actions'
+import Dialog from 'material-ui/Dialog';
+export class Account extends React.Component {
 
-    const renderEditIcon = () => {
-        return (
-            <Edit />
-        )
-    }
-    const renderAccountInfo = (user) => {
-        const { google, local } = user
-        return (
-            <List>
-                <ListItem primaryText="Account type" secondaryText={google ? 'google' : 'local'} disabled={true} />
-                <Divider />
-                <br />
-                <ListItem primaryText="Name" secondaryText={google ? google.firstname : local.firstname} disabled={false} rightAvatar={renderEditIcon()} />
-                <Divider />
-                <ListItem primaryText={google ? 'Email' : 'Username'} secondaryText={google ? google.username : local.username} disabled={false} rightAvatar={renderEditIcon()} />
-                <Divider />
-                <ListItem primaryText='Password' secondaryText={'change password'} disabled={false} rightAvatar={renderEditIcon()} />
-                <Divider />
-            </List>
-        )
+    constructor(props) {
+        super(props)
+        this.state = {
+            open: false,
+            field: null,
+            firstname: '',
+            username: ''
+        }
     }
 
-    const { user } = props.currentUser
-    return (
-        <main style={styles.container}>
-            <section style={styles.titleContainer}>
-                <h2>Your personal info</h2>
-                <p style={styles.desc}>Manage your name, email and personal contact infomation to help others find you.</p>
-            </section>
-            <section style={styles.entryContainer}>
-                {user ? renderAccountInfo(user) : ''}
-            </section>
-        </main>
-    )
+    componentDidMount() {
+        this.props.dispatch(fetchUserEvents())
+    }
+
+    handleOpen = (field) => {
+        const { google, local } = this.props.currentUser.user
+        google ? '' : this.setState({ open: true, field, [field]: local[field] })
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleOnChange = e => {
+        const { value } = e.target
+        const { field } = this.state
+        console.log(this.state)
+        this.setState({ [field]: value })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const { dispatch, currentUser } = this.props;
+        const { field } = this.state
+        console.log(field, this.state[field])
+        if (field === 'username') {
+            return dispatch(changeUserName(currentUser.user.id, this.state[field]))
+                .then(() => dispatch(fetchUserEvents()))
+        }
+        if (field === 'firstname') {
+            return dispatch(changeFirstName(currentUser.user.id, this.state[field]))
+                .then((user) => console.log(user))
+        }
+
+    }
+    render() {
+        const renderEditIcon = () => {
+            return (
+                <Edit />
+            )
+        }
+        const renderAccountInfo = (user) => {
+            const { google, local } = user
+            return (
+                <List>
+                    <ListItem primaryText="Account field" secondaryText={google ? 'google' : 'local'} disabled={true} />
+                    <Divider />
+                    <br />
+                    <ListItem primaryText="Name" secondaryText={google ? google.firstname : local.firstname} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} onClick={() => this.handleOpen('firstname')} />
+                    <Divider />
+                    <ListItem primaryText={google ? 'Email' : 'Username'} secondaryText={google ? google.username : local.username} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} onClick={() => this.handleOpen('username')} />
+                    <Divider />
+                    <ListItem primaryText='Password' secondaryText={'change password'} disabled={false} rightAvatar={renderEditIcon()} />
+                    <Divider />
+                </List>
+            )
+        }
+        const renderInput = (field) => {
+            return (
+                <input id={field} name={field} value={this.state[field]} onChange={this.handleOnChange} />
+
+            )
+        }
+
+        const renderDialog = () => {
+
+            const { field } = this.state;
+            return (
+                <Dialog
+                    title={`Change ${field}`}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleClose}
+                >
+                    <form onSubmit={this.handleSubmit}>
+                        {renderInput(field)}
+                        <button type="submit">Save</button>
+                    </form>
+
+                </Dialog>
+            )
+        }
+
+        const { user } = this.props.currentUser
+        return (
+            <main style={styles.container}>
+                {renderDialog()}
+                <section style={styles.titleContainer}>
+                    <h2>Your personal info</h2>
+                    <p style={styles.desc}>Manage your name, email and personal contact infomation to help others find you.</p>
+                </section>
+                <section style={styles.entryContainer}>
+                    {user ? renderAccountInfo(user) : ''}
+                </section>
+            </main>
+        )
+    }
+
 }
 
 const mapStateToProps = state => {
