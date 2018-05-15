@@ -21,7 +21,7 @@ export class PastEventsList extends React.Component {
       .filter(event => { 
         return  Number(new Date(Number(event.starttime)).getTime()) <= Number(Date.now());
       })
-      .map((event,index) => <EventListEvent event={event} key={index} /> ) : '';
+      .map((event,index) => <EventListEvent setSlideIndex={this.props.setSlideIndex} event={event} key={index} /> ) : '';
 
 
     return(
