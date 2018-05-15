@@ -9,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import { toggleWidgetDisplay, submitWidgetDisplay } from '../store/actions/widgetManage';
 // import { fetchUserEvents } from '../store/actions/eventlist.actions';
 import IconButton from 'material-ui/IconButton';
-import ActionSettings from 'material-ui/svg-icons/action/settings';
+
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { requestEventDelete } from '../store/actions/eventlist.actions';
@@ -96,11 +96,6 @@ class WidgetManager extends React.Component {
 								/>
 							</div>
 						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
-						}
 					/>
 					<ListItem
 						primaryText="Checklist"
@@ -111,11 +106,6 @@ class WidgetManager extends React.Component {
 									onToggle={() => this.handleToggle('todo')}
 								/>
 							</div>
-						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
 						}
 					/>
 					<ListItem
@@ -128,11 +118,6 @@ class WidgetManager extends React.Component {
 								/>
 							</div>
 						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => history.push('/dashboard/mapconfig')}>
-								<ActionSettings />
-							</IconButton>
-						}
 					/>
 					<ListItem
 						primaryText="Outdoor activity"
@@ -144,11 +129,7 @@ class WidgetManager extends React.Component {
 								/>
 							</div>
 						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
-						}
+
 					/>
 					<ListItem
 						primaryText="Public event"
@@ -159,11 +140,6 @@ class WidgetManager extends React.Component {
 									onToggle={() => this.handleToggle('publicevents')}
 								/>
 							</div>
-						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
 						}
 					/>
 					<ListItem
@@ -176,11 +152,6 @@ class WidgetManager extends React.Component {
 								/>
 							</div>
 						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
-						}
 					/>
 					<ListItem
 						primaryText="Sports"
@@ -192,11 +163,7 @@ class WidgetManager extends React.Component {
 								/>
 							</div>
 						}
-						rightIconButton={
-							<IconButton tooltip="setting" onClick={() => console.log('hello')}>
-								<ActionSettings />
-							</IconButton>
-						}
+
 					/>
 					<MenuItem
 						primaryText="Confirm"

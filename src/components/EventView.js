@@ -17,7 +17,7 @@ export class EventView extends React.Component {
     const { currentEvent, history } = this.props;
     let widgetsForShow = [];
     if (currentEvent.id) {
-      widgetsForShow = getWidgetRender(currentEvent);
+      widgetsForShow = getWidgetRender(currentEvent, history);
     }
 
     return (
@@ -57,7 +57,7 @@ export default withRouter(connect(mapStateToProps)(EventView));
 
 /*=============== helper function for Rendering widgets======
 */
-function getWidgetRender(event) {
+function getWidgetRender(event, history) {
   const widgets = event.widgets;
   const arr = [];
   for (let widget in widgets) {
@@ -78,8 +78,17 @@ function getWidgetRender(event) {
         arr.push(
           <CardItem key={'map'}>
             <Card>
+
               <header style={styles.widgetTitle}>
                 {widgets[widget].info ? widgets[widget].info.title : 'map'}
+                <div style={styles.gearIcon}>
+                  <IconButton
+                    tooltip="map setting"
+                    onClick={() => history.push('/dashboard/mapconfig')}
+                  >
+                    <ActionSettings color="white" />
+                  </IconButton>
+                </div>
               </header>
               <Map event={event} />
             </Card>
@@ -124,7 +133,7 @@ function Header(props) {
                 tooltip="setting"
                 onClick={() => history.push('/dashboard/eventsetting')}
               >
-                <ActionSettings />
+                <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
             {/* Left half div */}
@@ -207,6 +216,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   widgetTitle: {
+    position: 'relative',
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
     marginBottom: 8,
     padding: 10,
@@ -217,7 +227,8 @@ const styles = {
   gearIcon: {
     position: 'absolute',
     right: 0,
-    top: 0
+    top: -5
+
   },
   subHeaderContainer: {
     display: 'flex',
