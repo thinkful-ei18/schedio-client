@@ -10,5 +10,5 @@ export const updateMapWidget = (id, info) => (dispatch, getState) => {
     body: JSON.stringify({ info })
   })
     .then(res => normalizeResponseErrors(res))
-    .then(res => res.json());
+    .then(res => res.json())
 };

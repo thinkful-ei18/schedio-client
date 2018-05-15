@@ -36,8 +36,6 @@ class App extends Component {
           <Route exact path="/dashboard/eventsetting/edit" component={EventEdit} />
           <Route exact path="/googlelogin" component={GoogleLog} />
           <Route exact path="/account" component={SecureAccount} />
-
-
         </Switch>
       </div>
     );
