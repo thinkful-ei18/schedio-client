@@ -22,8 +22,33 @@ export const clearRestaurantData = () => ({
 
 //================================== Asynchronous Actions ====================>
 
-export const persistRestaurantChoice = (id) => {
+export const persistRestaurantChoice = (id,restaurantInfo) => (dispatch, getState) => {
+  restaurantInfo.requestType='setInfo';
   axios({
-    'url':`${API_BASE_URL}/api/events/${id}foodanddining`
+    'url':`${API_BASE_URL}/api/events/${id}/foodanddining`,
+    'method':'PUT',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${getState().auth.authToken}`
+    },
+    data: JSON.stringify({restaurantInfo})
+
+  });
+};
+
+export const clearRestaurantChoice = (id) => (dispatch, getState) => {
+  const restaurantInfo = {
+    requestType:'clearInfo'
+  };
+  
+  axios({
+    'url':`${API_BASE_URL}/api/events/${id}/foodanddining`,
+    'method':'PUT',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${getState().auth.authToken}`
+    },
+    data: JSON.stringify({restaurantInfo})
+
   });
 };
