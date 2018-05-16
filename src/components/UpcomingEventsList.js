@@ -18,9 +18,8 @@ export class UpcomingEventsList extends React.Component {
     const events = this.props.events
       ? this.props.events
         .filter(event => new Date(Number(event.starttime)).getTime() >= Date.now())
-        .map((event, index) => <EventListEvent event={event} key={index} />)
+        .map((event, index) => <EventListEvent setSlideIndex={this.props.setSlideIndex} event={event} key={index} />)
       : '';
-    console.log(this.props.events)
     return (
       <div className="event-list-container">
         <div className="event-list-header">Upcoming Events</div>
