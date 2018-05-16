@@ -6,6 +6,7 @@ import Edit from 'material-ui/svg-icons/image/edit'
 import { changeFirstName, changeUserName, validatePassword, resetPassword } from '../store/actions/users'
 import { fetchUserEvents } from '../store/actions/eventlist.actions'
 import Dialog from 'material-ui/Dialog';
+import Password from './ResetPassword';
 export class Account extends React.Component {
 
     constructor(props) {
@@ -14,7 +15,8 @@ export class Account extends React.Component {
             open: false,
             field: null,
             firstname: '',
-            username: ''
+            username: '',
+            openPassword: false
         }
     }
 
@@ -53,6 +55,12 @@ export class Account extends React.Component {
         }
 
     }
+
+    handlePasswordOpen = () => {
+        this.setState({
+            openPassword: true
+        })
+    }
     render() {
         const renderEditIcon = () => {
             return (
@@ -70,7 +78,7 @@ export class Account extends React.Component {
                     <Divider />
                     <ListItem primaryText={google ? 'Email' : 'Username'} secondaryText={google ? google.username : local.username} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} onClick={() => this.handleOpen('username')} />
                     <Divider />
-                    <ListItem primaryText='Password' secondaryText={'change password'} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} />
+                    <ListItem primaryText='Password' secondaryText={'change password'} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} onClick={this.handlePasswordOpen} />
                     <Divider />
                 </List>
             )
@@ -80,11 +88,13 @@ export class Account extends React.Component {
                 <input id={field} name={field} value={this.state[field]} onChange={this.handleOnChange} />
 
             )
+
         }
 
         const renderDialog = () => {
 
             const { field } = this.state;
+
             return (
                 <Dialog
                     title={`Change ${field}`}
@@ -94,7 +104,7 @@ export class Account extends React.Component {
                 >
                     <form onSubmit={this.handleSubmit}>
                         {renderInput(field)}
-                        <button type="submit">Save</button>
+                        <button type="submit">Submit</button>
                     </form>
 
                 </Dialog>
@@ -104,6 +114,7 @@ export class Account extends React.Component {
         const { user } = this.props.currentUser
         return (
             <main style={styles.container}>
+                <Password openPassword={this.state.openPassword} closePassword={() => this.setState({ openPassword: false })} user={user} />
                 {renderDialog()}
                 <section style={styles.titleContainer}>
                     <h2>Your personal info</h2>
