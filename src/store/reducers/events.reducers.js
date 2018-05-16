@@ -2,6 +2,7 @@ import { CREATE_EVENT } from '../actions/eventcreation';
 import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
 import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
 import {TOGGLE_TODO_CHECKED, DELETE_TODO, ADD_TODO} from '../actions/widgetAction/todolist.actions';
+import {SET_RESTAURANT_INFO, CLEAR_RESTAURANT_DATA} from '../actions/widgetAction/foodwidget.actions';
 
 const initialState = {
   activeEvent: {
@@ -129,6 +130,39 @@ export default function eventReducer(state = initialState, action) {
         }
       }
     };
+
+
+  case SET_RESTAURANT_INFO:
+    return {
+      ...state,
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          'foodanddining': {
+            ...state.activeEvent.widgets.foodanddining,
+            info:action.restaurantInfo
+          }
+        }
+      }
+    };
+
+  case CLEAR_RESTAURANT_DATA:
+    return {
+      ...state,
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          'foodanddining': {
+            ...state.activeEvent.widgets.foodanddining,
+            info:{}
+          }
+        }
+      }
+    };
+
+
 
   default:
     return state;

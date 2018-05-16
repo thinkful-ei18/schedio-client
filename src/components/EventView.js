@@ -6,18 +6,17 @@ import { withRouter } from 'react-router-dom';
 import Weather from './Widgets/WeatherWidget';
 import Todo from './Widgets/TodoWidget';
 import Map from './Widgets/MapWidget';
-// import Todo from './Widgets/Todo';
-// import Trail from './Widgets/trail';
 import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
+import FoodWidget from './Widgets/FoodWidget';
 
 export class EventView extends React.Component {
   render() {
     const { currentEvent, history } = this.props;
     let widgetsForShow = [];
     if (currentEvent.id) {
-      widgetsForShow = getWidgetRender(currentEvent);
+      widgetsForShow = getWidgetRender(currentEvent, history);
     }
 
     return (
@@ -29,7 +28,7 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? moment(Number(currentEvent.starttime)).format("MMMM Do, h:mm a")
+                ? moment(Number(currentEvent.starttime)).format('MMMM Do, h:mm a')
                 : ''
             }
             location={
@@ -57,7 +56,7 @@ export default withRouter(connect(mapStateToProps)(EventView));
 
 /*=============== helper function for Rendering widgets======
 */
-function getWidgetRender(event) {
+function getWidgetRender(event, history) {
   const widgets = event.widgets;
   const arr = [];
   for (let widget in widgets) {
@@ -67,7 +66,7 @@ function getWidgetRender(event) {
           <CardItem key={'weather'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'weather'}
+                {widgets[widget].info ? widgets[widget].info.title : 'Weather Information'}
               </header>
               <Weather event={event} />
             </Card>
@@ -78,8 +77,17 @@ function getWidgetRender(event) {
         arr.push(
           <CardItem key={'map'}>
             <Card>
+
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'map'}
+                {widgets[widget].info ? widgets[widget].info.title : 'Map'}
+                <div style={styles.gearIcon}>
+                  <IconButton
+                    tooltip="map setting"
+                    onClick={() => history.push('/dashboard/mapconfig')}
+                  >
+                    <ActionSettings color="white" />
+                  </IconButton>
+                </div>
               </header>
               <Map event={event} />
             </Card>
@@ -93,9 +101,23 @@ function getWidgetRender(event) {
               <header style={styles.widgetTitle}>
                 {widgets[widget].info
                   ? widgets[widget].info.title
-                  : 'check list'}
+                  : 'Things to Remember'}
               </header>
               <Todo event={event} />
+            </Card>
+          </CardItem>
+        );
+      }
+      if (widget === 'foodanddining') {
+        arr.push(
+          <CardItem key={'foodanddining'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Find Food Nearby'}
+              </header>
+              <FoodWidget event={event} />
             </Card>
           </CardItem>
         );
@@ -124,7 +146,7 @@ function Header(props) {
                 tooltip="setting"
                 onClick={() => history.push('/dashboard/eventsetting')}
               >
-                <ActionSettings />
+                <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
             {/* Left half div */}
@@ -207,6 +229,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   widgetTitle: {
+    position: 'relative',
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
     marginBottom: 8,
     padding: 10,
@@ -217,7 +240,8 @@ const styles = {
   gearIcon: {
     position: 'absolute',
     right: 0,
-    top: 0
+    top: -5
+
   },
   subHeaderContainer: {
     display: 'flex',
