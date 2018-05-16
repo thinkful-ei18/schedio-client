@@ -22,3 +22,8 @@ export const clearRestaurantData = () => ({
 
 //================================== Asynchronous Actions ====================>
 
+export const persistRestaurantChoice = (id) => {
+  axios({
+    'url':`${API_BASE_URL}/api/events/${id}foodanddining`
+  });
+};
