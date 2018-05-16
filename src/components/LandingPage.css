@@ -43,12 +43,19 @@
     padding: 25px;
   }
 
-  .instructions p {
+  .instructions p, li {
     font-size: 20px;
     text-align: left;
     
     /* color: white; */
   }
+
+  /* .instructions h2 {
+    font-size: 25px;
+    font-style: italic;
+    text-align: center;
+    text-emphasis: 
+  } */
   
   .info-progression {
 
