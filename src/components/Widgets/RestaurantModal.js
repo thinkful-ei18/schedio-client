@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import { Card } from 'material-ui/Card';
 import ReactStars from 'react-stars';
 import FlatButton from 'material-ui/FlatButton';
-import {setRestaurantInfo} from '../../store/actions/widgetAction/foodwidget.actions';
+import {setRestaurantInfo, persistRestaurantChoice} from '../../store/actions/widgetAction/foodwidget.actions';
 import {connect} from 'react-redux';
 
 export  class RestaurantsModal extends React.Component {
@@ -16,8 +16,7 @@ export  class RestaurantsModal extends React.Component {
   handleChooseRestaurant = restaurantId => {
 
     const cr = this.props.restaurantOptions.filter(restaurant => restaurant.id === restaurantId )[0];
-
-    this.props.dispatch(setRestaurantInfo({
+    const crInfo = {
       url:cr.url,
       name:cr.name,
       location:cr.location,
@@ -25,8 +24,10 @@ export  class RestaurantsModal extends React.Component {
       price:cr.price,
       rating:cr.rating,
       coordinates:cr.coordinates
+    };
 
-    }));
+    this.props.dispatch(setRestaurantInfo(crInfo));
+    this.props.dispatch(persistRestaurantChoice(this.props.eventId, crInfo));
     this.props.cancelSearch();
   };
 
