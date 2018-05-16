@@ -35,6 +35,7 @@ export const changeUserName = (id, username) => (dispatch, getState) => {
 }
 
 export const changeFirstName = (id, firstname) => (dispatch, getState) => {
+  console.log("hello")
   return fetch(`${API_BASE_URL}/user/${id}/firstname`, {
     method: 'PUT',
     headers: {

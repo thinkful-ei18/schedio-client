@@ -106,7 +106,7 @@ export class Account extends React.Component {
                 >
                     <form onSubmit={this.handleSubmit}>
                         {renderInput(field)}
-                        <FlatButton label="Submit" fullWidth={true} />
+                        <FlatButton label="Submit" fullWidth={true} type="submit" />
                     </form>
 
                 </Dialog>
