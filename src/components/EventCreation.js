@@ -137,36 +137,41 @@ export class EventCreation extends React.Component {
 	          <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
 							When does it start?
 	          </StepButton>
-	          <StepContent>
-	            <div style={styles.stepContent}>
-	              <TimePicker
-	                hintText="select a time"
-	                autoOk={true}
-	                minutesStep={5}
-	                onChange={(err, time) => this.handleHours(time)} />
-	            </div>
-	            {renderStepActions(1)}
-	          </StepContent>
-	        </Step>
-	        <Step>
-	          <StepButton onClick={() => this.setState({ stepIndex: 2 })}>
+						<StepContent>
+							<div style={styles.stepContent}>
+								<div style={styles.input}>
+
+									<TimePicker
+										hintText="select a time"
+										autoOk={true}
+										minutesStep={5}
+										onChange={(err, time) => this.handleHours(time)}
+										underlineStyle={{ display: 'none' }} />
+								</div>
+							</div>
+							{renderStepActions(1)}
+						</StepContent>
+					</Step>
+					<Step>
+						<StepButton onClick={() => this.setState({ stepIndex: 2 })}>
 							Where would you like to go?
 	          </StepButton>
-	          <StepContent>
-	            <p>Enter the address for the event.</p>
-	            <p>Enter city location if you don't know the detail yet.</p>
-	            <div style={styles.stepContent}>
-	              <LocationSearch
-	                address={this.handleLocation}
-	                coordinate={this.handleCoordinate}
-	                error={this.handleError}
-	              />
-	            </div>
-	            {renderStepActions(2)}
-	          </StepContent>
-	        </Step>
-	        <Step>
-	          <StepButton onClick={() => this.setState({ stepIndex: 3 })}>
+						<StepContent>
+							<p style={{ color: 'grey', fontSize: '14px' }}>Enter the address for the event.</p>
+							<div style={styles.stepContent}>
+								<div style={styles.input}>
+									<LocationSearch
+										address={this.handleLocation}
+										coordinate={this.handleCoordinate}
+										error={this.handleError}
+									/>
+								</div>
+							</div>
+							{renderStepActions(2)}
+						</StepContent>
+					</Step>
+					<Step>
+						<StepButton onClick={() => this.setState({ stepIndex: 3 })}>
 							Select the right template for your event:
 	          </StepButton>
 	          <StepContent>
@@ -186,10 +191,18 @@ const templateWidgets = {
   Shopping: ['weather', 'todo']
 };
 const styles = {
-  stepContent: {
-    padding: 15,
-    width: '100%'
-  }
+	stepContent: {
+		padding: 15,
+		width: '100%',
+		margin: 10,
+		marginLeft: 2,
+		paddingLeft: 0
+	},
+	input: {
+		boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+		display: 'flex',
+		justifyContent: 'center'
+	}
 };
 
 const mapStateToProps = state => {
