@@ -5,6 +5,7 @@ import Divider from 'material-ui/Divider';
 import { validatePassword, resetPassword } from '../store/actions/users'
 import { fetchUserEvents } from '../store/actions/eventlist.actions'
 import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton'
 
 
 export class ResetPassword extends React.Component {
@@ -75,34 +76,36 @@ export class ResetPassword extends React.Component {
 
         const renderInput = () => {
             return isVerified
-                ? (<div>
+                ? (<div style={styles.container}>
                     {!isSuccess ? 'Server is having some issue at the moment.' : ''}
-                    <label htmlFor="newpassword">New Password</label>
+                    <label htmlFor="newpassword" style={styles.label}>New Password</label>
                     <input type="password" id={`newpassword`} name={`newpassword`} ref={input => this.newpass = input} />
                 </div>)
                 : (
-                    <div>
-                        {!isMatched ? `passwords doet not match` : ''}
-                        {isWrong ? `password is incorrect` : ''}
-                        <label htmlFor="oldpassword">Old Password</label>
-                        <input type="password" id={`oldpassword`} name={`oldpassword`} ref={input => this.oldpass1 = input} />
-                        <Divider />
-                        <label htmlFor="confirm">confirm your password</label>
-                        <input type="password" id={`confirm`} name={`confirm`} ref={input => this.oldpass2 = input} />
+                    <div style={styles.container}>
+
+                        <label htmlFor="oldpassword" style={styles.label}>password</label>
+                        <input type="password" id={`oldpassword`} name={`oldpassword`} ref={input => this.oldpass1 = input} style={styles.input} placeholder="enter old password" />
+                        <div style={styles.warning}>
+                            {!isMatched ? `password does not match` : ''}
+                            {isWrong ? `password is incorrect` : ''}
+                        </div>
+                        <label htmlFor="confirm" style={styles.label}>confirm password</label>
+                        <input type="password" id={`confirm`} name={`confirm`} ref={input => this.oldpass2 = input} style={styles.input} placeholder="confirm password" />
                     </div>
                 )
         }
 
         const renderDialog = () => {
             return (<Dialog
-                title={isVerified ? `Now enter your new password.` : `Enter your old password`}
+                title={isVerified ? `Enter new password.` : `Enter password`}
                 modal={false}
                 open={openPassword}
                 onRequestClose={this.handleClose}
             >
                 <form onSubmit={this.handleSubmit}>
                     {renderInput()}
-                    <button type="submit">Submit</button>
+                    <FlatButton type="submit" label="Submit" fullWidth={true} />
                 </form>
 
             </Dialog>)
@@ -119,3 +122,28 @@ export class ResetPassword extends React.Component {
 }
 
 export default connect()(ResetPassword)
+
+const styles = {
+    container: {
+        padding: 5
+    },
+    label: {
+        display: 'block',
+        marginBottom: 5,
+        fontWeight: 'bold'
+    },
+    input: {
+        boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+        padding: 8,
+        paddingLeft: 5,
+        width: '100%',
+        marginBottom: 10,
+        border: '1px solid rgba(16, 36, 94, 0.2)',
+        borderWidth: 1
+    },
+    warning: {
+        display: 'block',
+        color: 'red',
+        padding: 10
+    }
+}

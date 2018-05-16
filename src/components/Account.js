@@ -7,6 +7,7 @@ import { changeFirstName, changeUserName, validatePassword, resetPassword } from
 import { fetchUserEvents } from '../store/actions/eventlist.actions'
 import Dialog from 'material-ui/Dialog';
 import Password from './ResetPassword';
+import FlatButton from 'material-ui/FlatButton'
 export class Account extends React.Component {
 
     constructor(props) {
@@ -36,7 +37,6 @@ export class Account extends React.Component {
     handleOnChange = e => {
         const { value } = e.target
         const { field } = this.state
-        console.log(this.state)
         this.setState({ [field]: value })
     }
 
@@ -44,14 +44,13 @@ export class Account extends React.Component {
         e.preventDefault()
         const { dispatch, currentUser } = this.props;
         const { field } = this.state
-        console.log(field, this.state[field])
         if (field === 'username') {
             return dispatch(changeUserName(currentUser.user.id, this.state[field]))
-                .then(() => dispatch(fetchUserEvents()))
+                .then(() => this.handleClose())
         }
         if (field === 'firstname') {
             return dispatch(changeFirstName(currentUser.user.id, this.state[field]))
-                .then((user) => console.log(user))
+                .then((user) => this.handleClose())
         }
 
     }
@@ -85,7 +84,10 @@ export class Account extends React.Component {
         }
         const renderInput = (field) => {
             return (
-                <input id={field} name={field} value={this.state[field]} onChange={this.handleOnChange} />
+                <div style={styles.inputContainer}>
+                    <label style={styles.label}>{field}</label>
+                    <input id={field} name={field} value={this.state[field]} onChange={this.handleOnChange} style={styles.input} />
+                </div>
 
             )
 
@@ -104,7 +106,7 @@ export class Account extends React.Component {
                 >
                     <form onSubmit={this.handleSubmit}>
                         {renderInput(field)}
-                        <button type="submit">Submit</button>
+                        <FlatButton label="Submit" fullWidth={true} />
                     </form>
 
                 </Dialog>
@@ -156,5 +158,28 @@ const styles = {
         width: '300px',
         padding: 10,
         margin: '0 auto'
+    },
+    inputContainer: {
+        padding: 16
+    },
+    label: {
+        display: 'block',
+        marginBottom: 15,
+        fontWeight: 'bold'
+    },
+    input: {
+        boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+        padding: 10,
+        paddingLeft: 5,
+        width: '100%',
+        marginBottom: 10,
+        border: '1px solid rgba(16, 36, 94, 0.2)',
+        borderWidth: 1
+    },
+    warning: {
+        display: 'block',
+        color: 'red',
+        padding: 10
     }
 }
+
