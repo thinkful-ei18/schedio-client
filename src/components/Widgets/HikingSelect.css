@@ -106,7 +106,7 @@
   height: 40px;
   text-align: center; }
 
-button {
+/* button {
   outline: none;
   height: 40px;
   text-align: center;
@@ -127,7 +127,7 @@ button {
   button:active {
     letter-spacing: 2px; }
   button:after {
-    content: ""; }
+    content: ""; } */
 
 .onclic {
   width: 40px;
