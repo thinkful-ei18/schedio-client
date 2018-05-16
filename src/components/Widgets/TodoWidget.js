@@ -105,9 +105,9 @@ export class TodoWidget extends React.Component {
 
 
   render() {
-
+    
     const todolist = this.props.event.widgets.todo.list;
-
+    console.log(todolist);
     const todoItems = todolist ? todolist.map(todo => <TodoItem deleteItem={this.deleteItem} toggleChecked={this.toggleChecked} todo={todo}/>) : '';
 
     return(

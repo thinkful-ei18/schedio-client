@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
+import HikingSelect from './Widgets/HikingSelect';
 
 export class EventView extends React.Component {
   render() {
@@ -59,6 +60,7 @@ export default withRouter(connect(mapStateToProps)(EventView));
 function getWidgetRender(event, history) {
   const widgets = event.widgets;
   const arr = [];
+
   for (let widget in widgets) {
     if (widgets[widget].displayed === true) {
       if (widget === 'weather') {
@@ -106,6 +108,16 @@ function getWidgetRender(event, history) {
               <Todo event={event} />
             </Card>
           </CardItem>
+        );
+      }
+      if (widget === 'outdooractivities') { 
+        arr.push(
+          <div>
+            <Card key={'outdooractivities'}>
+              <HikingSelect event={event} />
+            </Card>
+            <br />
+          </div>
         );
       }
       if (widget === 'foodanddining') {

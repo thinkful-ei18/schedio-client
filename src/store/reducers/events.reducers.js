@@ -5,6 +5,7 @@ import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
 import { TOGGLE_TODO_CHECKED, DELETE_TODO, ADD_TODO } from '../actions/widgetAction/todolist.actions';
 
 import {SET_RESTAURANT_INFO, CLEAR_RESTAURANT_DATA} from '../actions/widgetAction/foodwidget.actions';
+import {ADD_TRAIL, DELETE_TRAIL} from '../actions/widgetAction/hikingWidget.action';
 
 
 const initialState = {
@@ -163,6 +164,24 @@ export default function eventReducer(state = initialState, action) {
         }
       }
     };
+
+  case ADD_TRAIL:
+    return {
+      ...state, 
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          'outdooractivities': {
+            ...state.activeEvent.widgets.outdooractivities,
+            info: {
+              ...state.activeEvent.widgets.outdooractivities.trail,
+              ...action.trail
+            }
+          }
+        }
+      }
+    }
 
   default:
     return state;
