@@ -117,11 +117,18 @@
   box-shadow:3px 3px 10px rgba(0, 0, 0, 0.507) !important;
 }
 
+.rm-rating {
+  display:flex;
+  justify-content:center;
+  
+}
+
 .restaurant-module {
   min-width:15em !important;
   max-width:15em !important;
-  height:15em !important;
+  height:18em !important;
   padding:1em;
+  margin:1em;
 }
 
 .fw-mc-results-container {
@@ -131,4 +138,20 @@
   justify-content:center;
   overflow-x:scroll;
   max-height:80%;
+}
+
+.rm-title a{
+  text-decoration:none;
+  color:black;
+}
+
+.fw-mc-cancel-button {
+
+}
+
+.chosen-restaurant-image {
+  width:75%;
+  height:300px;
+  border-radius:8px;
+  margin-top:2em;
 }
