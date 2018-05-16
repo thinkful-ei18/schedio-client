@@ -70,7 +70,7 @@ export class Account extends React.Component {
                     <Divider />
                     <ListItem primaryText={google ? 'Email' : 'Username'} secondaryText={google ? google.username : local.username} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} onClick={() => this.handleOpen('username')} />
                     <Divider />
-                    <ListItem primaryText='Password' secondaryText={'change password'} disabled={false} rightAvatar={renderEditIcon()} />
+                    <ListItem primaryText='Password' secondaryText={'change password'} disabled={google ? true : false} rightAvatar={google ? '' : renderEditIcon()} />
                     <Divider />
                 </List>
             )
