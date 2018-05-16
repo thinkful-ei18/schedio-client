@@ -11,8 +11,11 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
 import HikingSelect from './Widgets/HikingSelect';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 export class EventView extends React.Component {
+
   render() {
     const { currentEvent, history } = this.props;
     let widgetsForShow = [];
@@ -110,7 +113,7 @@ function getWidgetRender(event, history) {
           </CardItem>
         );
       }
-      if (widget === 'outdooractivities') { 
+      if (widget === 'outdooractivities') {
         arr.push(
           <div>
             <Card key={'outdooractivities'}>
@@ -144,6 +147,11 @@ function getWidgetRender(event, history) {
 */
 function Header(props) {
   const { title, location, date, countdown, history } = props;
+
+  const handleEventCreationRedirect = () => {
+    history.push('/dashboard/eventcreate');
+  };
+
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
@@ -161,6 +169,11 @@ function Header(props) {
                 <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
+            <section style={styles.addEventBtnContainer}>
+              <FloatingActionButton secondary={true} onClick={handleEventCreationRedirect} mini={true}>
+                <ContentAdd />
+              </FloatingActionButton>
+            </section>
             {/* Left half div */}
             <section>
               <header style={styles.headerTitle}>
@@ -266,5 +279,11 @@ const styles = {
   },
   headerLabel: {
     color: 'rgba(140, 140, 140,0.9)'
+  },
+  addEventBtnContainer: {
+    transition: 'inherit',
+    position: 'absolute',
+    right: 10,
+    bottom: 10
   }
 };
