@@ -38,18 +38,17 @@ class Header extends React.Component {
   };
 
   render() {
+
     const style = {
       'visibility': this.state.open ? 'visible' : 'hidden'
     };
-
-
     return (
       <div className="header">
         <AppBar
           title="Schedio"
-          iconElementRight={this.props.authStatus ?  <Logged />: <RequiresLogin />}
+          iconElementRight={this.props.authStatus ? <Logged /> : <RequiresLogin />}
           onLeftIconButtonClick={this.handleToggle}
-          style={{position: 'fixed', top: 0}}
+          style={{ position: 'fixed', top: 0 }}
         />
         <Drawer
           docked={false}
@@ -61,15 +60,15 @@ class Header extends React.Component {
           <MenuItem onClick={() => this.handleSelectionRedirect('Homepage')}>
             Homepage
           </MenuItem>
-          {this.props.authStatus ? null: <MenuItem onClick={() => this.handleSelectionRedirect('Register')}>
+          {this.props.authStatus ? null : <MenuItem onClick={() => this.handleSelectionRedirect('Register')}>
             Register
           </MenuItem>}
-          {this.props.authStatus ? null: <MenuItem onClick={() => this.handleSelectionRedirect('Login')}>
+          {this.props.authStatus ? null : <MenuItem onClick={() => this.handleSelectionRedirect('Login')}>
             Login
           </MenuItem>}
           {this.props.authStatus ? <MenuItem onClick={() => this.handleSelectionRedirect('Dashboard')}>
             Dashboard
-          </MenuItem> : null }
+          </MenuItem> : null}
         </Drawer>
       </div>
     );

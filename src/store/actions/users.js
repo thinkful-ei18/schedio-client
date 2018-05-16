@@ -33,6 +33,7 @@ export const changeUserName = (id, username) => (dispatch, getState) => {
     .then(res => res.json())
     .then(user => dispatch(setUser(user)))
 }
+
 export const changeFirstName = (id, firstname) => (dispatch, getState) => {
   return fetch(`${API_BASE_URL}/user/${id}/firstname`, {
     method: 'PUT',
@@ -46,18 +47,20 @@ export const changeFirstName = (id, firstname) => (dispatch, getState) => {
     .then(res => res.json())
     .then(user => dispatch(setUser(user)))
 }
-export const validatePassword = (id, password) => (dispatch, getState) => {
+
+export const validatePassword = (id, username, password) => (dispatch, getState) => {
   return fetch(`${API_BASE_URL}/user/${id}/password`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${getState().auth.authToken}`
     },
-    body: JSON.stringify({ password })
+    body: JSON.stringify({ username, password })
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
 }
+
 export const resetPassword = (id, password) => (dispatch, getState) => {
   return fetch(`${API_BASE_URL}/user/${id}/reset`, {
     method: 'PUT',
