@@ -135,11 +135,7 @@ export class EventCreation extends React.Component {
 	        </Step>
 	        <Step>
 	          <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
-<<<<<<< HEAD
 							When does it start?
-=======
-							At what time does it starts?
->>>>>>> 1af52796787c898ec737485f0e50b9b26e9b8f22
 	          </StepButton>
 	          <StepContent>
 	            <div style={styles.stepContent}>

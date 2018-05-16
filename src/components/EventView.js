@@ -80,7 +80,6 @@ function getWidgetRender(event, history) {
 
               <header style={styles.widgetTitle}>
                 {widgets[widget].info ? widgets[widget].info.title : 'Map'}
-<<<<<<< HEAD
                 <div style={styles.gearIcon}>
                   <IconButton
                     tooltip="map setting"
@@ -89,8 +88,6 @@ function getWidgetRender(event, history) {
                     <ActionSettings color="white" />
                   </IconButton>
                 </div>
-=======
->>>>>>> 1af52796787c898ec737485f0e50b9b26e9b8f22
               </header>
               <Map event={event} />
             </Card>

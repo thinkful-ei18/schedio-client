@@ -117,7 +117,6 @@
   box-shadow:3px 3px 10px rgba(0, 0, 0, 0.507) !important;
 }
 
-<<<<<<< HEAD
 .rm-rating {
   display:flex;
   justify-content:center;
@@ -130,13 +129,6 @@
   height:18em !important;
   padding:1em;
   margin:1em;
-=======
-.restaurant-module {
-  min-width:15em !important;
-  max-width:15em !important;
-  height:15em !important;
-  padding:1em;
->>>>>>> 1af52796787c898ec737485f0e50b9b26e9b8f22
 }
 
 .fw-mc-results-container {
@@ -146,7 +138,6 @@
   justify-content:center;
   overflow-x:scroll;
   max-height:80%;
-<<<<<<< HEAD
 }
 
 .rm-title a{
@@ -163,6 +154,4 @@
   height:300px;
   border-radius:8px;
   margin-top:2em;
-=======
->>>>>>> 1af52796787c898ec737485f0e50b9b26e9b8f22
 }
