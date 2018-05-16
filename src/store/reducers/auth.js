@@ -9,7 +9,8 @@ import {
   AUTH_ERROR
 } from '../actions/actionType';
 // import {loadAuthToken} from '../../local-storage';
-import jwtDecode from 'jwt-decode'; 
+import jwtDecode from 'jwt-decode';
+import { SET_USER } from '../actions/users'
 
 
 //================================== Construct Initial State ====================>
@@ -35,17 +36,25 @@ export default function reducer(state = initialState, action) {
     return Object.assign({}, state, {
       loading: true,
       error: null
-    });
+    })
   } else if (action.type === AUTH_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
       currentUser: action.currentUser
-    });
+    })
   } else if (action.type === AUTH_ERROR) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error
-    });
+    })
   }
+  else if (action.type === SET_USER) {
+    return {
+      ...state, currentUser: {
+        user: { ...state.currentUser.user, ...action.user }
+      }
+    }
+  }
+
   return state;
 }

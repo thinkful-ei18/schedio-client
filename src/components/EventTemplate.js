@@ -18,65 +18,65 @@ export default class EventTemplate extends React.Component {
   }
 	/*======= select categories ======
 	*/
-	handleChange = value => this.setState({ activeLabel: value });
-	handleOnActive = activeLabel => {
-	  clearTimeout(this.timerId);
-	  this.timerId = setTimeout(() => {
-	    this.setState({ activeLabel });
-	  }, 50);
-	};
+  handleChange = value => this.setState({ activeLabel: value });
+  handleOnActive = activeLabel => {
+    clearTimeout(this.timerId);
+    this.timerId = setTimeout(() => {
+      this.setState({ activeLabel });
+    }, 50);
+  };
 
 	/*======= select a template ======
 		it will return template name as callback
 	*/
-	handleOnClick = () => {
-	  this.props.onClick(selectedTemplate);
-	};
-	render() {
-	  return (
-	    <main style={templateStyles.container}>
-	      <section>
-	        <Label
-	          title="Basic"
-	          id={0}
-	          active={this.state.activeLabel === 0 ? true : false}
-	          icon={<Basic />}
-	          onActive={this.handleOnActive}
-	        />
-	        <Label
-	          title="In door"
-	          id={1}
-	          icon={<Home />}
-	          active={this.state.activeLabel === 1 ? true : false}
-	          onActive={this.handleOnActive}
-	        />
-	        <Label
-	          title="Out door"
-	          id={2}
-	          icon={<Sport />}
-	          active={this.state.activeLabel === 2 ? true : false}
-	          onActive={this.handleOnActive}
-	        />
-	      </section>
-	      <section>
-	        <SwipeableViews index={this.state.activeLabel} onChangeIndex={this.handleChange}>
-	          <ul style={{ paddingLeft: '0' }}>
-	            <Choice title="Basic" onClick={this.handleOnClick} />
-	          </ul>
-	          <ul style={{ paddingLeft: '0' }}>
-	            <Choice title="Shopping" onClick={this.handleOnClick} />
-	            <Choice title="Party" onClick={this.handleOnClick} />
-	            <Choice title="In door sports" onClick={this.handleOnClick} />
-	          </ul>
-	          <ul style={{ paddingLeft: '0' }}>
-	            <Choice title="Hiking" onClick={this.handleOnClick} />
-	          </ul>
-	          <div />
-	        </SwipeableViews>
-	      </section>
-	    </main>
-	  );
-	}
+  handleOnClick = () => {
+    this.props.onClick(selectedTemplate);
+  };
+  render() {
+    return (
+      <main style={templateStyles.container}>
+        <section>
+          <Label
+            title="Basic"
+            id={0}
+            active={this.state.activeLabel === 0 ? true : false}
+            icon={<Basic />}
+            onActive={this.handleOnActive}
+          />
+          <Label
+            title="Indoor"
+            id={1}
+            icon={<Home />}
+            active={this.state.activeLabel === 1 ? true : false}
+            onActive={this.handleOnActive}
+          />
+          <Label
+            title="Outdoor"
+            id={2}
+            icon={<Sport />}
+            active={this.state.activeLabel === 2 ? true : false}
+            onActive={this.handleOnActive}
+          />
+        </section>
+        <section>
+          <SwipeableViews index={this.state.activeLabel} onChangeIndex={this.handleChange}>
+            <ul style={{ paddingLeft: '0' }}>
+              <Choice title="Basic" onClick={this.handleOnClick} />
+            </ul>
+            <ul style={{ paddingLeft: '0' }}>
+              <Choice title="Shopping" onClick={this.handleOnClick} />
+              <Choice title="Party" onClick={this.handleOnClick} />
+              <Choice title="In door sports" onClick={this.handleOnClick} />
+            </ul>
+            <ul style={{ paddingLeft: '0' }}>
+              <Choice title="Hiking" onClick={this.handleOnClick} />
+            </ul>
+            <div />
+          </SwipeableViews>
+        </section>
+      </main>
+    );
+  }
 }
 
 function Choice(props) {
@@ -117,7 +117,7 @@ const templateStyles = {
 };
 const labelStyles = {
   container: {
-    padding: 5,
+    padding: 3,
     width: '30%',
     display: 'inline-block',
     position: 'relative',
