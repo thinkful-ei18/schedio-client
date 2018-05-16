@@ -35,6 +35,20 @@
    padding: 25px;
   }
 
+  .instructions {
+    display: inline-block;
+    width: 92%;
+    background-color: #19BAD1;
+    margin: 5px;
+    padding: 25px;
+  }
+
+  .instructions p {
+    font-size: 20px;
+    text-align: left;
+    
+    /* color: white; */
+  }
   
   .info-progression {
 
