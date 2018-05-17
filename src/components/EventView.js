@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
+import SportsEvents from './Widgets/LocalSportsWidget';
 
 export class EventView extends React.Component {
   render() {
@@ -28,7 +29,9 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? moment(Number(currentEvent.starttime)).format('MMMM Do, h:mm a')
+                ? moment(Number(currentEvent.starttime)).format(
+                    'MMMM Do, h:mm a'
+                  )
                 : ''
             }
             location={
@@ -41,6 +44,7 @@ export class EventView extends React.Component {
             }
             history={history}
           />
+ 
         </Card>
         <br />
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
@@ -66,7 +70,9 @@ function getWidgetRender(event, history) {
           <CardItem key={'weather'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'Weather Information'}
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Weather Information'}
               </header>
               <Weather event={event} />
             </Card>
@@ -77,7 +83,6 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'map'}>
             <Card>
-
               <header style={styles.widgetTitle}>
                 {widgets[widget].info ? widgets[widget].info.title : 'Map'}
                 <div style={styles.gearIcon}>
@@ -118,6 +123,16 @@ function getWidgetRender(event, history) {
                   : 'Find Food Nearby'}
               </header>
               <FoodWidget event={event} />
+            </Card>
+          </CardItem>
+        );
+      }
+
+      if (widget === 'sports') {
+        arr.push(
+          <CardItem key={'sports'}>
+            <Card>
+              <SportsEvents event={event}/>
             </Card>
           </CardItem>
         );
@@ -178,7 +193,6 @@ function Header(props) {
 }
 
 /*=============== CardItem Component for Widgets==================
-
 */
 function CardItem(props) {
   return (
@@ -241,7 +255,6 @@ const styles = {
     position: 'absolute',
     right: 0,
     top: -5
-
   },
   subHeaderContainer: {
     display: 'flex',

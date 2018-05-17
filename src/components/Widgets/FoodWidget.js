@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import RestaurantModal from './RestaurantModal';
 import FlatButton from 'material-ui/FlatButton';
 import ReactStars from 'react-stars';
-import {clearRestaurantData} from '../../store/actions/widgetAction/foodwidget.actions';
+import {clearRestaurantData, clearRestaurantChoice} from '../../store/actions/widgetAction/foodwidget.actions';
 
 //================================== Food Widget ====================>
 
@@ -89,10 +89,14 @@ export class FoodWidget extends React.Component {
       this.widgetTimer = setTimeout(moduleStateSet, 1000);
     }
     
+
+    handleClearRestaurantData = () => {
+      this.props.dispatch(clearRestaurantData());
+      this.props.dispatch(clearRestaurantChoice(this.props.event.id));
+    }
+
     render() {
       const restrInfo = this.props.event.widgets.foodanddining.info;
-      if (restrInfo)
-        console.log('COORDINATES', restrInfo.coordinates);
       return (
         <section className='food-widget-container'>
           {restrInfo && Object.keys(restrInfo).length ? 
@@ -114,7 +118,7 @@ export class FoodWidget extends React.Component {
               </div>
               <br/>
               <FlatButton style={{'margin':'1em'}} label='Change your Mind?' onClick={() => {
-                this.props.dispatch(clearRestaurantData());
+                this.handleClearRestaurantData();
               }}/>
                 
             </div>
@@ -129,7 +133,7 @@ export class FoodWidget extends React.Component {
             </div>)} 
           
 
-          {this.state.searching ? <RestaurantModal cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm}/> : ''}
+          {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm}/> : ''}
         </section>
       );
     }
