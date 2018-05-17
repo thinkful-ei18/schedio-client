@@ -1,0 +1,34 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+}
+/* th {
+  background-color: #1495A4;
+  color: white;
+} */
+td, th {
+  border: 2px solid #dddddd;
+  padding: 8px;
+  text-align: center;
+
+}
+
+table caption {
+  background-color: #1495A4;
+  color: white;
+  height: 25px;
+  padding-top: 3px;
+  font-weight:  bold;
+
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.no-events-title {
+  background-color: #1495A4;
+  color: white;
+  padding: 10px;
+}
