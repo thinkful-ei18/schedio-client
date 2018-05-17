@@ -118,7 +118,8 @@ const styles = {
 		border: '0.5px solid rgba(16, 36, 94, 0.2)',
 		padding: 20,
 		marginTop: 10,
-		marginBottom: 10
+		marginBottom: 10,
+		color: '#757575'
 	},
 	link: {
 		textDecoration: 'none',
