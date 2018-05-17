@@ -61,6 +61,7 @@ class SignUp extends Component {
 		return (
 			<div className="landing-container" style={styles.container}>
 				<form onSubmit={this.signUpHandler}>
+					<legend style={{ fontWeight: "bold" }}>User Registration</legend>
 					<TextField
 						className="name-input"
 						type="text"
