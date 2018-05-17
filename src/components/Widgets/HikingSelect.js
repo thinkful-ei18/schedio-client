@@ -9,7 +9,7 @@ import { addTrail } from '../../store/actions/widgetAction/hikingWidget.action';
 import store from '../../store/configureStore';
 import { API_BASE_URL } from '../../config';
 
-import './HikingSelect.css';
+import './HikingSelect-old.css';
 
 // hiking trail api
 const API_KEY = '&key=200228532-bc7667c06009a2e233ef5527dbb3a053';
@@ -72,12 +72,14 @@ export class HikingSelect extends React.Component {
 
 		if (!activeEvent.widgets.outdooractivities.info) {
 
-			const styleSearch = {
-				// width: "100%",
-				height: "300px",
-				"background-size": "cover",
-				"background-position": "top",
-				backgroundImage: `url(https://www.banfftours.com/wp-content/uploads/2017/01/Hiking-Lake-Louise-5.jpg)`
+			const styles = {
+					search: {
+					width: "100%",
+					height: "300px",
+					"background-size": "cover",
+					"background-position": "top",
+					backgroundImage: `url(https://www.banfftours.com/wp-content/uploads/2017/01/Hiking-Lake-Louise-5.jpg)`
+				}
 			}
 
 			return (
@@ -88,7 +90,7 @@ export class HikingSelect extends React.Component {
 						onSelect={this.handleSelect}
 					>
 						{({ getInputProps, suggestions, getSuggestionItemProps }) => (
-							<div className="hiking-widget-container" style={styleSearch}>
+							<div className="hiking-widget-container" style={styles.search}>
 								<input
 									{...getInputProps({
 										placeholder: 'Search Places ...',
@@ -126,7 +128,8 @@ export class HikingSelect extends React.Component {
 
 			// styling img as background
 			const sectionStyle = {
-				width: "100%",
+				// width: "100%",
+				// width: "500px",
 				"background-size": "cover",
 				"background-position": "top",
 				backgroundImage: `url(${trail.imgMedium})`
