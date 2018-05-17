@@ -10,6 +10,10 @@ import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
+
+import HikingSelect from './Widgets/HikingSelect';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import SportsEvents from './Widgets/LocalSportsWidget';
 
 export class EventView extends React.Component {
@@ -60,6 +64,7 @@ export default withRouter(connect(mapStateToProps)(EventView));
 
 /*=============== helper function for Rendering widgets======
 */
+
 function getWidgetRender(event, history) {
   const widgets = event.widgets;
   const arr = [];
@@ -217,14 +222,15 @@ const styles = {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: '10px 40px 10px 10px',
-    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+
   },
   headerContainer: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     padding: '10px 25px 10px 10px',
-    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
   },
   cardItem: {
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
@@ -248,7 +254,7 @@ const styles = {
     marginBottom: 8,
     padding: 10,
     textAlign: 'left',
-    backgroundColor: '#0097A7',
+    backgroundColor: '#3F51B5',
     color: 'white'
   },
   gearIcon: {

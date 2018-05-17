@@ -1,16 +1,16 @@
 //================================== Import React Dependencies ====================>
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import EventListEvent from './EventListEvent';
 import './styles/EventList.css';
-import {fetchUserEvents} from '../store/actions/eventlist.actions';
+import { fetchUserEvents } from '../store/actions/eventlist.actions';
 //================================== Event List Component ====================>
 /**
  * Responsible for Containing a list of Events belonging to the user, conditionally displaying upcoming events or past events.
  * The Events listed will be individual Event components themselves. 
  */
 export class PastEventsList extends React.Component {
-  
+
   componentDidMount() {
     this.props.dispatch(fetchUserEvents());
   }
@@ -18,17 +18,14 @@ export class PastEventsList extends React.Component {
   render() {
 
     const events = this.props.events ? this.props.events
-      .filter(event => { 
-        return  Number(new Date(Number(event.starttime)).getTime()) <= Number(Date.now());
+      .filter(event => {
+        return Number(new Date(Number(event.starttime)).getTime()) <= Number(Date.now());
       })
-      .map((event,index) => <EventListEvent setSlideIndex={this.props.setSlideIndex} event={event} key={index} /> ) : '';
+      .map((event, index) => <EventListEvent setSlideIndex={this.props.setSlideIndex} event={event} key={index} />) : '';
 
 
-    return(
+    return (
       <div className='event-list-container'>
-        <div className='event-list-header'>
-          Past Events
-        </div>
         <section className='events-list'>
           {events}
 
@@ -40,7 +37,7 @@ export class PastEventsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    events:state.events.eventList
+    events: state.events.eventList
   };
 };
 

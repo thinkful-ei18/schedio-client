@@ -18,7 +18,8 @@ export class EventCreation extends React.Component {
 			stepIndex: 0,
 			date: new Date(),
 			address: null,
-			coordinate: null
+			coordinate: null,
+			error: null
 		};
 	}
 
@@ -29,14 +30,14 @@ export class EventCreation extends React.Component {
 	handleNext = () => {
 		const { stepIndex } = this.state;
 		if (stepIndex < 3) {
-			this.setState({ stepIndex: stepIndex + 1 });
+			this.setState({ stepIndex: stepIndex + 1, error: null });
 		}
 	};
 
 	handlePrev = () => {
 		const { stepIndex } = this.state;
 		if (stepIndex > 0) {
-			this.setState({ stepIndex: stepIndex - 1 });
+			this.setState({ stepIndex: stepIndex - 1, error: null });
 		}
 	};
 
@@ -45,12 +46,13 @@ export class EventCreation extends React.Component {
 	*/
 	onChange = date => this.setState({ date });
 	handleHours = newDate => {
-		const oldDate = this.state.date;
+		const oldDate = moment(this.state.date);
 		const hours = newDate.getHours();
 		const mins = newDate.getMinutes();
-
+		oldDate.hour(hours)
+		oldDate.minute(mins)
 		this.setState({
-			date: moment(oldDate).add(hours * 60 + mins, 'm').toDate()
+			date: oldDate.toDate()
 		});
 	}
 
@@ -71,17 +73,23 @@ export class EventCreation extends React.Component {
 		alert('no location is returned');
 	};
 	handleAsyncError = error => {
-		console.log(error);
 		alert('error in selecting template');
 	};
+	handleErrorSubmit = () => {
+		this.setState({
+			stepIndex: 2,
+			error: 'No location is defined'
+		})
+	}
 	/*===========handle submit and redirect ===========
 	
 	*/
 	onSubmit = template => {
+		const { address, coordinate, date } = this.state;
+		if (!address || !coordinate) return this.handleErrorSubmit()
 		if (!templateWidgets[template]) {
 			return alert(`${template} is not defined tempalte`);
 		}
-		const { address, coordinate, date } = this.state;
 		const { userId } = this.props;
 		const newEvent = {
 			title: `new event created on ${new Date().toDateString()}`,
@@ -116,7 +124,7 @@ export class EventCreation extends React.Component {
 		};
 		const { stepIndex } = this.state;
 		return (
-			<div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
+			<div style={{ maxWidth: 400, margin: 'auto', background: 'white', boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)' }}>
 				<Stepper activeStep={stepIndex} linear={false} orientation="vertical">
 					<Step>
 						<StepButton onClick={() => this.setState({ stepIndex: 0 })}>
@@ -159,7 +167,8 @@ export class EventCreation extends React.Component {
 	          </StepButton>
 						<StepContent>
 							<div style={styles.stepContent}>
-								<p style={{ color: 'grey', fontSize: '14px' }}>Enter the address for the event.</p>
+
+								<p style={{ color: 'grey', fontSize: '14px' }}>{this.state.error ? `${this.state.error}` : `Enter the address for the event.`}</p>
 								<LocationSearch
 									address={this.handleLocation}
 									coordinate={this.handleCoordinate}
@@ -186,8 +195,9 @@ export class EventCreation extends React.Component {
 }
 
 const templateWidgets = {
-	Basic: ['weather', 'todo'],
-	Shopping: ['weather', 'todo']
+	Basic: ['weather', 'todo', 'map', 'foodanddining'],
+	Shopping: ['weather', 'todo', 'map', 'foodanddining'],
+	Hiking: ['weather', 'todo', 'map', 'foodanddining', 'outdooractivities']
 };
 const styles = {
 	stepContent: {
