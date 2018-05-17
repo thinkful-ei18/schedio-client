@@ -10,6 +10,7 @@ import { requestEventEdit, fetchUserEvents } from '../store/actions/eventlist.ac
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import LocationSearch from './Utilities/LocationSearch';
+import './EventEdit.css'
 export class EventEdit extends React.Component {
 
   constructor(props) {
@@ -43,11 +44,13 @@ export class EventEdit extends React.Component {
     this.setState({ starttime: date });
   }
   handleTimeOnChange = newDate => {
-    const oldDate = this.state.starttime;
+    let oldDate = moment(Date(this.state.starttime))
     const hours = newDate.getHours();
     const mins = newDate.getMinutes();
+    oldDate.hour(hours)
+    oldDate.minute(mins)
     this.setState({
-      starttime: moment(oldDate).add(hours * 60 + mins, 'm').toDate().getTime()
+      starttime: oldDate.toDate().getTime()
     });
   }
   handleSubmit = e => {
@@ -93,9 +96,9 @@ export class EventEdit extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} style={styles.titleContainer}>
             {renderInput(type)}
-            <button type="submit">Save</button>
+            <FlatButton type="submit" label="Save" />
           </form>
 
         </Dialog>
@@ -104,12 +107,12 @@ export class EventEdit extends React.Component {
 
     const renderInput = (type) => {
       const { title, starttime, location } = this.state;
-      if (type === 'title' && title) {
+      if (type === 'title') {
         return (
-          <input type="text" name='title' id="title" value={title} onChange={e => this.handleTitleOnChange(e)} />
+          <input type="text" name='title' id="title" value={title} onChange={e => this.handleTitleOnChange(e)} style={styles.input} />
         );
       }
-      if (type === 'starttime' && starttime) {
+      if (type === 'starttime') {
         return (
           <section>
             <div>
@@ -122,7 +125,7 @@ export class EventEdit extends React.Component {
 
         );
       }
-      if (type === 'location' && location) {
+      if (type === 'location') {
         return (
           <LocationSearch address={address => this.setState({ location: { ...this.state.location, address } })} coordinate={coordinate => this.setState({ location: { ...this.state.location, lat: coordinate.lat, long: coordinate.lng } })} />
         );
@@ -131,7 +134,7 @@ export class EventEdit extends React.Component {
     };
 
     return (
-      <main style={styles.container}>
+      <main style={styles.container} className="container">
         {renderDialog()}
         <section style={styles.titleContainer}>
           <h2>Your event info</h2>
@@ -156,7 +159,9 @@ export default connect(mapStateToProps)(EventEdit);
 const styles = {
   container: {
     maxWidth: '1080px',
-    margin: '0 auto'
+    margin: '0 auto',
+    backgroundColor: 'white',
+    transition: 'all 0.5s ease',
   },
   titleContainer: {
     width: '300px',
@@ -172,5 +177,21 @@ const styles = {
     width: '300px',
     padding: 10,
     margin: '0 auto'
-  }
+  },
+  inputContainer: {
+    padding: 16
+  },
+  label: {
+    display: 'block',
+    marginBottom: 15,
+    fontWeight: 'bold'
+  },
+  input: {
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    padding: 10,
+    paddingLeft: 5,
+    width: '100%',
+    marginBottom: 10,
+    border: 0
+  },
 };

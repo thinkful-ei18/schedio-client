@@ -46,12 +46,13 @@ export class EventCreation extends React.Component {
 	*/
 	onChange = date => this.setState({ date });
 	handleHours = newDate => {
-		const oldDate = this.state.date;
+		const oldDate = moment(this.state.date);
 		const hours = newDate.getHours();
 		const mins = newDate.getMinutes();
-
+		oldDate.hour(hours)
+		oldDate.minute(mins)
 		this.setState({
-			date: moment(oldDate).add(hours * 60 + mins, 'm').toDate()
+			date: oldDate.toDate()
 		});
 	}
 
