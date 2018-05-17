@@ -109,9 +109,7 @@ function getWidgetRender(event, history) {
           <CardItem key={'todo'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info
-                  ? widgets[widget].info.title
-                  : 'Things to Remember'}
+                Things to Remember
               </header>
               <Todo event={event} />
             </Card>
