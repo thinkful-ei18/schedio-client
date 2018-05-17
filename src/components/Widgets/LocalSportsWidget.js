@@ -18,18 +18,19 @@ class SportsEvents extends React.Component {
   }
 
   getSportsData = () => {
+    console.log("getSportsData ran");
     let phq = new Client({ access_token: 'a9D6hB92LHdrVd4X7rWhItqIqrd8mb' });
 
-    let searchLocation = `25km@${this.props.activeEvent.location.lat},${
-      this.props.activeEvent.location.long
+    let searchLocation = `25km@${this.props.event.location.lat},${
+      this.props.event.location.long
     }`;
 
     phq.events
       .search({
         within: searchLocation,
         category: 'sports',
-        'active.gte': moment(Number(this.props.activeEvent.starttime)).format('YYYY-MM-DD'),
-        'start_around.origin': moment(Number(this.props.activeEvent.starttime)).format('YYYY-MM-DD')
+        'active.gte': moment(Number(this.props.event.starttime)).format('YYYY-MM-DD'),
+        'start_around.origin': moment(Number(this.props.event.starttime)).format('YYYY-MM-DD')
       })
       .then(results => {
         let localSports = results.result.results.slice(0, 5);
@@ -38,12 +39,18 @@ class SportsEvents extends React.Component {
       });
   };
 
+  componentDidMount(){
+    this.getSportsData();
+  }
   componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps.event.location.lat, this.props.event.location.lat);
+
     if (prevProps) {
       if (
-        prevProps.activeEvent.location.lat ===
-        this.props.activeEvent.location.lat
+        prevProps.event.location.lat ===
+        this.props.event.location.lat
       ) {
+       
         return null;
       } else {
         return this.getSportsData();
@@ -52,9 +59,10 @@ class SportsEvents extends React.Component {
   }
 
   render() {
+   
     return (
       <div>
-        <table>
+        {this.state.localSportingEvents ? <table>
         <caption>Sporting Events</caption>
           <thead>
             <tr>
@@ -74,7 +82,7 @@ class SportsEvents extends React.Component {
               );
             })}
           </tbody>
-        </table>
+        </table> : <h1 className="no-events-title">No Sporting Events within the 25 mile radius.</h1>}
       </div>
     );
   }

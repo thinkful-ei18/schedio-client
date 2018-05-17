@@ -26,3 +26,9 @@ table caption {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.no-events-title {
+  background-color: #1495A4;
+  color: white;
+  padding: 10px;
+}
