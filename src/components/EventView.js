@@ -6,6 +6,9 @@ import { withRouter } from 'react-router-dom';
 import Weather from './Widgets/WeatherWidget';
 import Todo from './Widgets/TodoWidget';
 import Map from './Widgets/MapWidget';
+// import Todo from './Widgets/Todo';
+// import Trail from './Widgets/trail';
+import SportsEvents from '../components/Widgets/LocalSportsWidget';
 import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
@@ -47,6 +50,8 @@ export class EventView extends React.Component {
           />
         </Card>
         <br />
+            {console.log(moment(Number(this.props.currentEvent.starttime)).format('YYYY-MM-DD, h:mm a'))}
+            <SportsEvents date={moment(Number(this.props.currentEvent.starttime)).format('YYYY-MM-DD')}/>
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
       </main>
     );
