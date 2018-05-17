@@ -3,8 +3,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import {setCurrentEvent} from '../store/actions/eventlist.actions';
 import {connect} from 'react-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card,CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 
 /**
