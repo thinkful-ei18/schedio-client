@@ -40,12 +40,12 @@ export default class WeatherWidget extends React.Component {
       Date.now(),
       'days'
     );
-    console.log(calculatedDiff);
+
     const daysAhead = calculatedDiff > 0 ? calculatedDiff + 1 : calculatedDiff;
     axios({
       url: `https://api.apixu.com/v1/forecast.json?key=${WEATHER_APIKEY}&q=${
         this.props.event.location.lat
-      },${this.props.event.location.long}&days=${daysAhead + 1}`,
+        },${this.props.event.location.long}&days=${daysAhead + 1}`,
       method: 'GET'
     })
       .then(response => {

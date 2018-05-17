@@ -25,9 +25,12 @@ class GoogleLog extends Component {
     return (
       <GoogleLogin
         clientId={clientId}
-        buttonText="Login With Google"
+        buttonText={<div style={{ display: 'flex', alignItems: 'center' }}><img src="/img/btn_google_light_normal_ios.svg" alt='google' /><div style={{ fontWeight: 'bold', color: '#757575', padding: '0 10px 0 5px' }}>Sign in with Google</div></div>}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
+        style={{
+          backgroundColor: 'white', border: 0, boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)', padding: 0, height: '40px', overflow: 'hidden'
+        }}
       />
     );
   }

@@ -8,6 +8,7 @@ import { fetchUserEvents } from '../store/actions/eventlist.actions'
 import Dialog from 'material-ui/Dialog';
 import Password from './ResetPassword';
 import FlatButton from 'material-ui/FlatButton'
+import './Account.css'
 export class Account extends React.Component {
 
     constructor(props) {
@@ -115,7 +116,7 @@ export class Account extends React.Component {
 
         const { user } = this.props.currentUser
         return (
-            <main style={styles.container}>
+            <main style={styles.container} className="root">
                 <Password openPassword={this.state.openPassword} closePassword={() => this.setState({ openPassword: false })} user={user} />
                 {renderDialog()}
                 <section style={styles.titleContainer}>
@@ -142,7 +143,9 @@ export default connect(mapStateToProps)(Account)
 const styles = {
     container: {
         maxWidth: '1080px',
+        backgroundColor: 'white',
         margin: '0 auto',
+        transition: 'all 0.5s ease',
     },
     titleContainer: {
         width: '300px',

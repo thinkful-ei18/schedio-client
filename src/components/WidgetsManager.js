@@ -13,6 +13,7 @@ import IconButton from 'material-ui/IconButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { requestEventDelete } from '../store/actions/eventlist.actions';
+import './WidgetManager.css'
 class WidgetManager extends React.Component {
 	constructor(props) {
 		super(props)
@@ -73,7 +74,7 @@ class WidgetManager extends React.Component {
 		const { currentEvent, history } = this.props;
 		if (!currentEvent) return <div>No content is loaded</div>;
 		return (
-			<div style={styles.root}>
+			<div style={styles.root} className="root">
 				<List>
 					<Subheader>General Setting</Subheader>
 					<ListItem
@@ -185,7 +186,11 @@ const mapStateToProps = (state, props) => {
 const styles = {
 	root: {
 		display: 'flex',
-		flexDirection: 'column'
+		flexDirection: 'column',
+		background: 'white',
+		maxWidth: '1080px',
+		margin: '0 auto',
+		transition: 'all 0.5s ease'
 	}
 };
 

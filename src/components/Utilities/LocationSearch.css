@@ -1,9 +1,10 @@
 .location-search-input {
     border:0;
-    font-size:16px;
+    font-size:14px;
     box-shadow: 0 3px 6px 0 rgba(16, 36, 94, 0.2);
     padding: 10px;
     padding-left: 5px;
+    width:100%
 
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
