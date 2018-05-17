@@ -14,12 +14,11 @@ export function fetchCoordinates(address) {
     .then(coor => {
       const latCoor = (coor.data.results[0].geometry.location.lat);
       const lngCoor = (coor.data.results[0].geometry.location.lng);
-      console.log(latCoor, lngCoor);
       return [latCoor, lngCoor];
     });
 
   return {
     type: FETCH_COORDINATES,
     payload: request
-  }
+  };
 }

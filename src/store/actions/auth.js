@@ -19,7 +19,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 export const login = loginInfo => dispatch => {
-  console.log('line 16');
   dispatch(authRequest());
   return axios({
     url: `${API_BASE_URL}/login/local/`,

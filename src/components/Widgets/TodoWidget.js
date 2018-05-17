@@ -51,7 +51,7 @@ export class TodoWidget extends React.Component {
         'content-type': 'application/json',
         Authorization: `Bearer ${store.getState().auth.authToken}`
       },
-    })
+    });
   }
 
 
@@ -78,7 +78,6 @@ export class TodoWidget extends React.Component {
           fetchUserEvents();
         })
         .catch(err => {
-          console.log(err);
         });
     };
 
