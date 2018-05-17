@@ -58,7 +58,6 @@
 // 	render() {
 // 	  let events = this.props.events ? this.props.events : '';
 // 	  let currentEvent = this.earlyEvent(events);
-// 	  console.log(currentEvent);
 
 // 	  return (
 // 	    <div>
@@ -75,7 +74,6 @@
 // }
 
 // const mapStateToProps = state => {
-//   console.log(state);
 //   return {
 //     events: state.events.eventList
 //   };
