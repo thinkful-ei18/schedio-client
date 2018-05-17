@@ -38,7 +38,8 @@ export class FoodWidget extends React.Component {
 
   cancelSearch = () => {
     this.setState({
-      searching:false
+      searching:false,
+      restaurantOptions:null
     });
   }
   
@@ -100,35 +101,41 @@ export class FoodWidget extends React.Component {
       return (
         <section className='food-widget-container'>
           {restrInfo && Object.keys(restrInfo).length ? 
-            <div className='food-widget-chosen-restaurant-container'>
+            <section className='fw-cr-wrapper'>
               <div className='rm-title'>
                 <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
-              </div>          
-              <div className='rm-city'>
-                {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ?  restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
-              </div>
-              <a href={restrInfo.url} target='_blank'><img className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a>
-              <div className='rm-price'>
-                <br/>
-                <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
-              </div>
-              <FlatButton label='Directions' style={{'background-color':'#EEEEEE'}} href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank'/>
-              <div className='rm-rating chosen-restaurant-stars'>
-                <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
-              </div>
-              <br/>
-              <FlatButton style={{'margin':'1em'}} label='Change your Mind?' onClick={() => {
-                this.handleClearRestaurantData();
-              }}/>
+              </div>    
+              <div className='food-widget-chosen-restaurant-container'>
+                <section className='fw-cr-divider1'> <a href={restrInfo.url} target='_blank'><img alt={'Chosen Restaurant'} className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a></section>
+              
+                <div className='fw-cr-divider2' >
+                       
+                  <div className='rm-city'>
+                    {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ?  restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
+                  </div>
+              
+                  <div className='rm-price'>
+                    <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
+                  </div>
+                  <FlatButton style={{backgroundColor:'#EEEEEE'}} label='Directions' href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank'/>
+                  <div className='rm-rating chosen-restaurant-stars'>
+                    <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
+                  </div>
+                  <br/>
+                  <FlatButton style={{ backgroundColor:'#3F51B5', color:'white'}} label='Cancel' onClick={() => {
+                    this.handleClearRestaurantData();
+                  }}/>
+                </div>
                 
-            </div>
+              </div>
+            </section>
             : 
-            (<div>
+            (<div className='food-search-container'>
               <label className='fw-search-label'>
             Search for your Favorite Food:
               </label>
               <br/>
-              <TextField onChange={(e) => this.handleWidgetSearch(e)}className='fw-search-input' ref={me => this.widgetSearchInput = me}/>
+              <TextField inputStyle={{textAlign:'center'}} onChange={(e) => this.handleWidgetSearch(e)}className='fw-search-input' ref={me => this.widgetSearchInput = me}/>
               <br/>
             </div>)} 
           
