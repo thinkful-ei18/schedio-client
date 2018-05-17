@@ -67,7 +67,6 @@ export class MapConfig extends React.Component {
 			.catch(err => console.log(err));
 	};
 	render() {
-		console.log(this.state);
 		const { showMap, configInfo } = this.state;
 		const { activeEvent } = this.props;
 

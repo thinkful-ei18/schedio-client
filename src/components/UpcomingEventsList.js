@@ -22,7 +22,6 @@ export class UpcomingEventsList extends React.Component {
       : '';
     return (
       <div className="event-list-container">
-        <div className="event-list-header">Upcoming Events</div>
         <section className="events-list">{events}</section>
       </div>
     );

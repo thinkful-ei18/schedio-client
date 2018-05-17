@@ -46,7 +46,6 @@ export class EventEdit extends React.Component {
     const oldDate = this.state.starttime;
     const hours = newDate.getHours();
     const mins = newDate.getMinutes();
-    console.log(moment(oldDate).add(hours * 60 + mins, 'm').toDate());
     this.setState({
       starttime: moment(oldDate).add(hours * 60 + mins, 'm').toDate().getTime()
     });

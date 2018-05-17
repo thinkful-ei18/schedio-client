@@ -13,7 +13,6 @@ class Header extends React.Component {
 
 
   handleToggle = () => {
-    console.log(this.firstItem);
     this.setState({ open: !this.state.open });
   };
 

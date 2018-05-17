@@ -65,8 +65,6 @@ export default class EventTemplate extends React.Component {
             </ul>
             <ul style={{ paddingLeft: '0' }}>
               <Choice title="Shopping" onClick={this.handleOnClick} />
-              <Choice title="Party" onClick={this.handleOnClick} />
-              <Choice title="In door sports" onClick={this.handleOnClick} />
             </ul>
             <ul style={{ paddingLeft: '0' }}>
               <Choice title="Hiking" onClick={this.handleOnClick} />

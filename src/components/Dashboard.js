@@ -38,13 +38,13 @@ export class Dashboard extends React.Component {
 			<div style={styles.container} className="dashboard-container">
 				<section style={styles.tabs}>
 					<Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-						< Tab label="View Event" value={0} style={{
+						< Tab label="Active" value={0} style={{
 							backgroundColor: '#3F51B5'
 						}} />
-						<Tab label="Upcoming Events" value={1} style={{
+						<Tab label="On Schedule" value={1} style={{
 							backgroundColor: '#3F51B5'
 						}} />
-						<Tab label="Past Events" value={2} style={{
+						<Tab label="Past" value={2} style={{
 							backgroundColor: '#3F51B5'
 						}} />
 					</Tabs>

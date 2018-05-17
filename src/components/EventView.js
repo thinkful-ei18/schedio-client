@@ -65,7 +65,6 @@ function getWidgetRender(event, history) {
   const arr = [];
   for (let widget in widgets) {
     if (widgets[widget].displayed === true) {
-      console.log(widget)
       if (widget === 'weather') {
         arr.push(
           <CardItem key={'weather'}>
