@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import '../styles/SportsWidget.css';
 import moment from 'moment';
 import Client from 'predicthq';
+import FlatButton from 'material-ui/FlatButton';
+import FontAwesome from 'react-fontawesome';
 import axios from 'axios';
 
 class SportsEvents extends React.Component {
@@ -26,8 +28,8 @@ class SportsEvents extends React.Component {
       .search({
         within: searchLocation,
         category: 'sports',
-        'active.gte': this.props.date,
-        'start_around.origin': this.props.date
+        'active.gte': moment(Number(this.props.activeEvent.starttime)).format('YYYY-MM-DD'),
+        'start_around.origin': moment(Number(this.props.activeEvent.starttime)).format('YYYY-MM-DD')
       })
       .then(results => {
         let localSports = results.result.results.slice(0, 5);
@@ -49,33 +51,11 @@ class SportsEvents extends React.Component {
     }
   }
 
-  generateAddress = sport => {
-    let addresses = [];
-    let currentAddress = '';
-
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${
-          sport.location[1]
-        },${sport.location[0]}&key=AIzaSyAG3_ZShOEY0OY7ndonNqxbBUE6DqVCSok`
-      )
-      .then(res => {
-
-        addresses.push(...res.data.results);
-        console.log(addresses);
-        // this.setState({address: addresses});
-        // addresses.forEach(address => {
-        //   this.setState({generateAddress: address});
-        // });
-      });
-    
-  };
-
   render() {
     return (
       <div>
-        <h1>Sporting Events</h1>
         <table>
+        <caption>Sporting Events</caption>
           <thead>
             <tr>
               <th>Title</th>
@@ -89,7 +69,7 @@ class SportsEvents extends React.Component {
                 <tr key={index}>
                   <td>{sport.title}</td>
                   <td>{moment(sport.start).format('YYYY-MM-DD, h:mm a')}</td>
-                  <td>{this.generateAddress(sport)}</td>
+                  <td>  <a  href={`https://www.google.com/maps/place/${sport.location[1]},${sport.location[0]}`} target='_blank'> <FontAwesome name='map'/> </a> </td>
                 </tr>
               );
             })}
