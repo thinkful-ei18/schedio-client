@@ -9,7 +9,7 @@ import { addTrail } from '../../store/actions/widgetAction/hikingWidget.action';
 import store from '../../store/configureStore';
 import { API_BASE_URL } from '../../config';
 
-import './HikingSelect-old.css';
+import './HikingSelect.css';
 
 // hiking trail api
 const API_KEY = '&key=200228532-bc7667c06009a2e233ef5527dbb3a053';
@@ -74,11 +74,12 @@ export class HikingSelect extends React.Component {
 
 			const styles = {
 					search: {
-					width: "100%",
-					height: "300px",
-					"background-size": "cover",
-					"background-position": "top",
-					backgroundImage: `url(https://www.banfftours.com/wp-content/uploads/2017/01/Hiking-Lake-Louise-5.jpg)`
+						"margin-top": "0",
+						width: "100%",
+						height: "250px",
+						"background-size": "cover",
+						"background-position": "top",
+						backgroundImage: `url(https://www.banfftours.com/wp-content/uploads/2017/01/Hiking-Lake-Louise-5.jpg)`
 				}
 			}
 
@@ -111,7 +112,7 @@ export class HikingSelect extends React.Component {
 										);
 									})}
 								</div>
-								<h4>Input location to find a hiking trail</h4>
+								<div className='trail-instruction'><h4>Input location to find a hiking trail</h4></div>
 							</div>
 						)}
 					</PlacesAutocomplete>
@@ -128,8 +129,8 @@ export class HikingSelect extends React.Component {
 
 			// styling img as background
 			const sectionStyle = {
-				// width: "100%",
-				// width: "500px",
+				width: "100%",
+				height: "250px",
 				"background-size": "cover",
 				"background-position": "top",
 				backgroundImage: `url(${trail.imgMedium})`
@@ -168,7 +169,7 @@ export class HikingSelect extends React.Component {
 						<span className='top' >
 							<ReactStars
 								value={trail.stars}
-								size={24}
+								size={16}
 								color2={'#ffd700'}
 								edit={false}
 							/>
