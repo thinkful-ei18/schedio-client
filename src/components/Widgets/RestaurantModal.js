@@ -92,9 +92,9 @@ export  class RestaurantsModal extends React.Component {
           <div className='fw-mc-header-title'>
               Narrow Down Your Results...
           </div>
-          <button onClick={() => this.props.cancelSearch()} className='fw-mc-cancel-button'>
+          <FlatButton onClick={() => this.props.cancelSearch()} className='fw-mc-cancel-button'>
             Cancel
-          </button>
+          </FlatButton>
         </div>
         <div className='fw-mc-search-options'>
           {this.props.loading? spinner(): ''}
