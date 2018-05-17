@@ -12,27 +12,27 @@ class Header extends React.Component {
   }
 
 
-  handleToggle = () =>  {
+  handleToggle = () => {
     console.log(this.firstItem);
     this.setState({ open: !this.state.open });
   };
 
   handleSelectionRedirect = itemSelected => {
     switch (itemSelected) {
-    case 'Homepage':
-      this.props.history.push('/');
-      break;
-    case 'Register':
-      this.props.history.push('/register');
-      break;
-    case 'Login':
-      this.props.history.push('/login');
-      break;
-    case 'Dashboard':
-      this.props.history.push('/dashboard');
-      break;
-    default:
-      return;
+      case 'Homepage':
+        this.props.history.push('/');
+        break;
+      case 'Register':
+        this.props.history.push('/register');
+        break;
+      case 'Login':
+        this.props.history.push('/login');
+        break;
+      case 'Dashboard':
+        this.props.history.push('/dashboard');
+        break;
+      default:
+        return;
     }
     this.handleToggle();
   };
@@ -48,7 +48,7 @@ class Header extends React.Component {
           title="Schedio"
           iconElementRight={this.props.authStatus ? <Logged /> : <RequiresLogin />}
           onLeftIconButtonClick={this.handleToggle}
-          style={{ position: 'fixed', top: 0 }}
+          style={{ position: 'fixed', top: 0, backgroundColor: '#3F51B5' }}
         />
         <Drawer
           docked={false}

@@ -78,6 +78,7 @@ export class EventCreation extends React.Component {
 	
 	*/
 	onSubmit = template => {
+		console.log(template)
 		if (!templateWidgets[template]) {
 			return alert(`${template} is not defined tempalte`);
 		}
@@ -116,7 +117,7 @@ export class EventCreation extends React.Component {
 		};
 		const { stepIndex } = this.state;
 		return (
-			<div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
+			<div style={{ maxWidth: 400, margin: 'auto', background: 'white', boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)' }}>
 				<Stepper activeStep={stepIndex} linear={false} orientation="vertical">
 					<Step>
 						<StepButton onClick={() => this.setState({ stepIndex: 0 })}>
@@ -186,8 +187,9 @@ export class EventCreation extends React.Component {
 }
 
 const templateWidgets = {
-	Basic: ['weather', 'todo'],
-	Shopping: ['weather', 'todo']
+	Basic: ['weather', 'todo', 'map', 'foodanddining'],
+	Shopping: ['weather', 'todo', 'map', 'foodanddining'],
+	Hiking: ['weather', 'todo', 'map', 'foodanddining', 'outdooractivities']
 };
 const styles = {
 	stepContent: {

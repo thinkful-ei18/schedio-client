@@ -185,7 +185,10 @@ const mapStateToProps = (state, props) => {
 const styles = {
 	root: {
 		display: 'flex',
-		flexDirection: 'column'
+		flexDirection: 'column',
+		background: 'white',
+		maxWidth: '1080px',
+		margin: '0 auto'
 	}
 };
 

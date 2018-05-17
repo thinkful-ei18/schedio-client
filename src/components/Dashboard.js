@@ -6,6 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import EventView from './EventView';
 import PastEventsList from './PastEventsList';
 import UpcomingEventsList from './UpcomingEventsList';
+import './Dashboard.css'
 
 // import SortableComponent from './Sortable';
 
@@ -34,12 +35,18 @@ export class Dashboard extends React.Component {
 			return <div>Loading</div>;
 		}
 		return (
-			<div style={styles.container}>
+			<div style={styles.container} className="dashboard-container">
 				<section style={styles.tabs}>
 					<Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-						<Tab label="View Event" value={0} />
-						<Tab label="Upcoming Events" value={1} />
-						<Tab label="Past Events" value={2} />
+						< Tab label="View Event" value={0} style={{
+							backgroundColor: '#3F51B5'
+						}} />
+						<Tab label="Upcoming Events" value={1} style={{
+							backgroundColor: '#3F51B5'
+						}} />
+						<Tab label="Past Events" value={2} style={{
+							backgroundColor: '#3F51B5'
+						}} />
 					</Tabs>
 				</section>
 				<main style={styles.contents}>

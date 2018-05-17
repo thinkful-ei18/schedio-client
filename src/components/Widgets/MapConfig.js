@@ -72,9 +72,9 @@ export class MapConfig extends React.Component {
 		const { activeEvent } = this.props;
 
 		return (
-			<div>
+			<div style={styles.container}>
 				{showMap ? (
-					<main>
+					<main style={styles.formContainer}>
 						<header style={styles.widgetTitle}>{configInfo.title}</header>
 						<Map configInfo={configInfo} event={activeEvent} />
 						<br />
@@ -86,18 +86,17 @@ export class MapConfig extends React.Component {
 						/>
 					</main>
 				) : (
-						<form onSubmit={this.handleSubmit}>
-							<div>
-								<label style={{ display: 'block' }}>widget title</label>
-								<input
-									id="title"
-									name="title"
-									value={configInfo ? configInfo.title : 'map widget'}
-									onChange={this.handleTitleChange}
-								/>
-							</div>
-							<div>
-								<label>Search for location</label>
+						<form onSubmit={this.handleSubmit} style={styles.formContainer}>
+							<label htmlFor="title" style={styles.label}>Change widget title</label>
+							<input
+								id="title"
+								name="title"
+								value={configInfo ? configInfo.title : 'map widget'}
+								onChange={this.handleTitleChange}
+								style={styles.input}
+							/>
+							<div style={{ position: 'relative' }}>
+								<label style={{ ...styles.label, ...styles.fixed }} > Search for location</label>
 								<LocationSearch address={this.handleAddress} coordinate={this.handleCoordinate} />
 								<RaisedButton type="submit" label="Show Map" />
 							</div>
@@ -118,14 +117,36 @@ export default connect(mapStateToProps)(MapConfig);
 
 const styles = {
 	container: {
-		//   display: 'block',
-		position: 'relative'
-		//   margin: 10
+		position: 'relative',
+		maxWidth: '700px',
+		margin: '0 auto',
+		backgroundColor: 'white',
+		boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
 	},
 	widgetTitle: {
 		padding: 10,
 		fontWeight: 'bold',
 		boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
 		marginBottom: 8
-	}
+	},
+	formContainer: {
+		padding: 16
+	},
+	label: {
+		display: 'block',
+		marginBottom: 15,
+		fontWeight: 'bold'
+	},
+	fixed: {
+		position: 'absolute',
+		top: -2
+	},
+	input: {
+		boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+		padding: 10,
+		paddingLeft: 5,
+		width: '100%',
+		marginBottom: 20,
+		border: 0,
+	},
 };

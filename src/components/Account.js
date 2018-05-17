@@ -142,6 +142,7 @@ export default connect(mapStateToProps)(Account)
 const styles = {
     container: {
         maxWidth: '1080px',
+        backgroundColor: 'white',
         margin: '0 auto',
     },
     titleContainer: {
