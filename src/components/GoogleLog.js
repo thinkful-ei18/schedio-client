@@ -15,6 +15,7 @@ class GoogleLog extends Component {
   render() {
     const responseGoogle = response => {
       const { dispatch } = this.props;
+      console.log(response.accessToken)
       dispatch(googleLogin(response.accessToken)).then(() => {
         if (this.props.authStatus) {
           this.props.history.push('/dashboard');
