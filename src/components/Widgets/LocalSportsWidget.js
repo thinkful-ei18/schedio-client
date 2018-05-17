@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import '../styles/SportsWidget.css';
 import moment from 'moment';
 import Client from 'predicthq';
-import FlatButton from 'material-ui/FlatButton';
+// import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
-import axios from 'axios';
+// import axios from 'axios';
 
 class SportsEvents extends React.Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class SportsEvents extends React.Component {
   }
 
   getSportsData = () => {
-    console.log("getSportsData ran");
     let phq = new Client({ access_token: 'a9D6hB92LHdrVd4X7rWhItqIqrd8mb' });
 
     let searchLocation = `25km@${this.props.event.location.lat},${
@@ -34,7 +33,6 @@ class SportsEvents extends React.Component {
       })
       .then(results => {
         let localSports = results.result.results.slice(0, 5);
-        console.log(results);
         this.setState({ localSportingEvents: localSports });
       });
   };
@@ -43,7 +41,6 @@ class SportsEvents extends React.Component {
     this.getSportsData();
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.event.location.lat, this.props.event.location.lat);
 
     if (prevProps) {
       if (
@@ -63,7 +60,7 @@ class SportsEvents extends React.Component {
     return (
       <div>
         {this.state.localSportingEvents ? <table>
-        <caption>Sporting Events</caption>
+          <caption>Sporting Events</caption>
           <thead>
             <tr>
               <th>Title</th>

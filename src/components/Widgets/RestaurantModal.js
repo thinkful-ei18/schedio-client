@@ -67,7 +67,7 @@ export  class RestaurantsModal extends React.Component {
           <div className='rm-city'>
             {restaurant.location.city}, {restaurant.location.country === 'US' ? restaurant.location.state : ''} {restaurant.location.country === 'US' ? '' : restaurant.location.country}
           </div>
-          <a href={restaurant.url} target='_blank'><img src={restaurant.image_url ? restaurant.image_url : 'img/restaurantvector.png'} /></a>
+          <a href={restaurant.url} target='_blank'><img alt={'Restaurant Image'} src={restaurant.image_url ? restaurant.image_url : 'img/restaurantvector.png'} /></a>
           <div className='rm-price'>
             <br/>
             <b>Price</b>: {restaurant.price ? restaurant.price : 'No Info'}
