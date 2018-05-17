@@ -118,6 +118,22 @@ function getWidgetRender(event, history) {
           </CardItem>
         );
       }
+      if (widget === 'outdooractivities') {
+        arr.push(
+          <CardItem key={'outdooractivities'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                Hiking Trail
+                {/* {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Hiking Widget'} */}
+              </header>
+              <HikingSelect event={event} />
+            </Card>
+          </CardItem>
+          
+        );
+      }
       if (widget === 'foodanddining') {
         arr.push(
           <CardItem key={'foodanddining'}>
