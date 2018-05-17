@@ -10,11 +10,13 @@ import IconButton from 'material-ui/IconButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
+
 import HikingSelect from './Widgets/HikingSelect';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-export class EventView extends React.Component {
+import SportsEvents from './Widgets/LocalSportsWidget';
 
+export class EventView extends React.Component {
   render() {
     const { currentEvent, history } = this.props;
     let widgetsForShow = [];
@@ -31,7 +33,9 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? moment(Number(currentEvent.starttime)).format('MMMM Do, h:mm a')
+                ? moment(Number(currentEvent.starttime)).format(
+                    'MMMM Do, h:mm a'
+                  )
                 : ''
             }
             location={
@@ -44,6 +48,7 @@ export class EventView extends React.Component {
             }
             history={history}
           />
+ 
         </Card>
         <br />
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
@@ -70,7 +75,9 @@ function getWidgetRender(event, history) {
           <CardItem key={'weather'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'Weather Information'}
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Weather Information'}
               </header>
               <Weather event={event} />
             </Card>
@@ -81,7 +88,6 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'map'}>
             <Card>
-
               <header style={styles.widgetTitle}>
                 {widgets[widget].info ? widgets[widget].info.title : 'Map'}
                 <div style={styles.gearIcon}>
@@ -112,16 +118,6 @@ function getWidgetRender(event, history) {
           </CardItem>
         );
       }
-      if (widget === 'outdooractivities') {
-        arr.push(
-          <div>
-            <Card key={'outdooractivities'}>
-              <HikingSelect event={event} />
-            </Card>
-            <br />
-          </div>
-        );
-      }
       if (widget === 'foodanddining') {
         arr.push(
           <CardItem key={'foodanddining'}>
@@ -136,6 +132,16 @@ function getWidgetRender(event, history) {
           </CardItem>
         );
       }
+
+      if (widget === 'sports') {
+        arr.push(
+          <CardItem key={'sports'}>
+            <Card>
+              <SportsEvents event={event}/>
+            </Card>
+          </CardItem>
+        );
+      }
     }
   }
   return arr;
@@ -146,11 +152,6 @@ function getWidgetRender(event, history) {
 */
 function Header(props) {
   const { title, location, date, countdown, history } = props;
-
-  const handleEventCreationRedirect = () => {
-    history.push('/dashboard/eventcreate');
-  };
-
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
@@ -168,11 +169,6 @@ function Header(props) {
                 <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
-            <section style={styles.addEventBtnContainer}>
-              <FloatingActionButton secondary={true} onClick={handleEventCreationRedirect} mini={true}>
-                <ContentAdd />
-              </FloatingActionButton>
-            </section>
             {/* Left half div */}
             <section>
               <header style={styles.headerTitle}>
@@ -202,7 +198,6 @@ function Header(props) {
 }
 
 /*=============== CardItem Component for Widgets==================
-
 */
 function CardItem(props) {
   return (
@@ -266,7 +261,6 @@ const styles = {
     position: 'absolute',
     right: 0,
     top: -5
-
   },
   subHeaderContainer: {
     display: 'flex',
@@ -279,11 +273,5 @@ const styles = {
   },
   headerLabel: {
     color: 'rgba(140, 140, 140,0.9)'
-  },
-  addEventBtnContainer: {
-    transition: 'inherit',
-    position: 'absolute',
-    right: 10,
-    bottom: 10
   }
 };
