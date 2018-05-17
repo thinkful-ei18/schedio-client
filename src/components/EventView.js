@@ -254,7 +254,7 @@ const styles = {
     marginBottom: 8,
     padding: 10,
     textAlign: 'left',
-    backgroundColor: 'rgb(0,0,0,0.7)',
+    backgroundColor: '#3F51B5',
     color: 'white'
   },
   gearIcon: {
