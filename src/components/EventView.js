@@ -34,8 +34,8 @@ export class EventView extends React.Component {
             date={
               currentEvent.title
                 ? moment(Number(currentEvent.starttime)).format(
-                    'MMMM Do, h:mm a'
-                  )
+                  'MMMM Do, h:mm a'
+                )
                 : ''
             }
             location={
@@ -48,7 +48,7 @@ export class EventView extends React.Component {
             }
             history={history}
           />
- 
+
         </Card>
         <br />
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
@@ -137,7 +137,7 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'sports'}>
             <Card>
-              <SportsEvents event={event}/>
+              <SportsEvents event={event} />
             </Card>
           </CardItem>
         );
@@ -152,6 +152,7 @@ function getWidgetRender(event, history) {
 */
 function Header(props) {
   const { title, location, date, countdown, history } = props;
+  const handleEventCreationRedirect = () => { history.push('/dashboard/eventcreate') };
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
@@ -169,6 +170,7 @@ function Header(props) {
                 <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
+            <section style={styles.addEventBtnContainer}> <FloatingActionButton secondary={true} onClick={handleEventCreationRedirect} mini={true}> <ContentAdd /> </FloatingActionButton> </section>
             {/* Left half div */}
             <section>
               <header style={styles.headerTitle}>
@@ -273,5 +275,6 @@ const styles = {
   },
   headerLabel: {
     color: 'rgba(140, 140, 140,0.9)'
-  }
+  },
+  addEventBtnContainer: { transition: 'inherit', position: 'absolute', right: 10, bottom: 10 }
 };
