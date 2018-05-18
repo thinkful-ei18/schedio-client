@@ -1,7 +1,21 @@
+.landing-page {
+  margin-top: -70px;
+  background-image: url('http://interfacelift.com/wallpaper/D3a9368e/04152_thewandereratthecampfire_1920x1080.jpg');
+  background-size: "cover";
+  background-position: "top";
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.landing-page h1 {
+  padding-top: 70px;
+}
+
 .info-container{
   margin: 0 auto;
   text-align: center;  
-  background-color: #5A7A6E;
+  /* background-color: #5A7A6E; */
+  background: linear-gradient(to bottom, rgba(90, 90, 90, 0.1), rgba(90, 90, 90, 0.9) );
   padding: 20px;
   
   }
@@ -31,14 +45,18 @@
    display: inline-block;
    width: 30%;
    background-color: #19BAD1;
+   background: linear-gradient(to bottom, rgba(90, 90, 90, 0.1), rgba(90, 90, 90, 0.8) );
    margin: 5px;
    padding: 25px;
   }
 
   .instructions {
     display: inline-block;
-    width: 92%;
+    width: 95%;
     background-color: #19BAD1;
+    background: linear-gradient(to right bottom, rgba(90, 90, 90, 0.8), rgba(90, 90, 90, 0.8) );
+    
+    /* background: linear-gradient(to bottom, rgba(90, 90, 90, 0.1), rgba(90, 90, 90, 0.9) ); */
     margin: 5px;
     padding: 25px;
   }
@@ -58,13 +76,96 @@
   } */
   
   .info-progression {
-
-  margin-top: 75px;  
-  padding-top: 40px;
-  padding-bottom: 25px;
-  color: white;
-  text-align: center;
+    margin-top: 75px;  
+    padding-top: 40px;
+    padding-bottom: 25px;
+    color: white;
+    text-align: center;
  
   }
   
-  
+  /* For mobile phones: */
+
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {
+    width: 8.33%;
+  }
+  .col-s-2 {
+    width: 16.66%;
+  }
+  .col-s-3 {
+    width: 25%;
+  }
+  .col-s-4 {
+    width: 33.33%;
+  }
+  .col-s-5 {
+    width: 41.66%;
+  }
+  .col-s-6 {
+    width: 50%;
+  }
+  .col-s-7 {
+    width: 58.33%;
+  }
+  .col-s-8 {
+    width: 66.66%;
+  }
+  .col-s-9 {
+    width: 75%;
+  }
+  .col-s-10 {
+    width: 83.33%;
+  }
+  .col-s-11 {
+    width: 91.66%;
+  }
+  .col-s-12 {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+  .col-2 {
+    width: 16.66%;
+  }
+  .col-3 {
+    width: 25%;
+  }
+  .col-4 {
+    width: 33.33%;
+  }
+  .col-5 {
+    width: 41.66%;
+  }
+  .col-6 {
+    width: 50%;
+  }
+  .col-7 {
+    width: 58.33%;
+  }
+  .col-8 {
+    width: 66.66%;
+  }
+  .col-9 {
+    width: 75%;
+  }
+  .col-10 {
+    width: 83.33%;
+  }
+  .col-11 {
+    width: 91.66%;
+  }
+  .col-12 {
+    width: 100%;
+  }
+}
