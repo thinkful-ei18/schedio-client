@@ -72,7 +72,7 @@ class WidgetManager extends React.Component {
 	    </div>);
 	  };
 	  const { currentEvent, history } = this.props;
-	  if (!currentEvent) return <div>No content is loaded</div>;
+	  if (!currentEvent) return <div style={{textAlign:'center', marginTop:'2em'}}><b>No event selected!</b></div>;
 	  return (
 	    <div style={styles.root} className="root">
 	      <List>
@@ -144,7 +144,7 @@ class WidgetManager extends React.Component {
 	          }
 	        />
 	        <ListItem
-	          primaryText="Food and dinning"
+	          primaryText="Food and Dining"
 	          rightToggle={
 	            <div style={{ marginRight: '35px' }}>
 	              <Toggle
