@@ -122,7 +122,7 @@ export class RestaurantsModal extends React.Component {
             Narrow Down Your Results...
           </div>
           <FlatButton
-            style={{'background-color':'#EEEEEE',fontSize:'1.2em !important', 'margin-bottom':'1em'}}
+            style={{'backgroundColor':'#B04712',fontSize:'1.2em !important', 'color':'white', 'margin-bottom':'1em'}}
             onClick={() => this.props.cancelSearch()}
             className='fw-mc-cancel-button'>
             Cancel
