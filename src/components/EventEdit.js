@@ -41,10 +41,10 @@ export class EventEdit extends React.Component {
     this.setState({ title });
   }
   handleDateOnChange = date => {
-    this.setState({ starttime: date });
+    this.setState({ starttime: date.getTime() });
   }
   handleTimeOnChange = newDate => {
-    let oldDate = moment(Date(this.state.starttime));
+    let oldDate = moment(Number(this.state.starttime));
     const hours = newDate.getHours();
     const mins = newDate.getMinutes();
     oldDate.hour(hours);
