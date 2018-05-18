@@ -51,7 +51,7 @@ export class TodoWidget extends React.Component {
         'content-type': 'application/json',
         Authorization: `Bearer ${store.getState().auth.authToken}`
       },
-    })
+    });
   }
 
 
@@ -78,7 +78,6 @@ export class TodoWidget extends React.Component {
           fetchUserEvents();
         })
         .catch(err => {
-          console.log(err);
         });
     };
 
@@ -104,7 +103,7 @@ export class TodoWidget extends React.Component {
   render() {
 
     const todolist = this.props.event.widgets.todo.list;
-    const todoItems = todolist ? todolist.map(todo => <TodoItem deleteItem={this.deleteItem} toggleChecked={this.toggleChecked} todo={todo} />) : '';
+    const todoItems = todolist ? todolist.map((todo,index) => <TodoItem deleteItem={this.deleteItem} key={index} toggleChecked={this.toggleChecked} todo={todo} />) : '';
 
     return (
       <div className='todo-widget-container'>

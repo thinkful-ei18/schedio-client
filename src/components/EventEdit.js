@@ -10,7 +10,7 @@ import { requestEventEdit, fetchUserEvents } from '../store/actions/eventlist.ac
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import LocationSearch from './Utilities/LocationSearch';
-import './EventEdit.css'
+import './EventEdit.css';
 export class EventEdit extends React.Component {
 
   constructor(props) {
@@ -44,11 +44,11 @@ export class EventEdit extends React.Component {
     this.setState({ starttime: date });
   }
   handleTimeOnChange = newDate => {
-    let oldDate = moment(Date(this.state.starttime))
+    let oldDate = moment(Date(this.state.starttime));
     const hours = newDate.getHours();
     const mins = newDate.getMinutes();
-    oldDate.hour(hours)
-    oldDate.minute(mins)
+    oldDate.hour(hours);
+    oldDate.minute(mins);
     this.setState({
       starttime: oldDate.toDate().getTime()
     });
@@ -62,7 +62,9 @@ export class EventEdit extends React.Component {
         return dispatch(fetchUserEvents());
       })
       .then(() => this.handleClose())
-      .catch(err => console.log(err));
+      .catch(err => {
+
+      });
 
   }
   render() {
