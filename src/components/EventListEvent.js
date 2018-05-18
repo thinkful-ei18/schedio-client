@@ -25,12 +25,18 @@ export class  EventListEvent extends React.Component {
       
       <div className='event-list-event'>
         <Card style={{'marginTop':'1em'}}>
-          <CardHeader style={{'paddingRight':'0 !important'}} title={this.props.event.title} subtitle={<Moment fromNow date={Number(this.props.event.starttime)}></Moment>}/>
+          <CardText style={{paddingRight: 0}}/>
+          <div className='card-title'>
+            <b>{this.props.event.title}</b>
+          </div>
+          <div className='card-subtitle'>
+            <Moment fromNow date={Number(this.props.event.starttime)}></Moment>
+          </div>
           <CardText>
           On <Moment format={'dddd, MMMM Do, h:mm a'}date={Number(this.props.event.starttime)}> </Moment>
           </CardText>
           <CardText>
-            {this.props.event.location.address ? this.props.event.location.address : ''}
+           in {this.props.event.location.address ? this.props.event.location.address : ''}
           </CardText>
           <RaisedButton style={{'marginBottom':'1em'}}  secondary label='View Event' onClick={() => this.handleViewEvent()}/>
         </Card>

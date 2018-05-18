@@ -10,7 +10,7 @@ import RestaurantModal from './RestaurantModal';
 import FlatButton from 'material-ui/FlatButton';
 import ReactStars from 'react-stars';
 import { clearRestaurantData, clearRestaurantChoice } from '../../store/actions/widgetAction/foodwidget.actions';
-import Map from 'react-icons/lib/fa/map-o'
+import Map from 'react-icons/lib/fa/map-o';
 //================================== Food Widget ====================>
 
 export class FoodWidget extends React.Component {
@@ -38,8 +38,8 @@ export class FoodWidget extends React.Component {
 
   cancelSearch = () => {
     this.setState({
-      searching: false,
-      restaurantOptions: null
+      searching:false,
+      restaurantOptions:null
     });
   }
 
@@ -72,6 +72,17 @@ export class FoodWidget extends React.Component {
   }
 
 
+  handleClearRestaurantData() {
+    this.props.dispatch(clearRestaurantChoice(this.props.event.id));
+    this.props.dispatch(clearRestaurantData());
+
+    this.setState({
+      searching:false,
+      restaurantOptions:null
+    });
+  }
+
+
   handleWidgetSearch = (e) => {
 
     let searchTerm = e.target.value;
@@ -90,111 +101,54 @@ export class FoodWidget extends React.Component {
     this.widgetTimer = setTimeout(moduleStateSet, 1000);
   }
 
-  handleClearRestaurantData = () => {
-    this.props.dispatch(clearRestaurantData());
-    this.props.dispatch(clearRestaurantChoice(this.props.event.id));
-  }
-
   render() {
     const restrInfo = this.props.event.widgets.foodanddining.info;
     return (
       <section className='food-widget-container'>
-        {restrInfo && Object.keys(restrInfo).length ?
-          <div className='food-widget-chosen-restaurant-container'>
-            <section style={styles.body}>
-              <div style={styles.imgContainer}>
-                <a href={restrInfo.url} target='_blank'><img className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a>
+        {restrInfo && Object.keys(restrInfo).length ? 
+          <section className='fw-cr-wrapper'>
+            <div className='rm-title'>
+              <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
+            </div>    
+            <div className='food-widget-chosen-restaurant-container'>
+              <section className='fw-cr-divider1'> <a href={restrInfo.url} target='_blank'><img alt={'Chosen Restaurant'} className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a></section>
+              
+              <div className='fw-cr-divider2' >
+                       
+                <div className='rm-city'>
+                  {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ?  restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
+                </div>
+              
+                <div className='rm-price'>
+                  <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
+                </div>
+                <FlatButton style={{backgroundColor:'#EEEEEE'}} label='Directions' href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank'/>
+                <div className='rm-rating chosen-restaurant-stars'>
+                  <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
+                </div>
+                <br/>
+                <FlatButton style={{ backgroundColor:'#CA5D5D', color:'white'}} label='Remove' onClick={() => {
+                  this.handleClearRestaurantData();
+                }}/>
               </div>
-              <section style={styles.descBody}>
-
-                <div style={styles.subDesc}>
-                  <div className='rm-title'>
-                    <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
-                  </div>
-                  <section>{restrInfo.price ? restrInfo.price : 'No Info'}</section>
-                </div>
-                <div style={styles.subDesc}>
-                  <ReactStars size={16} edit={false} count={5} value={Number(restrInfo.rating)} />
-                </div>
-                <div style={styles.subDesc}>
-                  <div style={{ fontSize: '16px' }}>
-                    {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ? restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
-                  </div>
-                  <FlatButton icon={<Map />} label='Directions' backgroundColor={'rgb(238, 238, 238)'} href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank' />
-                </div>
-
-              </section>
-
-            </section>
-            <FlatButton label='Change your Mind?' onClick={() => {
-              this.handleClearRestaurantData();
-            }} />
-
-          </div>
-          :
-          (<div>
+                
+            </div>
+          </section>
+          : 
+          (<div className='food-search-container'>
             <label className='fw-search-label'>
-              Search for your Favorite Food:
-              </label>
-            <br />
-            <TextField onChange={(e) => this.handleWidgetSearch(e)} className='fw-search-input' ref={me => this.widgetSearchInput = me} />
-            <br />
-          </div>)}
+            Search for your Favorite Food:
+            </label>
+            <br/>
+            <TextField inputStyle={{textAlign:'center'}} onChange={(e) => this.handleWidgetSearch(e)}className='fw-search-input' ref={me => this.widgetSearchInput = me}/>
+            <br/>
+          </div>)} 
+          
 
-
-        {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm} /> : ''}
+        {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm}/> : ''}
       </section>
     );
   }
-  // render() {
-  //   const restrInfo = this.props.event.widgets.foodanddining.info;
-  //   return (
-  //     <section className='food-widget-container'>
-  //       {restrInfo && Object.keys(restrInfo).length ?
-  //         <section className='fw-cr-wrapper'>
-  //           <div className='rm-title'>
-  //             <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
-  //           </div>
-  //           <div className='food-widget-chosen-restaurant-container'>
-  //             <section className='fw-cr-divider1'> <a href={restrInfo.url} target='_blank'><img alt={'Chosen Restaurant'} className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a></section>
-
-  //             <div className='fw-cr-divider2' >
-
-  //               <div className='rm-city'>
-  //                 {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ? restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
-  //               </div>
-
-  //               <div className='rm-price'>
-  //                 <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
-  //               </div>
-  //               <FlatButton style={{ backgroundColor: '#EEEEEE' }} label='Directions' href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank' />
-  //               <div className='rm-rating chosen-restaurant-stars'>
-  //                 <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
-  //               </div>
-  //               <br />
-  //               <FlatButton style={{ backgroundColor: '#3F51B5', color: 'white' }} label='Cancel' onClick={() => {
-  //                 this.handleClearRestaurantData();
-  //               }} />
-  //             </div>
-
-  //           </div>
-  //         </section>
-  //         :
-  //         (<div className='food-search-container'>
-  //           <label className='fw-search-label'>
-  //             Search for your Favorite Food:
-  //           </label>
-  //           <br />
-  //           <TextField inputStyle={{ textAlign: 'center' }} onChange={(e) => this.handleWidgetSearch(e)} className='fw-search-input' ref={me => this.widgetSearchInput = me} />
-  //           <br />
-  //         </div>)}
-
-
-  //       {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm} /> : ''}
-  //     </section>
-  //   );
-  // }
-
 }
 
 
@@ -216,7 +170,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 2,
-    width: '80%'
+    width: '90%'
   },
   descBody: {
     paddingTop: 10,
@@ -239,4 +193,4 @@ const styles = {
   //   padding: 5
   // }
 
-}
+};

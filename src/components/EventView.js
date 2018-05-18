@@ -167,7 +167,7 @@ function getWidgetRender(event, history) {
 */
 function Header(props) {
   const { title, location, date, countdown, history } = props;
-  const handleEventCreationRedirect = () => { history.push('/dashboard/eventcreate') };
+  const handleEventCreationRedirect = () => { history.push('/dashboard/eventcreate'); };
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
@@ -272,7 +272,7 @@ const styles = {
     padding: 10,
     textAlign: 'left',
     backgroundColor: '#3F51B5',
-    color: 'white'
+    color: 'white',
   },
   gearIcon: {
     position: 'absolute',
