@@ -129,7 +129,7 @@ function getWidgetRender(event, history) {
               <HikingSelect event={event} />
             </Card>
           </CardItem>
-          
+
         );
       }
       if (widget === 'foodanddining') {
@@ -137,9 +137,7 @@ function getWidgetRender(event, history) {
           <CardItem key={'foodanddining'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info
-                  ? widgets[widget].info.title
-                  : 'Find Food Nearby'}
+                Find Food Nearby
               </header>
               <FoodWidget event={event} />
             </Card>
@@ -151,6 +149,9 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'sports'}>
             <Card>
+              <header style={styles.widgetTitle}>
+                Sport events
+              </header>
               <SportsEvents event={event} />
             </Card>
           </CardItem>

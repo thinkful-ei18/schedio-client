@@ -119,8 +119,8 @@
 
 .rm-rating {
   display:flex;
-  justify-content:center;
-  
+  padding:'5x';
+
 }
 
 .restaurant-module {
@@ -150,8 +150,6 @@
 }
 
 .chosen-restaurant-image {
-  width:75%;
-  height:300px;
-  border-radius:8px;
-  margin-top:2em;
+  display:'block';
+  border-radius:5px;
 }
