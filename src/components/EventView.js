@@ -149,7 +149,7 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'sports'}>
             <Card>
-              <header style={styles.widgetTitle}>
+              <header style={styles.widgetTitleSports}>
                 Sport events
               </header>
               <SportsEvents event={event} />
@@ -267,6 +267,14 @@ const styles = {
   },
   widgetTitle: {
     position: 'relative',
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+    marginBottom: 8,
+    padding: 10,
+    textAlign: 'left',
+    backgroundColor: '#3F51B5',
+    color: 'white',
+  },
+  widgetTitleSports: {
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
     marginBottom: 8,
     padding: 10,
