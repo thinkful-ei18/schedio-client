@@ -3,8 +3,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import {setCurrentEvent} from '../store/actions/eventlist.actions';
 import {connect} from 'react-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card,CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 
 /**
@@ -26,12 +25,18 @@ export class  EventListEvent extends React.Component {
       
       <div className='event-list-event'>
         <Card style={{'marginTop':'1em'}}>
-          <CardHeader style={{'paddingRight':'0 !important'}} title={this.props.event.title} subtitle={<Moment fromNow date={Number(this.props.event.starttime)}></Moment>}/>
+          <CardText style={{paddingRight: 0}}/>
+          <div className='card-title'>
+            <b>{this.props.event.title}</b>
+          </div>
+          <div className='card-subtitle'>
+            <Moment fromNow date={Number(this.props.event.starttime)}></Moment>
+          </div>
           <CardText>
           On <Moment format={'dddd, MMMM Do, h:mm a'}date={Number(this.props.event.starttime)}> </Moment>
           </CardText>
           <CardText>
-            {this.props.event.location.address ? this.props.event.location.address : ''}
+           in {this.props.event.location.address ? this.props.event.location.address : ''}
           </CardText>
           <RaisedButton style={{'marginBottom':'1em'}}  secondary label='View Event' onClick={() => this.handleViewEvent()}/>
         </Card>

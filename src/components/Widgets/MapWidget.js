@@ -16,7 +16,7 @@ export default class Map extends React.Component {
     const { configInfo, event } = this.props;
     const location = event.location;
     const widgetInfo = event.widgets['map'].info;
-
+    
     return (
       <div>
         <section>

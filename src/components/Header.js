@@ -3,16 +3,18 @@ import { AppBar, Drawer, MenuItem } from 'material-ui';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Logged from './Logged';
-import RequiresLogin from './RequiresLogin'
+import RequiresLogin from './RequiresLogin';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = { open: false };
-
   }
 
-  handleToggle = () => this.setState({ open: !this.state.open });
+
+  handleToggle = () => {
+    this.setState({ open: !this.state.open });
+  };
 
   handleSelectionRedirect = itemSelected => {
     switch (itemSelected) {
@@ -35,33 +37,37 @@ class Header extends React.Component {
   };
 
   render() {
-    
+
+    const style = {
+      'visibility': this.state.open ? 'visible' : 'hidden'
+    };
     return (
       <div className="header">
         <AppBar
           title="Schedio"
-          iconElementRight={this.props.authStatus ?  <Logged />: <RequiresLogin />}
+          iconElementRight={this.props.authStatus ? <Logged /> : <RequiresLogin />}
           onLeftIconButtonClick={this.handleToggle}
-          style={{position: 'fixed', top: 0}}
+          style={{ position: 'fixed', top: 0, backgroundColor: '#3F51B5' }}
         />
         <Drawer
           docked={false}
           width={200}
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
+          style={style}
         >
           <MenuItem onClick={() => this.handleSelectionRedirect('Homepage')}>
             Homepage
           </MenuItem>
-          {this.props.authStatus ? null: <MenuItem onClick={() => this.handleSelectionRedirect('Register')}>
+          {this.props.authStatus ? null : <MenuItem onClick={() => this.handleSelectionRedirect('Register')}>
             Register
           </MenuItem>}
-          {this.props.authStatus ? null: <MenuItem onClick={() => this.handleSelectionRedirect('Login')}>
+          {this.props.authStatus ? null : <MenuItem onClick={() => this.handleSelectionRedirect('Login')}>
             Login
           </MenuItem>}
           {this.props.authStatus ? <MenuItem onClick={() => this.handleSelectionRedirect('Dashboard')}>
             Dashboard
-          </MenuItem> : null }
+          </MenuItem> : null}
         </Drawer>
       </div>
     );

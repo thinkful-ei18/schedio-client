@@ -1,8 +1,12 @@
 import { CREATE_EVENT } from '../actions/eventcreation';
 import { STORE_EVENTLIST, SET_CURRENT_EVENT } from '../actions/eventlist.actions';
 import { TOGGLE_WIDGET_DISPLAY } from '../actions/widgetManage';
-import {TOGGLE_TODO_CHECKED, DELETE_TODO, ADD_TODO} from '../actions/widgetAction/todolist.actions';
+
+import { TOGGLE_TODO_CHECKED, DELETE_TODO, ADD_TODO } from '../actions/widgetAction/todolist.actions';
+
 import {SET_RESTAURANT_INFO, CLEAR_RESTAURANT_DATA} from '../actions/widgetAction/foodwidget.actions';
+import {ADD_TRAIL} from '../actions/widgetAction/hikingWidget.action';
+
 
 const initialState = {
   activeEvent: {
@@ -82,7 +86,7 @@ export default function eventReducer(state = initialState, action) {
             list: [
               ...state.activeEvent.widgets.todo.list.map(item => {
                 if (item.id === action.todoId) {
-                  return Object.assign({}, item, {completed: !item.completed});
+                  return Object.assign({}, item, { completed: !item.completed });
                 } else {
                   return Object.assign({}, item);
                 }
@@ -131,7 +135,6 @@ export default function eventReducer(state = initialState, action) {
       }
     };
 
-
   case SET_RESTAURANT_INFO:
     return {
       ...state,
@@ -162,11 +165,26 @@ export default function eventReducer(state = initialState, action) {
       }
     };
 
-
+  case ADD_TRAIL:
+    return {
+      ...state, 
+      activeEvent: {
+        ...state.activeEvent,
+        widgets: {
+          ...state.activeEvent.widgets,
+          'outdooractivities': {
+            ...state.activeEvent.widgets.outdooractivities,
+            info: {
+              ...state.activeEvent.widgets.outdooractivities.trail,
+              ...action.trail
+            }
+          }
+        }
+      }
+    };
 
   default:
     return state;
 
-		//--------------
   }
 }

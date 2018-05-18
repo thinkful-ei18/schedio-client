@@ -1,6 +1,7 @@
 .landing-container {
   margin: 0 auto;
   text-align: center;
+  box-shadow: '0.5px solid rgba(16, 36, 94, 0.2)'
 }
 
 .landing-container form {

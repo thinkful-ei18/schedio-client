@@ -6,8 +6,8 @@ import SwipeableViews from 'react-swipeable-views';
 import EventView from './EventView';
 import PastEventsList from './PastEventsList';
 import UpcomingEventsList from './UpcomingEventsList';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import './Dashboard.css';
+
 // import SortableComponent from './Sortable';
 
 export class Dashboard extends React.Component {
@@ -23,13 +23,10 @@ export class Dashboard extends React.Component {
 	    slideIndex: value
 	  });
 	};
-	handleEventCreationRedirect = () => {
-	  this.props.history.push('/dashboard/eventcreate');
-	};
 
 	setSlideIndex = () => {
 	  this.setState({
-	    slideIndex:0
+	    slideIndex: 0
 	  });
 	}
 
@@ -38,12 +35,18 @@ export class Dashboard extends React.Component {
 	    return <div>Loading</div>;
 	  }
 	  return (
-	    <div style={styles.container}>
+	    <div style={styles.container} className="dashboard-container">
 	      <section style={styles.tabs}>
 	        <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-	          <Tab label="View Event" value={0} />
-	          <Tab label="Upcoming Events" value={1} />
-	          <Tab label="Past Events" value={2} />
+	          < Tab label="Active" value={0} style={{
+	            backgroundColor: '#3F51B5'
+	          }} />
+	          <Tab label="Scheduled" value={1} style={{
+	            backgroundColor: '#3F51B5'
+	          }} />
+	          <Tab label="Past" value={2} style={{
+	            backgroundColor: '#3F51B5'
+	          }} />
 	        </Tabs>
 	      </section>
 	      <main style={styles.contents}>
@@ -52,17 +55,12 @@ export class Dashboard extends React.Component {
 	            <EventView />
 	          </div>
 	          <div style={styles.slide}>
-	            <UpcomingEventsList setSlideIndex={this.setSlideIndex}/>
+	            <UpcomingEventsList setSlideIndex={this.setSlideIndex} />
 	          </div>
 	          <div style={styles.slide}>
-	            <PastEventsList setSlideIndex={this.setSlideIndex}/>
+	            <PastEventsList setSlideIndex={this.setSlideIndex} />
 	          </div>
 	        </SwipeableViews>
-	        <section style={styles.addEventBtnContainer}>
-	          <FloatingActionButton secondary={true} onClick={this.handleEventCreationRedirect}>
-	            <ContentAdd />
-	          </FloatingActionButton>
-	        </section>
 	      </main>
 	    </div>
 	  );
@@ -73,7 +71,7 @@ const styles = {
   container: {
     maxWidth: '1080px',
     margin: '0 auto',
-    transition: 'all 0.5s ease'
+    transition: 'all 0.5s ease',
   },
   tabs: {
     marginTop: '20px'
@@ -85,11 +83,7 @@ const styles = {
     position: 'relative',
     transition: 'inherit'
   },
-  addEventBtnContainer: {
-    margin: '10px 10px',
-    marginBottom: '50px',
-    transition: 'inherit'
-  },
+
   headline: {
     fontSize: 24,
     paddingTop: 16,

@@ -26,7 +26,7 @@ const Logged = props => {
       </IconButton>)
     }
     return (<IconButton>
-      <AccountCircle />
+      <AccountCircle color="white" />
     </IconButton>)
   }
 

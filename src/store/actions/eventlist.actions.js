@@ -78,7 +78,6 @@ export const fetchUserEvents = () => (dispatch, getState) => {
       dispatch(storeEventList(response.data));
     })
     .catch(err => {
-      console.log(err);
     });
 };
 
@@ -92,8 +91,8 @@ export const requestEventEdit = (id, content) => (dispatch, getState) => {
     body: JSON.stringify(content)
   })
     .then(normalizeResponseErrors)
-    .then(res => res.json())
-}
+    .then(res => res.json());
+};
 
 export const requestEventDelete = (id) => (dispatch, getState) => {
   return fetch(`${API_BASE_URL}/api/events/${id}`, {
@@ -104,5 +103,5 @@ export const requestEventDelete = (id) => (dispatch, getState) => {
     }
   })
     .then(normalizeResponseErrors)
-    .then(res => res.json())
-}
+    .then(res => res.json());
+};

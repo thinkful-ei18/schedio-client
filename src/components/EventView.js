@@ -11,6 +11,11 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 import MediaQuery from 'react-responsive';
 import FoodWidget from './Widgets/FoodWidget';
 
+import HikingSelect from './Widgets/HikingSelect';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import SportsEvents from './Widgets/LocalSportsWidget';
+
 export class EventView extends React.Component {
   render() {
     const { currentEvent, history } = this.props;
@@ -28,7 +33,9 @@ export class EventView extends React.Component {
             }
             date={
               currentEvent.title
-                ? moment(Number(currentEvent.starttime)).format('MMMM Do, h:mm a')
+                ? moment(Number(currentEvent.starttime)).format(
+                  'MMMM Do, h:mm a'
+                )
                 : ''
             }
             location={
@@ -41,6 +48,7 @@ export class EventView extends React.Component {
             }
             history={history}
           />
+
         </Card>
         <br />
         <section style={styles.widgetContainer}>{widgetsForShow}</section>
@@ -56,6 +64,7 @@ export default withRouter(connect(mapStateToProps)(EventView));
 
 /*=============== helper function for Rendering widgets======
 */
+
 function getWidgetRender(event, history) {
   const widgets = event.widgets;
   const arr = [];
@@ -66,7 +75,9 @@ function getWidgetRender(event, history) {
           <CardItem key={'weather'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info ? widgets[widget].info.title : 'Weather Information'}
+                {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Weather Information'}
               </header>
               <Weather event={event} />
             </Card>
@@ -77,7 +88,6 @@ function getWidgetRender(event, history) {
         arr.push(
           <CardItem key={'map'}>
             <Card>
-
               <header style={styles.widgetTitle}>
                 {widgets[widget].info ? widgets[widget].info.title : 'Map'}
                 <div style={styles.gearIcon}>
@@ -99,13 +109,27 @@ function getWidgetRender(event, history) {
           <CardItem key={'todo'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info
-                  ? widgets[widget].info.title
-                  : 'Things to Remember'}
+                Things to Remember
               </header>
               <Todo event={event} />
             </Card>
           </CardItem>
+        );
+      }
+      if (widget === 'outdooractivities') {
+        arr.push(
+          <CardItem key={'outdooractivities'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                Hiking Trail
+                {/* {widgets[widget].info
+                  ? widgets[widget].info.title
+                  : 'Hiking Widget'} */}
+              </header>
+              <HikingSelect event={event} />
+            </Card>
+          </CardItem>
+
         );
       }
       if (widget === 'foodanddining') {
@@ -113,11 +137,22 @@ function getWidgetRender(event, history) {
           <CardItem key={'foodanddining'}>
             <Card>
               <header style={styles.widgetTitle}>
-                {widgets[widget].info
-                  ? widgets[widget].info.title
-                  : 'Find Food Nearby'}
+                Find Food Nearby
               </header>
               <FoodWidget event={event} />
+            </Card>
+          </CardItem>
+        );
+      }
+
+      if (widget === 'sports') {
+        arr.push(
+          <CardItem key={'sports'}>
+            <Card>
+              <header style={styles.widgetTitle}>
+                Sport events
+              </header>
+              <SportsEvents event={event} />
             </Card>
           </CardItem>
         );
@@ -132,6 +167,7 @@ function getWidgetRender(event, history) {
 */
 function Header(props) {
   const { title, location, date, countdown, history } = props;
+  const handleEventCreationRedirect = () => { history.push('/dashboard/eventcreate'); };
   return (
     <MediaQuery maxWidth={700}>
       {matches => {
@@ -149,6 +185,7 @@ function Header(props) {
                 <ActionSettings color="rgb(0, 151, 167)" />
               </IconButton>
             </div>
+            <section style={styles.addEventBtnContainer}> <FloatingActionButton secondary={true} onClick={handleEventCreationRedirect} mini={true}> <ContentAdd /> </FloatingActionButton> </section>
             {/* Left half div */}
             <section>
               <header style={styles.headerTitle}>
@@ -178,7 +215,6 @@ function Header(props) {
 }
 
 /*=============== CardItem Component for Widgets==================
-
 */
 function CardItem(props) {
   return (
@@ -203,14 +239,15 @@ const styles = {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: '10px 40px 10px 10px',
-    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
+
   },
   headerContainer: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     padding: '10px 25px 10px 10px',
-    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)'
+    boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
   },
   cardItem: {
     boxShadow: '0 3px 6px 0 rgba(16, 36, 94, 0.2)',
@@ -234,14 +271,13 @@ const styles = {
     marginBottom: 8,
     padding: 10,
     textAlign: 'left',
-    backgroundColor: '#0097A7',
-    color: 'white'
+    backgroundColor: '#3F51B5',
+    color: 'white',
   },
   gearIcon: {
     position: 'absolute',
     right: 0,
     top: -5
-
   },
   subHeaderContainer: {
     display: 'flex',
@@ -254,5 +290,6 @@ const styles = {
   },
   headerLabel: {
     color: 'rgba(140, 140, 140,0.9)'
-  }
+  },
+  addEventBtnContainer: { transition: 'inherit', position: 'absolute', right: 10, bottom: 10 }
 };
