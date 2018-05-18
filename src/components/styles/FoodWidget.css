@@ -8,10 +8,7 @@
 }
 
 
-.food-widget-container {
-  height:250px;
-  box-sizing:border-box;
-}
+
 
 .fw-mc-header {
   font-family:Roboto, sans-serif;
@@ -157,20 +154,22 @@
 .fw-mc-cancel-button {
 }
 
+.food-widget-container {
+  box-sizing:border-box;
+  min-height:250px;
+}
 .chosen-restaurant-image {
-<<<<<<< HEAD
-  display:'block';
-  border-radius:5px;
-=======
-  max-width:18em;
+
+    max-width:18em;
   max-height:12em;
   border-radius:8px;
   margin-top:1.5em;
   margin-left:1em;
+ 
 }
 .food-widget-chosen-restaurant-container {
-  display:flex;
-  flex-direction:row;
+  /* display:flex;
+  flex-direction:row; */
 }
 
 
@@ -193,5 +192,4 @@
 
 .rm-price {
   margin-bottom:1em;
->>>>>>> 06cbc818de8a91b029c35ddfe4a9d9a779484d8d
 }

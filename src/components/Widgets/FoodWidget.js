@@ -38,12 +38,8 @@ export class FoodWidget extends React.Component {
 
   cancelSearch = () => {
     this.setState({
-<<<<<<< HEAD
-      searching: false
-=======
-      searching:false,
-      restaurantOptions:null
->>>>>>> 06cbc818de8a91b029c35ddfe4a9d9a779484d8d
+      searching: false,
+      restaurantOptions: null
     });
   }
 
@@ -94,8 +90,6 @@ export class FoodWidget extends React.Component {
     this.widgetTimer = setTimeout(moduleStateSet, 1000);
   }
 
-<<<<<<< HEAD
-
   handleClearRestaurantData = () => {
     this.props.dispatch(clearRestaurantData());
     this.props.dispatch(clearRestaurantChoice(this.props.event.id));
@@ -120,7 +114,7 @@ export class FoodWidget extends React.Component {
                   <section>{restrInfo.price ? restrInfo.price : 'No Info'}</section>
                 </div>
                 <div style={styles.subDesc}>
-                  <ReactStars size={18} edit={false} count={5} value={Number(restrInfo.rating)} />
+                  <ReactStars size={16} edit={false} count={5} value={Number(restrInfo.rating)} />
                 </div>
                 <div style={styles.subDesc}>
                   <div style={{ fontSize: '16px' }}>
@@ -152,56 +146,55 @@ export class FoodWidget extends React.Component {
       </section>
     );
   }
-=======
-    render() {
-      const restrInfo = this.props.event.widgets.foodanddining.info;
-      return (
-        <section className='food-widget-container'>
-          {restrInfo && Object.keys(restrInfo).length ? 
-            <section className='fw-cr-wrapper'>
-              <div className='rm-title'>
-                <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
-              </div>    
-              <div className='food-widget-chosen-restaurant-container'>
-                <section className='fw-cr-divider1'> <a href={restrInfo.url} target='_blank'><img alt={'Chosen Restaurant'} className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a></section>
-              
-                <div className='fw-cr-divider2' >
-                       
-                  <div className='rm-city'>
-                    {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ?  restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
-                  </div>
-              
-                  <div className='rm-price'>
-                    <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
-                  </div>
-                  <FlatButton style={{backgroundColor:'#EEEEEE'}} label='Directions' href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank'/>
-                  <div className='rm-rating chosen-restaurant-stars'>
-                    <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
-                  </div>
-                  <br/>
-                  <FlatButton style={{ backgroundColor:'#3F51B5', color:'white'}} label='Cancel' onClick={() => {
-                    this.handleClearRestaurantData();
-                  }}/>
-                </div>
-                
-              </div>
-            </section>
-            : 
-            (<div className='food-search-container'>
-              <label className='fw-search-label'>
-            Search for your Favorite Food:
-              </label>
-              <br/>
-              <TextField inputStyle={{textAlign:'center'}} onChange={(e) => this.handleWidgetSearch(e)}className='fw-search-input' ref={me => this.widgetSearchInput = me}/>
-              <br/>
-            </div>)} 
-          
+  // render() {
+  //   const restrInfo = this.props.event.widgets.foodanddining.info;
+  //   return (
+  //     <section className='food-widget-container'>
+  //       {restrInfo && Object.keys(restrInfo).length ?
+  //         <section className='fw-cr-wrapper'>
+  //           <div className='rm-title'>
+  //             <b><a href={restrInfo.url} target='_blank'>{restrInfo.name}</a></b>
+  //           </div>
+  //           <div className='food-widget-chosen-restaurant-container'>
+  //             <section className='fw-cr-divider1'> <a href={restrInfo.url} target='_blank'><img alt={'Chosen Restaurant'} className='chosen-restaurant-image' src={restrInfo.image_url ? restrInfo.image_url : 'img/restaurantvector.png'} /></a></section>
 
-          {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm}/> : ''}
-        </section>
-      );
-    }
->>>>>>> 06cbc818de8a91b029c35ddfe4a9d9a779484d8d
+  //             <div className='fw-cr-divider2' >
+
+  //               <div className='rm-city'>
+  //                 {restrInfo.location ? restrInfo.location.city : ''}, {restrInfo.location ? restrInfo.location.country === 'US' ? restrInfo.location.state : '' : ''} {restrInfo.location ? restrInfo.location.country === 'US' ? '' : restrInfo.location.country : ''}
+  //               </div>
+
+  //               <div className='rm-price'>
+  //                 <b>Price</b>: {restrInfo.price ? restrInfo.price : 'No Info'}
+  //               </div>
+  //               <FlatButton style={{ backgroundColor: '#EEEEEE' }} label='Directions' href={`https://www.google.com/maps/place/${restrInfo.coordinates.latitude},${restrInfo.coordinates.longitude}`} target='_blank' />
+  //               <div className='rm-rating chosen-restaurant-stars'>
+  //                 <ReactStars size={20} edit={false} count={5} value={Number(restrInfo.rating)} />
+  //               </div>
+  //               <br />
+  //               <FlatButton style={{ backgroundColor: '#3F51B5', color: 'white' }} label='Cancel' onClick={() => {
+  //                 this.handleClearRestaurantData();
+  //               }} />
+  //             </div>
+
+  //           </div>
+  //         </section>
+  //         :
+  //         (<div className='food-search-container'>
+  //           <label className='fw-search-label'>
+  //             Search for your Favorite Food:
+  //           </label>
+  //           <br />
+  //           <TextField inputStyle={{ textAlign: 'center' }} onChange={(e) => this.handleWidgetSearch(e)} className='fw-search-input' ref={me => this.widgetSearchInput = me} />
+  //           <br />
+  //         </div>)}
+
+
+  //       {this.state.searching ? <RestaurantModal eventId={this.props.event.id} cancelSearch={this.cancelSearch} fetchRestaurants={this.fetchRestaurants} restaurantOptions={this.state.restaurantOptions} handleSearchInputChange={this.handleSearchInputChange} loading={this.state.loading} searchTerm={this.state.searchTerm} /> : ''}
+  //     </section>
+  //   );
+  // }
+
 }
 
 
@@ -223,7 +216,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 2,
-    width: '90%'
+    width: '80%'
   },
   descBody: {
     paddingTop: 10,
