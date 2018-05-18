@@ -89,7 +89,10 @@ export class RestaurantsModal extends React.Component {
             <br/>
             <b>Price</b>: {restaurant.price
               ? restaurant.price
-              : 'No Info'}
+              : ' ¯\\_(ツ)_/¯'}
+          </div>
+          <div className='rm-distance'>
+            {restaurant.distance ? Math.floor(restaurant.distance * 0.00062137) === 0 ? 'In Town' : Math.floor(restaurant.distance * 0.00062137) + ' miles from town' : ''}
           </div>
           <div className='rm-rating'>
             <ReactStars size={20} edit={false} count={5} value={Number(restaurant.rating)}/>
@@ -122,6 +125,7 @@ export class RestaurantsModal extends React.Component {
             Narrow Down Your Results...
           </div>
           <FlatButton
+            inputStyle={{textAlign:'center'}}
             style={{'backgroundColor':'#B04712',fontSize:'1.2em !important', 'color':'white', 'margin-bottom':'1em'}}
             onClick={() => this.props.cancelSearch()}
             className='fw-mc-cancel-button'>

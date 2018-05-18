@@ -1,5 +1,6 @@
 import { API_BASE_URL } from '../../config';
 import { normalizeResponseErrors } from './utils';
+import {setCurrentEvent} from '../actions/eventlist.actions';
 
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const createEvent = event => ({
@@ -19,10 +20,11 @@ export const asyncCreateEvent = newEvent => (dispatch, getState) => {
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(
-      event => event,
-      error => {
-        throw new Error('error that is not so nice');
-      }
-    );
+    .then(event => {
+      localStorage.setItem('lastViewedEvent', event.id);
+      localStorage.setItem('lastViewedTimestamp', Number(Date.now()));
+    })
+    .catch(error => {
+      throw new Error('error that is not so nice');
+    });
 };

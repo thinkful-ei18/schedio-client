@@ -10,7 +10,7 @@ export default class TodoItem extends React.Component  {
   }
 
   render() {
-    return (
+    return (  
       <div className='todo-item-container'>
         <div className='todo-title-section'>
           {this.props.todo.title}
@@ -18,7 +18,7 @@ export default class TodoItem extends React.Component  {
         <div className='todo-completed-delete-section'>
           <Checkbox onClick={() => this.onCheck()} checked={this.props.todo.completed}/>
           <div className='todo-svg-delete'>
-            <svg  onClick={() => this.props.deleteItem(this.props.todo.id)} className='svg-img' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            <button className='svg-button' onClick={() => this.props.deleteItem(this.props.todo.id)}><svg  className='svg-img' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
         </div>
       </div>

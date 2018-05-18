@@ -36,3 +36,8 @@
 .svg-img {
   cursor:pointer;
 }
+
+.svg-button {
+  border:none;
+  background-color:white;
+}
