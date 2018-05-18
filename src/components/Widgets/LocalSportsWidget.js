@@ -4,7 +4,7 @@ import '../styles/SportsWidget.css';
 import moment from 'moment';
 import Client from 'predicthq';
 // import FlatButton from 'material-ui/FlatButton';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
 import Map from 'react-icons/lib/fa/map-o';
 
 class SportsEvents extends React.Component {
