@@ -5,7 +5,7 @@ import moment from 'moment';
 import Client from 'predicthq';
 // import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
-// import axios from 'axios';
+import Map from 'react-icons/lib/fa/map-o';
 
 class SportsEvents extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class SportsEvents extends React.Component {
 
     let searchLocation = `25km@${this.props.event.location.lat},${
       this.props.event.location.long
-      }`;
+    }`;
 
     phq.events
       .search({
@@ -73,7 +73,7 @@ class SportsEvents extends React.Component {
                 <tr key={index}>
                   <td>{sport.title}</td>
                   <td>{moment(sport.start).format('YYYY-MM-DD, h:mm a')}</td>
-                  <td>  <a href={`https://www.google.com/maps/place/${sport.location[1]},${sport.location[0]}`} target='_blank'> <FontAwesome name='map' /> </a> </td>
+                  <td>  <a href={`https://www.google.com/maps/place/${sport.location[1]},${sport.location[0]}`} target='_blank'> <Map/> </a> </td>
                 </tr>
               );
             })}
