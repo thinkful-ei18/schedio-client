@@ -3,7 +3,6 @@ By,
 * Zhou Yang
 * Evan Garrett
 * Matt San Pedro
-* Saugat Dhungel
 
 Link to deployed version: 
 https://schedio.netlify.com/
